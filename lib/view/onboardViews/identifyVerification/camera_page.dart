@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:credify/config/AppRoutes/routes.dart';
 import 'package:credify/core/constants/app_color.dart';
@@ -60,23 +62,27 @@ class _CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('Hi');
+    print('Starting camera');
     // if(!controller!.value.isInitialized){
     //   Navigator.pop(context);
     // }
     if (controller == null || !controller!.value.isInitialized) {
-      return const Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios))),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
       body: Stack(
         children: [
-          CameraPreview(controller!),
+          Center(child: CameraPreview(controller!)),
 
           /// Overlay
           Center(
@@ -97,20 +103,15 @@ class _CameraPageState extends State<CameraPage> {
             right: 0,
             child: Column(
               children: const [
-                Text(
-                  "Passport",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Front of card",
-                  style: TextStyle(color: Colors.white70),
-                ),
+                Text("Passport", style: TextStyle(fontSize: 18)),
+                SizedBox(height: 6.0),
+                Text("Front of card"),
                 SizedBox(height: 5),
                 Text(
                   "Position all 4 corners clearly in the frame.",
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                  style: TextStyle(fontSize: 12),
                 ),
+                SizedBox(height: 8.0),
               ],
             ),
           ),
@@ -123,22 +124,33 @@ class _CameraPageState extends State<CameraPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(Icons.flash_off, color: Colors.grey),
+                const Icon(Icons.flash_off, color: Colors.grey),
                 GestureDetector(
                   onTap: () async {
-                    await controller!.takePicture();
+                    final path = await controller!.takePicture();
+                    Navigator.pop(context, path);
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckQuality(path: path),
+                      ),
+                    );
+                    // print('Take picture ${path.path}');
                   },
                   child: Container(
                     width: 70,
                     height: 70,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 4),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        width: 4,
+                      ),
                       shape: BoxShape.circle,
-                      color: AppColors.primary
+                      color: AppColors.primary,
                     ),
                   ),
                 ),
-                Icon(Icons.done, color: Colors.white),
+                const Icon(Icons.done, color: Colors.grey),
               ],
             ),
           ),
@@ -148,30 +160,83 @@ class _CameraPageState extends State<CameraPage> {
   }
 }
 
-
 class CheckQuality extends StatelessWidget {
-  const CheckQuality({super.key});
+  final XFile path;
+
+  const CheckQuality({super.key, required this.path});
 
   @override
   Widget build(BuildContext context) {
+    final File imageFile = File(path.path);
     return Scaffold(
-      body: SafeArea(child: Column(
-        children: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios)),
-          const SizedBox(),
-          
-          Container(),
-          
-          Text('Chaek Quality'),
-          Text('Please make sure your card is clear to read with no blur or glare', textAlign: TextAlign.center,),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.arrow_back_ios),
+                ),
+              ),
+              const SizedBox(),
 
-          Icon(Icons.lens),
-          AppButton(onPressed: (){}, label: 'All clear, continue'),
+              Center(
+                child: Container(
+                  height: 150,
+                  width: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: AppColors.blueGrey),
+                    // image: DecorationImage(image: FileImage(imageFile), fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                height: 60,
+                width: 60,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [AppColors.primary, AppColors.gradientBtn],
+                    begin: Alignment.topLeft,
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.lens),
+              ),
+              const Text('Check Quality', textAlign: TextAlign.center),
+              SizedBox(
+                width: 250,
+                child: const Text(
+                  'Please make sure your card details or passport is clear to read with no blur or glare',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w200),
+                ),
+              ),
+              const SizedBox(height: 20),
+              AppButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                label: 'All clear, continue',
+              ),
 
-          TextButton(onPressed: (){Navigator.pushNamed(context, Routes.camera);}, child: Text('Take a new photo')),
-        ],
-      )),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.camera);
+                },
+                child: const Text('Take a new photo'),
+              ),
+              const SizedBox(height: 10),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
-
