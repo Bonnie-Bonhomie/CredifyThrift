@@ -1,5 +1,4 @@
-import 'package:credify/config/AppRoutes/routes.dart';
-import 'package:credify/core/utils/custom_snack_bar.dart';
+
 import 'package:credify/core/utils/loaderFile/loading_wrapper.dart';
 import 'package:credify/core/utils/validator/validatoe.dart';
 import 'package:credify/core/widgets/app_button.dart';
@@ -7,7 +6,6 @@ import 'package:credify/core/widgets/phone_number_form.dart';
 import 'package:credify/core/widgets/term_or_agree.dart';
 import 'package:credify/data/models/countries_model.dart';
 import 'package:credify/view/onboardViews/auth_views/verify_acc.dart';
-import 'package:credify/view/onboardViews/identifyVerification/verify_method.dart';
 import 'package:credify/viewModel/auth_view_model/sign_in_v_model.dart';
 import 'package:credify/viewModel/loader_model.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +85,7 @@ class _SignUpViewState extends State<SignUpView> {
                               child: PhoneNumberFormField(
                                 numberCtrl: numberCtrl,
                                 numberKey: numberKey,
+                                filledColor: Colors.transparent,
                                 validator: (val) =>
                                     Validator.validateNumber(val!),
                                 onChanged: (val){
@@ -129,9 +128,12 @@ class _SignUpViewState extends State<SignUpView> {
 
     showDialog(context: context, builder: (context){
       return Dialog(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        shadowColor: Colors.grey,
+        elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
+          // color: Colors.transparent,
           padding: const EdgeInsets.all(10),
           child: ListView.builder(
             shrinkWrap: true,
@@ -139,9 +141,10 @@ class _SignUpViewState extends State<SignUpView> {
               itemBuilder: (context, index){
                 final item = lists[index];
                 return ListTile(
+                  tileColor: Colors.transparent,
                   // leading: Image(image: AssetImage('assetName')),
-                  title: Text(item.name, style: TextStyle(color: Colors.black),),
-                  trailing: Text(item.numberCode, style: TextStyle(color: Colors.black),),
+                  title: Text(item.name),
+                  trailing: Text(item.numberCode,),
                   onTap: () {onTap(item.numberCode); Navigator.pop(context);}
                 );
               }),
