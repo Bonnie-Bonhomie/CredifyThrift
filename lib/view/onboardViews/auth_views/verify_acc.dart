@@ -2,6 +2,7 @@ import 'package:credify/core/constants/app_color.dart';
 import 'package:credify/core/constants/app_size.dart';
 import 'package:credify/core/utils/loaderFile/loading_wrapper.dart';
 import 'package:credify/core/widgets/custom_pin_code_field.dart';
+import 'package:credify/view/view_widgets/shared_widget.dart';
 import 'package:credify/viewModel/auth_view_model/sign_in_v_model.dart';
 import 'package:credify/viewModel/loader_model.dart';
 import 'package:flutter/gestures.dart';
@@ -34,63 +35,66 @@ class _VerifyAccViewState extends State<VerifyAccView> {
     final loading = context.watch<LoaderModel>().isLoading;
     final readOtp = context.read<SignUpViewM>();
 
-    return Scaffold(
-      appBar: AppBar(leading: Icon(Icons.keyboard_arrow_left_sharp), backgroundColor: Colors.transparent,),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSize.padding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 200),
-            Text('Confirm', style: Theme.of(context).textTheme.headlineLarge),
-            Text('Please enter the 6-digit code just sent to ${widget.number}'),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 55,
-              width: 200,
-              child: CustomPinCodeField(
-                pinTextCtrl: pinTextCtrl,
-                len: 4,
-                readOnly: loading,
-                height: 50,
-                onComplete: (pin) {
-                  if(pin.length == 4){
-                    context.read<LoaderModel>().changeLoadingState((){
-                      readOtp.onComplete(context, pin);
-                      readOtp.cancelTimer();
-                    });
-                  }
-                },
+    return LoaderWrapper(
+      loading: loading,
+      child: Scaffold(
+        appBar: AppBar(leading: Icon(Icons.keyboard_arrow_left_sharp), backgroundColor: Colors.transparent,),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(AppSize.padding),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 200),
+              Text('Confirm', style: Theme.of(context).textTheme.headlineLarge),
+              Text('Please enter the 6-digit code just sent to ${widget.number}'),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 55,
+                width: 200,
+                child: CustomPinPut(
+                  controller: pinTextCtrl,
+                  len: 4,
+                  readOnly: loading,
+                  height: 50,
+                  onComplete: (pin) {
+                    if(pin.length == 4){
+                      context.read<LoaderModel>().changeLoadingState((){
+                        readOtp.onComplete(context, pin);
+                        readOtp.cancelTimer();
+                      });
+                    }
+                  },
+                ),
               ),
-            ),
-            const SizedBox(height: 200),
-            loading
-                ? Text('verifying....')
-                :  otpModel.inCorrectCode || otpModel.seconds == 0
-                ? RichText(
-              text: TextSpan(
-                text: 'Incorrect code, try again ',
-                style: TextStyle(color: Colors.red),
-                children: [
-                  TextSpan(
-                    text: 'Resend',
-                    style: TextStyle(color: AppColors.primary),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        readOtp.resetTimer();
-                        readOtp.startTimer();
+              const SizedBox(height: 200),
+              loading
+                  ? Text('verifying....')
+                  :  otpModel.inCorrectCode || otpModel.seconds == 0
+                  ? RichText(
+                text: TextSpan(
+                  text: 'Incorrect code, try again ',
+                  style: TextStyle(color: Colors.red),
+                  children: [
+                    TextSpan(
+                      text: 'Resend',
+                      style: TextStyle(color: AppColors.primary),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          readOtp.resetTimer();
+                          readOtp.startTimer();
+                        },
+                    ),
+                  ],
+                ),
+              ): Consumer<SignUpViewM>(
+                      builder: (context, timeReader, child) {
+                        return Text('Resend code in 00:${timeReader.seconds}');
                       },
-                  ),
-                ],
-              ),
-            ): Consumer<SignUpViewM>(
-                    builder: (context, timeReader, child) {
-                      return Text('Resend code in 00:${timeReader.seconds}');
-                    },
-                  ),
-            // SizedBox(height: 20,)
-          ],
+                    ),
+              // SizedBox(height: 20,)
+            ],
+          ),
         ),
       ),
     );
