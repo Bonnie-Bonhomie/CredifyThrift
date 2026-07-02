@@ -137,18 +137,7 @@ class _CameraPageState extends State<CameraPage> {
                     );
                     // print('Take picture ${path.path}');
                   },
-                  child: Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.onSurface,
-                        width: 4,
-                      ),
-                      shape: BoxShape.circle,
-                      color: AppColors.primary,
-                    ),
-                  ),
+                  child: const Icon(Icons.radio_button_checked, size: 80,)
                 ),
                 const Icon(Icons.done, color: Colors.grey),
               ],
@@ -192,7 +181,8 @@ class CheckQuality extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.blueGrey),
-                    // image: DecorationImage(image: FileImage(imageFile), fit: BoxFit.cover),
+                    image: DecorationImage(image: FileImage(imageFile), fit: BoxFit.cover, onError: (_, __){Icon(Icons.photo, size: 50,);}),
+
                   ),
                 ),
               ),
@@ -203,7 +193,7 @@ class CheckQuality extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [AppColors.primary, AppColors.gradientBtn],
-                    begin: Alignment.topLeft,
+                    begin: Alignment.topLeft,end: Alignment.bottomRight
                   ),
                   shape: BoxShape.circle,
                 ),
