@@ -21,6 +21,7 @@ class FormWidget extends StatelessWidget {
     this.needMax = false,
     required this.fieldKey,
     required this.validator,
+    this.cursorHeight =   20,
     super.key,
   });
 
@@ -42,6 +43,7 @@ class FormWidget extends StatelessWidget {
   final int maxLength;
   final bool needMax;
   final GlobalKey<FormFieldState> fieldKey;
+  final double cursorHeight;
 
 
   @override
@@ -56,6 +58,7 @@ class FormWidget extends StatelessWidget {
         controller: valController,
         maxLength: maxLength,
         style: TextStyle(fontSize: textSize),
+        cursorHeight: cursorHeight,
         // minLines: min,
         // maxLines: max,
         // keyboardType: TextInputType.multiline, // For address where the input box expands
