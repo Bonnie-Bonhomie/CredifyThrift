@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
         theme: BAppTheme.light,
         darkTheme: BAppTheme.dark,
-        initialRoute: Routes.verifyID,
+        initialRoute: Routes.signUp,
       onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
     );
   }
