@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import '../constants/app_color.dart';
 import 'color_theme.dart';
 import 'form_field_theme.dart';
 import 'text_theme.dart';
@@ -16,7 +17,9 @@ final ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     brightness: Brightness.light,
     primary: ColorTheme.lightPrimary,
-    secondary: ColorTheme.darkPrimary
+    secondary: ColorTheme.darkPrimary,
+    onSurface: AppColors.surface,
+    surface: AppColors.onSurface
   ),
 
   iconTheme: IconThemeData(
