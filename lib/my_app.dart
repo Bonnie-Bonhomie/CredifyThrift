@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
         theme: BAppTheme.light,
         darkTheme: BAppTheme.dark,
-        initialRoute: Routes.signUp,
+        initialRoute: Routes.home,
       onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
     );
   }
