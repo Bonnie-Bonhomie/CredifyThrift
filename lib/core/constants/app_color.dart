@@ -16,5 +16,9 @@ class AppColors {
   static const Color disableColor = Color(0xF03F5265);
   static const Color onSurface = Color(0xFFF3F3FD);
   static const Color surface = Color(0xFF01012A);
+
+
+  static const Color pending = Color(0xFFF1B43B);
+  static const Color error = Color(0xFFFA2525);
   
 }
