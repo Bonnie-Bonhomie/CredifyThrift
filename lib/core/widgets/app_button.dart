@@ -58,7 +58,7 @@ class DisabledButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(onPressed: (){}, style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.disableColor
-      ), child: Text(label, style: TextStyle(color: Colors.grey.withOpacity(0.5)),),),
+      ), child: Text(label, style: TextStyle(color: Colors.grey.withOpacity(0.8)),),),
     );
   }
 }
