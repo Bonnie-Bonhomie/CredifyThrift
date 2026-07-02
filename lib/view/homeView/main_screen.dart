@@ -1,9 +1,5 @@
 import 'package:credify/core/constants/app_color.dart';
-import 'package:credify/view/homeView/history_page.dart';
-import 'package:credify/view/homeView/home_page.dart';
-import 'package:credify/view/homeView/profile_page.dart';
-import 'package:credify/view/homeView/request_page.dart';
-import 'package:credify/view/homeView/scan_page.dart';
+import 'package:credify/view/view_export.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
