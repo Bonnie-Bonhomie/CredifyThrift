@@ -64,6 +64,7 @@ class VerifyMethod extends StatelessWidget {
                             context: context,
                             type: 'Driver`s license',
                             onTap: () {
+                              print('This is driver');
                               Navigator.pushNamed(context, Routes.camera);
                             },
                           ),
@@ -92,7 +93,7 @@ class VerifyMethod extends StatelessWidget {
               "Selfie Photo",
               "It`s required by law to verify your identity as new user.",
               '',
-              () {},
+              () {Navigator.pushNamed(context, Routes.camera);},
             ),
             const SizedBox(height: 20),
             DisabledButton(label: 'Verify my identity'),
@@ -115,9 +116,7 @@ class VerifyMethod extends StatelessWidget {
         contentPadding: const EdgeInsets.all(0),
         titleTextStyle: Theme.of(context).textTheme.bodySmall,
         leading: const Icon(Icons.local_police),
-        onTap: (){
-          showDialog(context: context, builder: (context) => AlertDialog());
-        },
+        onTap: onTap,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
