@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 
+
 class CustomPinCodeField extends StatelessWidget {
   final TextEditingController pinTextCtrl;
   final Function(String)? onComplete;
@@ -32,6 +33,7 @@ class CustomPinCodeField extends StatelessWidget {
     return PinCodeTextField(
       appContext: context,
       controller: pinTextCtrl,
+
       keyboardType: TextInputType.number,
       length: len,
       readOnly: readOnly,
@@ -66,3 +68,5 @@ class CustomPinCodeField extends StatelessWidget {
     );
   }
 }
+
+
