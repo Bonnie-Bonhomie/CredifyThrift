@@ -1,6 +1,7 @@
 import 'package:credify/config/AppRoutes/page_slider.dart';
 import 'package:credify/config/AppRoutes/routes.dart';
 import 'package:credify/view/homeView/home_page.dart';
+import 'package:credify/view/homeView/main_screen.dart';
 import 'package:credify/view/onboardViews/auth_views/create_password.dart';
 import 'package:credify/view/onboardViews/auth_views/sign_up_view.dart';
 import 'package:credify/view/onboardViews/identifyVerification/camera_page.dart';
@@ -33,6 +34,9 @@ class AppRoutes {
         return slidePage(VerifyMethod());
       case Routes.camera:
         return slidePage(CameraPage());
+
+      case Routes.mainS:
+        return slidePage(MainScreen());
 
       default:
         return MaterialPageRoute(

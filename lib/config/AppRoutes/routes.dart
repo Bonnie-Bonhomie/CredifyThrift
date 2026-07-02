@@ -12,4 +12,5 @@ class Routes{
   static const String verifyID = '/verifyID';
   static const String camera = '/camera';
   static const String quality = '/checkQuality';
+  static const String mainS = '/mainScreen';
 }
