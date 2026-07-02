@@ -13,7 +13,6 @@ class SignUpViewM extends ChangeNotifier{
     CountryModel(name: 'India', imgPath: 'imgPath', numberCode: '+91'),
     CountryModel(name: 'Tanzania', imgPath: 'imgPath', numberCode: '+123'),
     CountryModel(name: 'South Korea', imgPath: 'imgPath', numberCode: '+111'),
-    CountryModel(name: 'America', imgPath: 'imgPath', numberCode: '+222'),
   ];
 
   String _selected = '+234';
