@@ -248,7 +248,8 @@ class _VerifyMethodState extends State<VerifyMethod> {
                   width: 150,
                   child: AppButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, Routes.home);
+                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, Routes.mainS);
                     },
                     label: 'Got it',
                   ),
