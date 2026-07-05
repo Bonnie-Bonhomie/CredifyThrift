@@ -182,10 +182,10 @@ class _VerifyMethodState extends State<VerifyMethod> {
     return showModalBottomSheet(
       context: context,
       showDragHandle: true,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       requestFocus: true,
       builder: (context) => Container(
-        decoration: BoxDecoration(color: Theme.of(context).cardColor),
+        // decoration: BoxDecoration(color: Theme.of(context).cardColor),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -218,6 +218,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
       context: context,
       builder: (context) {
         return Dialog(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           child: Container(
             height: 400,
             padding: const EdgeInsets.all(30),
