@@ -39,13 +39,13 @@ class _VerifyAccViewState extends State<VerifyAccView> {
       loading: loading,
       child: Scaffold(
         appBar: AppBar(leading: Icon(Icons.keyboard_arrow_left_sharp), backgroundColor: Colors.transparent,),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSize.padding),
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 200),
+              const Spacer(),
               Text('Confirm', style: Theme.of(context).textTheme.headlineLarge),
               Text('Please enter the 6-digit code just sent to ${widget.number}'),
               const SizedBox(height: 20),
@@ -67,7 +67,7 @@ class _VerifyAccViewState extends State<VerifyAccView> {
                   },
                 ),
               ),
-              const SizedBox(height: 200),
+              const Spacer(),
               loading
                   ? Text('verifying....')
                   :  otpModel.inCorrectCode || otpModel.seconds == 0
@@ -92,7 +92,7 @@ class _VerifyAccViewState extends State<VerifyAccView> {
                         return Text('Resend code in 00:${timeReader.seconds}');
                       },
                     ),
-              // SizedBox(height: 20,)
+              const SizedBox(height: 40,)
             ],
           ),
         ),
