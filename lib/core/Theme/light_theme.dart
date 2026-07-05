@@ -13,7 +13,7 @@ final ThemeData lightTheme = ThemeData(
   cardTheme: CardThemeData(
     color: ColorTheme.containerLight
   ),
-
+cardColor: ColorTheme.containerLight,
   colorScheme: const ColorScheme.light(
     brightness: Brightness.light,
     primary: ColorTheme.lightPrimary,

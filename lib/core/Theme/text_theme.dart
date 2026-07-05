@@ -6,17 +6,17 @@ import 'color_theme.dart';
 class LightTextTheme{
 
   static const TextStyle headings = TextStyle(
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: FontWeight.bold,
       color: ColorTheme.textLight
   );
   static const TextStyle subHead = TextStyle(
-      fontSize: 25,
+      fontSize: 20,
       fontWeight: FontWeight.bold,
       color: ColorTheme.textLight
   );
   static const TextStyle body = TextStyle(
-      fontSize: 20,
+      fontSize: 17,
      color: ColorTheme.textLight
   );
 
@@ -25,7 +25,7 @@ class LightTextTheme{
       color: ColorTheme.textLight
   );
   static const TextStyle medium = TextStyle(
-      fontSize: 17,
+      fontSize: 15,
       color: ColorTheme.textLight
   );
 
@@ -35,17 +35,17 @@ class LightTextTheme{
 class DarkTextTheme{
 
   static const TextStyle headings = TextStyle(
-      fontSize: 30,
-      fontWeight: FontWeight.bold,
-      color: ColorTheme.textDark
-  );
-  static const TextStyle subHead = TextStyle(
       fontSize: 25,
       fontWeight: FontWeight.bold,
       color: ColorTheme.textDark
   );
-  static const TextStyle body = TextStyle(
+  static const TextStyle subHead = TextStyle(
       fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: ColorTheme.textDark
+  );
+  static const TextStyle body = TextStyle(
+      fontSize: 17,
       color: ColorTheme.textDark
   );
 
@@ -54,7 +54,7 @@ class DarkTextTheme{
       color: ColorTheme.textDark
   );
   static const TextStyle medium = TextStyle(
-      fontSize: 17,
+      fontSize: 15,
       color: ColorTheme.textDark
   );
 

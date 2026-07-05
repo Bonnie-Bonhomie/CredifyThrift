@@ -26,22 +26,29 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _screens[currentIndex],
       floatingActionButton: primaryFab(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
-        color: const Color(0xff181D2D),
+        color: Theme.of(context).cardColor,
+        // color: AppColors.darkGrey,
         elevation: 20,
         child: SizedBox(
           height: 72,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
             children: [
-              _navItem(Icons.home_filled, 'Home', 0),
-              _navItem(Icons.request_page_outlined, 'Request', 1),
-              Column(children: const [SizedBox(width: 50), Text('Scan')]),
-              _navItem(Icons.history_edu_outlined, 'History', 3),
-              _navItem(Icons.person_3, 'Profile', 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _navItem(Icons.home_filled, 'Home', 0),
+                  _navItem(Icons.request_page_outlined, 'Request', 1),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [const SizedBox(width: 50),const SizedBox(height: 30), Text('Scan', style: TextStyle(color: currentIndex  == 2? AppColors.primary : Theme.of(context).textTheme.bodySmall!.color ),)]),
+                  _navItem(Icons.history_edu_outlined, 'History', 3),
+                  _navItem(Icons.person_3, 'Profile', 4),
+                ],
+              ),
             ],
           ),
         ),
@@ -63,13 +70,13 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: selected ? AppColors.primary : Colors.white70),
+            Icon(icon, color: selected ? AppColors.primary : Theme.of(context).colorScheme.onSurface),
             const SizedBox(height: 4),
             Text(
               title,
               style: TextStyle(
                 fontSize: 12,
-                color: selected ? AppColors.primary : Colors.white70,
+                color: selected ? AppColors.primary : Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ],
@@ -88,24 +95,18 @@ class _MainScreenState extends State<MainScreen> {
         });
       },
       child: Container(
-        width: 74,
-        height: 74,
+        width: 55,
+        height: 55,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: const LinearGradient(
-            colors: [Color(0xff7A00FF), Color(0xff5B00E6)],
+          border: Border.all(color: Theme.of(context).cardColor,),
+          gradient: LinearGradient(
+            colors: [AppColors.primary, AppColors.gradientBtn],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(.5),
-              blurRadius: 20,
-              spreadRadius: 2,
-            ),
-          ],
         ),
-        child: const Icon(Icons.qr_code_scanner, color: Colors.white, size: 34),
+        child: const Icon(Icons.qr_code_scanner, color: Colors.white, size: 24),
       ),
     );
   }

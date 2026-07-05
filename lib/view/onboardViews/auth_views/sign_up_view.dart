@@ -43,7 +43,7 @@ class _SignUpViewState extends State<SignUpView> {
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 200,),
+              SizedBox(height: 150,),
               Form(
                   key: formKey,
                   child: Column(

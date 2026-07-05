@@ -31,6 +31,7 @@ class HomePageView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      const SizedBox(height: 20,),
                       Row(
                         children: [
                           Text(
@@ -50,6 +51,7 @@ class HomePageView extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey.withAlpha(5),
                               foregroundColor: AppColors.onSurface,
+                              padding: const EdgeInsets.all(5)
                             ),
                           ),
                           const SizedBox(width: 20),
@@ -75,10 +77,11 @@ class HomePageView extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '# amount',
+                            '#123.90',
                             style: TextStyle(
                               color: AppColors.onSurface,
                               fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(width: 30),
@@ -147,7 +150,7 @@ class HomePageView extends StatelessWidget {
                 children: [
                   HeadingText(title: 'Upcoming',),
                   Text('You have an upcoming thrift'),
-
+const SizedBox(height: 5.0,),
                   Card(
                     clipBehavior: Clip.antiAlias,
                     child: ListTile(
@@ -159,9 +162,9 @@ class HomePageView extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(),
+            const Divider(height: 0.1, color: Colors.grey,),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -186,7 +189,8 @@ class HomePageView extends StatelessWidget {
           decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
           child: const Icon(Icons.atm, size: 20),
         ),
-        Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 2.6,),
+        Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
       ],
     );
   }

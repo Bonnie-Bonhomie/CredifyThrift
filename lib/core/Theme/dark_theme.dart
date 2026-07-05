@@ -14,6 +14,7 @@ final ThemeData darkTheme = ThemeData(
     cardTheme: CardThemeData(
         color: ColorTheme.containerDark,
     ),
+    cardColor: ColorTheme.containerDark,
 
     iconTheme: IconThemeData(
         color: ColorTheme.containerLight
