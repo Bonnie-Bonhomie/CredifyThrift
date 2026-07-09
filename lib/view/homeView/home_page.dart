@@ -1,4 +1,5 @@
 import 'package:credify/core/constants/app_color.dart';
+import 'package:credify/view/view_export.dart';
 import 'package:credify/viewModel/loader_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class HomePageView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(height: 20,),
+                      const SizedBox(height: 20),
                       Row(
                         children: [
                           Text(
@@ -51,7 +52,7 @@ class HomePageView extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey.withAlpha(5),
                               foregroundColor: AppColors.onSurface,
-                              padding: const EdgeInsets.all(5)
+                              padding: const EdgeInsets.all(5),
                             ),
                           ),
                           const SizedBox(width: 20),
@@ -109,7 +110,13 @@ class HomePageView extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         color: Theme.of(context).scaffoldBackgroundColor,
-                        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.3), blurRadius: 1, offset: Offset(0, 1))]
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            blurRadius: 1,
+                            offset: Offset(0, 1),
+                          ),
+                        ],
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 15,
@@ -142,38 +149,53 @@ class HomePageView extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  HeadingText(title: 'Upcoming',),
-                  Text('You have an upcoming thrift'),
-const SizedBox(height: 5.0,),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    child: ListTile(
-                      title: Text('data'),
-                      subtitle: Text('textsheh'),
-                      leading: CircleAvatar(),
-                    ),
+                  HeadingText(title: 'Upcoming'),
+                  Text(
+                    'You have an upcoming thrift',
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
+                  const SizedBox(height: 5.0),
                 ],
               ),
             ),
-            const Divider(height: 0.1, color: Colors.grey,),
+            const Divider(height: 0.1, color: Colors.grey),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   HeadingText(title: 'This Month'),
-                  Text('You have spent £3.90 more than last month'),
-                  Card()
+                  Text('You have spent £3.90 more than last month', style: Theme.of(context).textTheme.bodySmall,),
+                 const SizedBox(height: 30,),
+                  Card(
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: [
+                        TransactionLists(),
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: Colors.grey[300],
+                            padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 18),
+                            textStyle: Theme.of(context).textTheme.bodyLarge,
+                            foregroundColor: Theme.of(context).textTheme.bodyLarge!.color
+                          ),
+                          child: Text('See all transactions'),
+                        ),
+                        const SizedBox(height: 10,)
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -189,19 +211,63 @@ const SizedBox(height: 5.0,),
           decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
           child: const Icon(Icons.atm, size: 20),
         ),
-        const SizedBox(height: 2.6,),
-        Text(name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+        const SizedBox(height: 2.6),
+        Text(
+          name,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+        ),
       ],
+    );
+  }
+}
+
+class TransactionLists extends StatelessWidget {
+  const TransactionLists({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: List.generate(
+        5,
+        (index) => Column(
+          children: [
+            ListTile(
+              title: Text(
+                'data',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              subtitle: Text(
+                'textsheh',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              leading: CircleAvatar(),
+              trailing: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    '-#234.00',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  Text('Nov 23', style: TextStyle(fontWeight: FontWeight.w200)),
+                ],
+              ),
+            ),
+            Divider(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              indent: 30,
+              endIndent: 30,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
 class HeadingText extends StatelessWidget {
   final String title;
-  const HeadingText({
-    super.key,
-    required this.title
-  });
+
+  const HeadingText({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
