@@ -141,9 +141,9 @@ class StatCard extends StatelessWidget {
 
 
 
-class _ProductCard extends StatelessWidget {
+class ProductCard extends StatelessWidget {
   // final Product product;
-  const _ProductCard();
+  const ProductCard();
 
   @override
   Widget build(BuildContext context) {
@@ -202,9 +202,9 @@ class _ProductCard extends StatelessWidget {
 
 
 
-class _ListCard extends StatelessWidget {
+class ListCard extends StatelessWidget {
   final Widget child;
-  const _ListCard({required this.child});
+  const ListCard({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
