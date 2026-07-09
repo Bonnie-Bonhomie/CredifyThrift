@@ -26,10 +26,11 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _screens[currentIndex],
       floatingActionButton: primaryFab(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
+        notchMargin: 0,
         color: Theme.of(context).cardColor,
         // color: AppColors.darkGrey,
         elevation: 20,
@@ -99,7 +100,7 @@ class _MainScreenState extends State<MainScreen> {
         height: 55,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Theme.of(context).cardColor,),
+          border: Border.all(color: Theme.of(context).cardColor, width: 6),
           gradient: LinearGradient(
             colors: [AppColors.primary, AppColors.gradientBtn],
             begin: Alignment.topLeft,
