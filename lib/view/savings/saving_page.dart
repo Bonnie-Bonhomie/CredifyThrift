@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScanPageView extends StatelessWidget {
-  const ScanPageView({super.key});
+class SavingPage extends StatelessWidget {
+  const SavingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
