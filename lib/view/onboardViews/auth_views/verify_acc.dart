@@ -1,14 +1,6 @@
-import 'package:credify/core/constants/app_color.dart';
-import 'package:credify/core/constants/app_size.dart';
-import 'package:credify/core/utils/loaderFile/loading_wrapper.dart';
-import 'package:credify/core/widgets/custom_pin_code_field.dart';
-import 'package:credify/view/view_widgets/shared_widget.dart';
-import 'package:credify/viewModel/auth_view_model/sign_in_v_model.dart';
-import 'package:credify/viewModel/loader_model.dart';
+
+import 'package:credify/export_barrel.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:provider/provider.dart';
 
 class VerifyAccView extends StatefulWidget {
   final String number;
