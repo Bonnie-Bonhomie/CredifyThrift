@@ -1,16 +1,6 @@
-import 'package:credify/config/AppRoutes/routes.dart';
-import 'package:credify/core/constants/app_size.dart';
-import 'package:credify/core/utils/date_formatter.dart';
-import 'package:credify/core/utils/form_widget.dart';
-import 'package:credify/core/utils/loaderFile/loading_wrapper.dart';
-import 'package:credify/core/utils/validator/validatoe.dart';
-import 'package:credify/core/widgets/app_button.dart';
-import 'package:credify/view/view_widgets/shared_widget.dart';
-import 'package:credify/viewModel/auth_view_model/details_view_model.dart';
-import 'package:credify/viewModel/loader_model.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+
+
+import '../../../export_barrel.dart';
 
 class PersonalInfoView extends StatefulWidget {
   const PersonalInfoView({super.key});
