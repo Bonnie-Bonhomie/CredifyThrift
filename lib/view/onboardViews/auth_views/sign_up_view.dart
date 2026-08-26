@@ -1,15 +1,8 @@
 
-import 'package:credify/core/utils/loaderFile/loading_wrapper.dart';
-import 'package:credify/core/utils/validator/validatoe.dart';
-import 'package:credify/core/widgets/app_button.dart';
 import 'package:credify/core/widgets/phone_number_form.dart';
 import 'package:credify/core/widgets/term_or_agree.dart';
-import 'package:credify/data/models/countries_model.dart';
-import 'package:credify/view/onboardViews/auth_views/verify_acc.dart';
-import 'package:credify/viewModel/auth_view_model/sign_in_v_model.dart';
-import 'package:credify/viewModel/loader_model.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
+import 'package:credify/export_barrel.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
