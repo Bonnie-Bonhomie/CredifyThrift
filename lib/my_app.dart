@@ -1,7 +1,6 @@
-import 'package:credify/config/AppRoutes/app_routes.dart';
-import 'package:credify/config/AppRoutes/routes.dart';
-import 'package:credify/core/Theme/app_theme.dart';
-import 'package:flutter/material.dart';
+
+import 'package:credify/export_barrel.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
         theme: BAppTheme.light,
         darkTheme: BAppTheme.dark,
-        initialRoute: Routes.signUp,
+        initialRoute: Routes.mainS,
       onGenerateRoute: (settings) => AppRoutes.generateRoute(settings),
     );
   }
