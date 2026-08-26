@@ -10,15 +10,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   int currentIndex = 0;
 
   final List<Widget> _screens = const [
     HomePageView(),
-    RequestPageView(),
-    ScanPageView(),
-    HistoryPageView(),
-    ProfilePageView()
+    ActivityPageView(),
+    SavingPage(),
+    InvestPageView(),
+    ProfilePageView(),
   ];
 
   @override
@@ -27,29 +26,41 @@ class _MainScreenState extends State<MainScreen> {
       body: _screens[currentIndex],
       floatingActionButton: primaryFab(),
 
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: BottomAppBar(
+        padding: const EdgeInsets.only(top: 5, bottom: 3),
+        height: 55,
         shape: const CircularNotchedRectangle(),
         notchMargin: 0,
         color: Theme.of(context).cardColor,
         // color: AppColors.darkGrey,
-        elevation: 20,
+        // elevation: 20,
         child: SizedBox(
-          height: 72,
-          child: Column(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              _navItem(Icons.home_filled, 'Home', 0),
+              _navItem(Icons.wifi_protected_setup_outlined, 'Activity', 1),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  _navItem(Icons.home_filled, 'Home', 0),
-                  _navItem(Icons.request_page_outlined, 'Request', 1),
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [const SizedBox(width: 50),const SizedBox(height: 30), Text('Scan', style: TextStyle(color: currentIndex  == 2? AppColors.primary : Theme.of(context).textTheme.bodySmall!.color ),)]),
-                  _navItem(Icons.history_edu_outlined, 'History', 3),
-                  _navItem(Icons.person_3, 'Profile', 4),
+                  const SizedBox(width: 30),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Savings',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: currentIndex == 2
+                          ? AppColors.primary
+                          : Theme.of(context).textTheme.bodySmall!.color,
+                    ),
+                  ),
                 ],
               ),
+              _navItem(Icons.scale_sharp, 'Investment', 3),
+              _navItem(Icons.person_3, 'Profile', 4),
             ],
           ),
         ),
@@ -67,17 +78,34 @@ class _MainScreenState extends State<MainScreen> {
         });
       },
       child: SizedBox(
-        width: 60,
+        width: 65,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: selected ? AppColors.primary : Theme.of(context).colorScheme.onSurface),
-            const SizedBox(height: 4),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: selected
+                    ? AppColors.lightBlue.withAlpha(50)
+                    : Colors.transparent,
+              ),
+              child: Icon(
+                icon,
+                size: 20,
+                color: selected
+                    ? AppColors.primary
+                    : Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+            const SizedBox(height: 5),
             Text(
               title,
               style: TextStyle(
-                fontSize: 12,
-                color: selected ? AppColors.primary : Theme.of(context).colorScheme.onSurface,
+                fontSize: 10,
+                color: selected
+                    ? AppColors.primary
+                    : Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ],
@@ -107,7 +135,7 @@ class _MainScreenState extends State<MainScreen> {
             end: Alignment.bottomRight,
           ),
         ),
-        child: const Icon(Icons.qr_code_scanner, color: Colors.white, size: 24),
+        child: const Icon(Icons.savings_rounded, color: Colors.white, size: 24),
       ),
     );
   }
