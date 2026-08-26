@@ -1,11 +1,20 @@
-import 'package:credify/core/constants/app_color.dart';
-import 'package:credify/view/view_export.dart';
-import 'package:credify/viewModel/loader_model.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class HomePageView extends StatelessWidget {
+import 'package:credify/core/utils/gradient_linear_bar.dart';
+import 'package:credify/export_barrel.dart';
+import 'package:credify/viewModel/app_model.dart';
+
+import '../view_widgets/saving_box.dart';
+
+
+class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
+
+  @override
+  State<HomePageView> createState() => _HomePageViewState();
+}
+
+class _HomePageViewState extends State<HomePageView> {
+  final AppModel appModel = AppModel();
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +170,18 @@ class HomePageView extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(height: 5.0),
+
+                  Row(
+                    children: [
+                      SavingBox(appModel: appModel),
+                      SavingBox(appModel: appModel),
+                    ],
+                  ),
+                  Row(
+                    children: [
+
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -240,7 +261,7 @@ class TransactionLists extends StatelessWidget {
                 'textsheh',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              leading: CircleAvatar(),
+              leading: CircleAvatar(child: Icon(Icons.real_estate_agent),),
               trailing: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
