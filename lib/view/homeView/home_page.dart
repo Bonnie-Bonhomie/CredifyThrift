@@ -87,7 +87,7 @@ class _HomePageViewState extends State<HomePageView> {
                       Row(
                         children: [
                           Text(
-                            '#123.90',
+                            appModel.formatCurrency(123456),
                             style: TextStyle(
                               color: AppColors.onSurface,
                               fontSize: 30,
@@ -171,17 +171,16 @@ class _HomePageViewState extends State<HomePageView> {
                   ),
                   const SizedBox(height: 5.0),
 
-                  Row(
-                    children: [
-                      SavingBox(appModel: appModel),
-                      SavingBox(appModel: appModel),
-                    ],
-                  ),
-                  Row(
-                    children: [
+                 SizedBox(
+                   height: 220,
+                   child: ListView.builder(
+                       itemCount: 3,
+                       scrollDirection: Axis.horizontal,
+                       itemBuilder: (context, index){
+                     return  SavingBox(appModel: appModel);
+                   }),
+                 ),
 
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -273,6 +272,7 @@ class TransactionLists extends StatelessWidget {
                 ],
               ),
             ),
+
             Divider(
               color: Theme.of(context).scaffoldBackgroundColor,
               indent: 30,
