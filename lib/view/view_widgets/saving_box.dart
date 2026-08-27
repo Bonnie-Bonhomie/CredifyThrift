@@ -16,7 +16,6 @@ class SavingBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: SizedBox(
-          width: 200,
           height: 200,
           child: Padding(
             padding: const EdgeInsets.all(18.0),
