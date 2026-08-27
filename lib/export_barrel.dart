@@ -28,6 +28,9 @@ export 'core/utils/form_widget.dart';
 export 'core/utils/permission_page.dart';
 export 'core/utils/persmission_box.dart';
 export 'core/utils/phone_number_formatter.dart';
+export 'core/widgets/app_button.dart';
+export 'core/widgets/app_text_widget.dart';
+export 'core/widgets/term_or_agree.dart';
 
 export 'data/models/countries_model.dart';
 // export 'data/repositories/';
@@ -41,7 +44,7 @@ export 'view/homeView/home_page.dart';
 export 'view/homeView/main_screen.dart';
 export 'view/homeView/profile_page.dart';
 export 'view/activities/activity.dart';
-export 'view/savings/saving_page.dart';
+export 'view/savings/presentation/saving_page.dart';
 
 export 'view/onboardViews/auth_views/create_password.dart';
 export 'view/onboardViews/auth_views/sign_up_view.dart';
