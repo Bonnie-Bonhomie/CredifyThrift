@@ -1,4 +1,5 @@
 import 'package:credify/core/constants/app_color.dart';
+import 'package:credify/core/utils/Helpers/cred_textstyle.dart';
 import 'package:credify/core/widgets/app_text_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -63,3 +64,32 @@ class DisabledButton extends StatelessWidget {
   }
 }
 
+
+
+
+
+class GradientButton extends StatelessWidget {
+  const GradientButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 3,
+        horizontal: 15,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        gradient: LinearGradient(
+          colors: [AppColors.lightGradient, AppColors.darkGradient],
+        ),
+      ),
+      child: Row(children: [
+        Icon(Icons.add, color: Colors.white,),
+        Text('create a new goal', style: CredTextStyle.bs3.copyWith(color: AppColors.onSurface),)
+      ],),
+    );
+  }
+}
