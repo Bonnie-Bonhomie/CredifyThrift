@@ -155,7 +155,7 @@ class SavingCard extends StatelessWidget {
               ),
               TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: saving.percent),
-                duration: const Duration(seconds: 4),
+                duration: const Duration(seconds: 2),
                 builder: (context, value, child) {
                   return GradientProgressBar(
                     progress: value,
