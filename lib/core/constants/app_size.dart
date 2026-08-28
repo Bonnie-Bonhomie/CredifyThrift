@@ -4,5 +4,11 @@ class AppSize{
 }
 
 enum Frequency{
-  daily, weekly, monthly
+  daily('day', 'daily', 'Daily'), weekly('week', 'wk', 'Weekly'), monthly('month', 'm', 'Monthly');
+
+  final String abbrev;
+  final String name;
+  final String value;
+
+  const Frequency(this.name, this.abbrev, this.value);
 }
