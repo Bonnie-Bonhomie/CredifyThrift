@@ -10,6 +10,7 @@ class SaveModel {
   int percentage;
   String createdAt;
   String updatedAt;
+  String duration;
 
   SaveModel({
     required this.title,
@@ -19,10 +20,24 @@ class SaveModel {
     required this.amount,
     required this.updatedAt,
     required this.paidAmount,
-    required this.percentage
-});
+    required this.duration,
+    this.percentage = 0,
+  });
+
+  double get percent => (paidAmount/amount);
+
+
+  factory SaveModel.fromJson(Map<String, dynamic> json){
+    return SaveModel(title: json['title'],
+        subtitle: json['subtitle'],
+        frequency: json['frequency'],
+        createdAt: json['createdAt'],
+        duration: json['duration'],
+        amount: json['amount'],
+        updatedAt: json['updatedAt'],
+        paidAmount: json['paidAmount'],
+        percentage: json['percentage']);
+  }
 
 }
-
-
 
