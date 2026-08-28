@@ -78,7 +78,11 @@ class _SavingPageState extends State<SavingPage> {
 
                       const SizedBox(height: 10),
                       SizedBox(width: 200,
+                          // height: 30,
                           child: GradientButton(
+                            onTap: (){
+                              Navigator.pushNamed(context, Routes.availableSaving);
+                            },
                             title: 'create a new goal', iconSize: 20,)),
                       // const SizedBox(height: 10,)
                     ],
@@ -126,7 +130,7 @@ class _SavingPageState extends State<SavingPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 800),
+            const SizedBox(height: 850),
           ],
         ),
       ),
