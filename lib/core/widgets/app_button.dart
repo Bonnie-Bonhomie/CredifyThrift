@@ -72,29 +72,63 @@ class GradientButton extends StatelessWidget {
   const GradientButton({
     super.key,
     required this.title,
+    required this.onTap,
     this.iconSize = 15,
+    this.needIcon = true,
+    this.icon,
   });
 
   final String title;
   final double iconSize;
+  final VoidCallback onTap;
+  final bool needIcon;
+  final IconData? icon;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 3,
-        horizontal: 15,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        gradient: LinearGradient(
-          colors: [AppColors.lightGradient, AppColors.darkGradient],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 5,
+          horizontal: 15,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          gradient: LinearGradient(
+            colors: [AppColors.lightGradient, AppColors.darkGradient],
+          ),
+        ),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+           needIcon? Icon(icon ?? Icons.add, color: Colors.white, size: iconSize,): SizedBox.shrink(),
+            Text(title, style: CredTextStyle.bs3.copyWith(color: AppColors.onSurface),)
+          ],),
         ),
       ),
-      child: Center(
-        child: Row(children: [
-          Icon(Icons.add, color: Colors.white, size: iconSize,),
-          Text(title, style: CredTextStyle.bs3.copyWith(color: AppColors.onSurface),)
-        ],),
+    );
+  }
+}
+
+
+
+class CustomArrowBtn extends StatelessWidget {
+  const CustomArrowBtn({
+    super.key,
+    required this.onTap,
+  });
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.textSecondary.withAlpha(50)),
+        child: Icon(Icons.chevron_right_outlined),
       ),
     );
   }
