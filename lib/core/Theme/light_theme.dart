@@ -60,4 +60,6 @@ cardColor: ColorTheme.containerLight,
         iconColor: ColorTheme.darkPrimary,
         tileColor: Colors.transparent
     ),
+
+  // dividerColor: AppColors.progressColor
 );
