@@ -29,6 +29,9 @@ class AppColors {
 
 
   static const Color pending = Color(0xFFF1B43B);
+  static const Color middle = Color(0xFFFE7D01);
+  static const Color early = Color(0xFF0B77D1);
+  static const Color complete = Color(0xFF2EBC79);
   static const Color error = Color(0xFFFA2525);
   
 }
