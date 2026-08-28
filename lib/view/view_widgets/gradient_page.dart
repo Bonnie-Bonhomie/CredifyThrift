@@ -22,17 +22,19 @@ class GradientPageWidget extends StatelessWidget {
 
 
 class GradientContainer extends StatelessWidget {
-  const GradientContainer({super.key, required this.child, this.height = 270});
+  const GradientContainer({super.key, required this.child, this.height = 270, this.bottomMargin = 30, this.allPadding = 15});
 
   final Widget child;
   final double height;
+  final double bottomMargin;
+  final double allPadding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      margin: const EdgeInsets.only(bottom: 30),
-      padding: const EdgeInsets.all(15),
+      margin: EdgeInsets.only(bottom: bottomMargin),
+      padding: EdgeInsets.all(allPadding),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [AppColors.primary, AppColors.gradientBtn],
