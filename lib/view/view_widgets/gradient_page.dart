@@ -18,3 +18,30 @@ class GradientPageWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+class GradientContainer extends StatelessWidget {
+  const GradientContainer({super.key, required this.child, this.height = 270});
+
+  final Widget child;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      margin: const EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [AppColors.primary, AppColors.gradientBtn],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: child,
+    );
+  }
+}
+
