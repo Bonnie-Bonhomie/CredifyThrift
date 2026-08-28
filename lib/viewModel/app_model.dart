@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:credify/core/constants/app_color.dart';
 import 'package:intl/intl.dart';
 
 class AppModel {
@@ -14,6 +17,16 @@ class AppModel {
       greet = 'Good Day';
     }
     return greet;
+  }
+
+  Color getPercent(double percent) {
+    Color color = AppColors.early;
+    if (percent >= 50 && percent < 75) {
+      color = AppColors.middle;
+    } else if(percent >= 75 && percent <= 100) {
+      color = AppColors.complete;
+    }
+    return color;
   }
 
   //Account state
