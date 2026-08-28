@@ -25,13 +25,16 @@ class _HomePageViewState extends State<HomePageView> {
               clipBehavior: Clip.none,
               children: [
                 GradientContainer(
+                  height: 300,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 50),
                       Row(
                         children: [
+                          Icon(Icons.layers, color: Colors.white,),
+                          const SizedBox(width: 8,),
                           Text(
                             'Credify.',
                             style: TextStyle(
@@ -43,7 +46,7 @@ class _HomePageViewState extends State<HomePageView> {
                           const Spacer(),
                           SizedBox(
                             width: 90,
-                            child: GradientButton(title: '234'),
+                            child: GradientButton(title: '234', onTap: (){},),
                           ),
                           const SizedBox(width: 20),
                           IconButton(
@@ -249,7 +252,7 @@ class _HomePageViewState extends State<HomePageView> {
                         SizedBox(
                           width: 200,
                           height: 30,
-                          child: GradientButton(title: 'See all transactions'),
+                          child: GradientButton(title: 'See all transactions', onTap: (){},needIcon: false,),
                         ),
                         const SizedBox(height: 10),
                       ],
