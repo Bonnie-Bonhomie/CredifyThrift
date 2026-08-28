@@ -4,10 +4,12 @@ import '../../export_barrel.dart';
 
 class GradientProgressBar extends StatelessWidget {
   final double progress; // 0.0 - 1.0
+  final Color color;
 
   const GradientProgressBar({
     super.key,
     required this.progress,
+    this.color = AppColors.early,
   });
 
   @override
@@ -28,7 +30,7 @@ class GradientProgressBar extends StatelessWidget {
                 width: constraints.maxWidth * progress,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: AppColors.progressColor
+                  color: color
                   // gradient: const LinearGradient(
                   //   colors: [
                   //     Colors.green,
