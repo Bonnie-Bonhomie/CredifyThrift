@@ -1,10 +1,6 @@
-
-import 'package:credify/core/utils/gradient_linear_bar.dart';
 import 'package:credify/export_barrel.dart';
+import 'package:credify/view/savings/notifier/saving_notifier.dart';
 import 'package:credify/viewModel/app_model.dart';
-
-import '../view_widgets/saving_box.dart';
-
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -16,6 +12,8 @@ class HomePageView extends StatefulWidget {
 class _HomePageViewState extends State<HomePageView> {
   final AppModel appModel = AppModel();
 
+  List<String> quickLinkText = ['Top up', 'Transfer', 'Activity', 'savings'];
+
   @override
   Widget build(BuildContext context) {
     final loading = context.watch<LoaderModel>().isLoading;
@@ -26,17 +24,7 @@ class _HomePageViewState extends State<HomePageView> {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Container(
-                  height: 270,
-                  margin: const EdgeInsets.only(bottom: 30),
-                  padding: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [AppColors.primary, AppColors.gradientBtn],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
+                GradientContainer(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,16 +41,9 @@ class _HomePageViewState extends State<HomePageView> {
                             ),
                           ),
                           const Spacer(),
-                          ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: Icon(Icons.keyboard_arrow_down_sharp),
-                            iconAlignment: IconAlignment.end,
-                            label: Text('*234'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey.withAlpha(5),
-                              foregroundColor: AppColors.onSurface,
-                              padding: const EdgeInsets.all(5),
-                            ),
+                          SizedBox(
+                            width: 90,
+                            child: GradientButton(title: '234'),
                           ),
                           const SizedBox(width: 20),
                           IconButton(
@@ -134,24 +115,23 @@ class _HomePageViewState extends State<HomePageView> {
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          buildService('Top up'),
-                          SizedBox(
-                            height: 65,
-                            child: VerticalDivider(endIndent: 20),
-                          ),
-                          buildService('Transfer'),
-                          SizedBox(
-                            height: 65,
-                            child: VerticalDivider(endIndent: 20),
-                          ),
-                          buildService('History'),
-                          SizedBox(
-                            height: 65,
-                            child: VerticalDivider(endIndent: 20),
-                          ),
-                          buildService('Saving'),
-                        ],
+                        children: List.generate(quickLinkText.length, (index) {
+                          final title = quickLinkText[index];
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buildService(title),
+                              index == quickLinkText.length - 1 ?const SizedBox.shrink():  const SizedBox(width: 20,),
+                              index == quickLinkText.length - 1 ? SizedBox.shrink(): SizedBox(
+                                height: 65,
+                                child: VerticalDivider(
+                                  endIndent: 20,
+                                  color: AppColors.lightBlue.withAlpha(100),
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
                       ),
                     ),
                   ),
@@ -166,50 +146,112 @@ class _HomePageViewState extends State<HomePageView> {
                 children: [
                   HeadingText(title: 'Upcoming'),
                   Text(
-                    'You have an upcoming thrift',
+                    'Your next investment',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(height: 5.0),
 
-                 SizedBox(
-                   height: 220,
-                   child: ListView.builder(
-                       itemCount: 3,
-                       scrollDirection: Axis.horizontal,
-                       itemBuilder: (context, index){
-                     return  SavingBox(appModel: appModel);
-                   }),
-                 ),
-
+                  SizedBox(
+                    height: 160,
+                    child: ListView.builder(
+                      itemCount: 3,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          width: 150,
+                          height: 100,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CircleAvatar(backgroundColor: AppColors.complete,child: Icon(Icons.account_balance_wallet_sharp),),
+                                  Text('Title', style: CredTextStyle.h3,),
+                                  Text('description', style: CredTextStyle.bs4,),
+                                  Text(appModel.formatCurrNoKobo(1345), style: CredTextStyle.h5,)
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
-            const Divider(height: 0.1, color: Colors.grey),
+            const SizedBox(height: 15),
+            Consumer<SavingNotifier>(
+              builder: (key, s, child) {
+                final save = s.savings;
+                if(save.isEmpty){
+                  return SizedBox.shrink();
+                }
+                int len = save.length >= 3? 3: save.length;
+                return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      HeadingText(title: 'My Savings'),
+                      Text(
+                        'All available savings',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      const SizedBox(height: 5.0),
+
+                      SizedBox(
+                        height: 190,
+                        child: ListView.builder(
+                          itemCount: len,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            final saving = save[index];
+                            return SavingBox(appModel: appModel, saving: saving);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            ),
+            Divider(thickness: 8, color: Colors.grey[300],),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   HeadingText(title: 'This Month'),
-                  Text('You have spent £3.90 more than last month', style: Theme.of(context).textTheme.bodySmall,),
-                 const SizedBox(height: 30,),
+                  Text(
+                    'You have spent £3.90 more than last month',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 30),
                   Card(
                     clipBehavior: Clip.antiAlias,
                     child: Column(
                       children: [
-                        TransactionLists(),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: Colors.grey[300],
-                            padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 18),
-                            textStyle: Theme.of(context).textTheme.bodyLarge,
-                            foregroundColor: Theme.of(context).textTheme.bodyLarge!.color
-                          ),
-                          child: Text('See all transactions'),
+                        TransactionLists(appModel: appModel,),
+                        // ElevatedButton(
+                        //   onPressed: () {},
+                        //   style: ElevatedButton.styleFrom(
+                        //     elevation: 0,
+                        //     backgroundColor: AppColors.progressColor,
+                        //     padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                        //     textStyle: Theme.of(context).textTheme.bodyLarge,
+                        //     foregroundColor: AppColors.onSurface
+                        //   ),
+                        //   child: Text('See all transactions'),
+                        // ),
+                        SizedBox(
+                          width: 200,
+                          height: 30,
+                          child: GradientButton(title: 'See all transactions'),
                         ),
-                        const SizedBox(height: 10,)
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
@@ -226,15 +268,19 @@ class _HomePageViewState extends State<HomePageView> {
     return Column(
       children: [
         Container(
-          height: 50,
-          width: 50,
+          height: 45,
+          width: 45,
           decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-          child: const Icon(Icons.atm, size: 20),
+          child: const Icon(
+            Icons.now_widgets_rounded,
+            size: 30,
+            color: Colors.white,
+          ),
         ),
-        const SizedBox(height: 2.6),
+        const SizedBox(height: 3),
         Text(
           name,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
         ),
       ],
     );
@@ -242,13 +288,14 @@ class _HomePageViewState extends State<HomePageView> {
 }
 
 class TransactionLists extends StatelessWidget {
-  const TransactionLists({super.key});
+  final AppModel appModel;
+  const TransactionLists({super.key, required this.appModel});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        5,
+        3,
         (index) => Column(
           children: [
             ListTile(
@@ -260,12 +307,12 @@ class TransactionLists extends StatelessWidget {
                 'textsheh',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              leading: CircleAvatar(child: Icon(Icons.real_estate_agent),),
+              leading: CircleAvatar(child: Icon(Icons.real_estate_agent)),
               trailing: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '-#234.00',
+                    '-${appModel.formatCurrency(1234)}',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   Text('Nov 23', style: TextStyle(fontWeight: FontWeight.w200)),
@@ -274,7 +321,7 @@ class TransactionLists extends StatelessWidget {
             ),
 
             Divider(
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: AppColors.lightBlue.withAlpha(100),
               indent: 30,
               endIndent: 30,
             ),
