@@ -71,8 +71,12 @@ class DisabledButton extends StatelessWidget {
 class GradientButton extends StatelessWidget {
   const GradientButton({
     super.key,
+    required this.title,
+    this.iconSize = 15,
   });
 
+  final String title;
+  final double iconSize;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,10 +90,12 @@ class GradientButton extends StatelessWidget {
           colors: [AppColors.lightGradient, AppColors.darkGradient],
         ),
       ),
-      child: Row(children: [
-        Icon(Icons.add, color: Colors.white,),
-        Text('create a new goal', style: CredTextStyle.bs3.copyWith(color: AppColors.onSurface),)
-      ],),
+      child: Center(
+        child: Row(children: [
+          Icon(Icons.add, color: Colors.white, size: iconSize,),
+          Text(title, style: CredTextStyle.bs3.copyWith(color: AppColors.onSurface),)
+        ],),
+      ),
     );
   }
 }
