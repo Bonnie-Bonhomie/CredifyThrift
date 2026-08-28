@@ -59,7 +59,7 @@ export 'view/onboardViews/personal_details/personal_info_view.dart';
 export 'view/view_export.dart';
 export 'viewModel/view_model_export.dart';
 
-export 'package:credify/core/widgets/app_button.dart';
+export 'package:credify/view/view_widgets/saving_box.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
 export 'package:provider/provider.dart';
