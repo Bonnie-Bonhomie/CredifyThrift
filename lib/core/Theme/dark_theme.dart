@@ -1,5 +1,6 @@
 
 
+import 'package:credify/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 import 'color_theme.dart';
 import 'form_field_theme.dart';
@@ -9,26 +10,26 @@ final ThemeData darkTheme = ThemeData(
 
     // useMaterial3: 3,
     brightness: Brightness.dark,
-    primaryColor: ColorTheme.containerLight,
-    scaffoldBackgroundColor: ColorTheme.backgroundDark,
+    primaryColor: AppColors.progressColor,
+    scaffoldBackgroundColor: AppColors.darkBackground,
     cardTheme: CardThemeData(
-        color: ColorTheme.containerDark,
+        color: AppColors.cardDark,
     ),
-    cardColor: ColorTheme.containerDark,
+    cardColor: AppColors.cardDark,
 
     iconTheme: IconThemeData(
-        color: ColorTheme.containerLight
+        color: AppColors.cardLight
     ),
     colorScheme: const ColorScheme.light(
         brightness: Brightness.dark,
-        primary: ColorTheme.lightPrimary,
-        secondary: ColorTheme.darkPrimary,
+        primary: AppColors.primary,
+        secondary: AppColors.darkBlue,
         onSurface: Colors.white
     ),
 
     appBarTheme: AppBarTheme(
-        backgroundColor: ColorTheme.backgroundDark,
-        foregroundColor: ColorTheme.backgroundLight,
+        backgroundColor: AppColors.darkBackground,
+        foregroundColor: AppColors.lightBackground,
         elevation: 0
     ),
 
@@ -41,23 +42,23 @@ final ThemeData darkTheme = ThemeData(
     ),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: ColorTheme.darkPrimary
+        backgroundColor: AppColors.darkBlue
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-            backgroundColor: ColorTheme.darkPrimary,
+            backgroundColor: AppColors.darkBlue,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            textStyle: DarkTextTheme.body.copyWith(color: ColorTheme.textLight)
+            textStyle: DarkTextTheme.body.copyWith(color: AppColors.textMain)
         )
     ),
     inputDecorationTheme: BFormTheme.darkInputTheme,
     dividerTheme: DividerThemeData(
-        color: ColorTheme.containerLight
+        color: AppColors.darkGrey
     ),
     listTileTheme: ListTileThemeData(
         textColor: DarkTextTheme.body.color,
-        iconColor: ColorTheme.containerLight,
+        iconColor: AppColors.cardDark,
         tileColor: Colors.transparent
     )
 
