@@ -1,20 +1,28 @@
-import 'package:credify/config/AppRoutes/routes.dart';
-import 'package:credify/core/constants/app_size.dart';
-import 'package:credify/core/utils/loaderFile/loading_wrapper.dart';
-import 'package:credify/core/widgets/app_button.dart';
-import 'package:credify/view/onboardViews/identifyVerification/verify_method.dart';
-import 'package:credify/view/view_widgets/shared_widget.dart';
-import 'package:credify/viewModel/auth_view_model/details_view_model.dart';
-import 'package:credify/viewModel/loader_model.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
+import 'package:credify/export_barrel.dart';
+
 
 class AddressDetailsView extends StatelessWidget {
   AddressDetailsView({super.key});
 
   final TextEditingController addressCtrl = TextEditingController();
+  final streetCtrl = TextEditingController();
+  final apartment = TextEditingController();
+  final zipCodeCtrl = TextEditingController();
+  final cityCtrl = TextEditingController();
+  final stateCtrl = TextEditingController();
+
   final addressKey = GlobalKey<FormFieldState>();
+  final streetKey = GlobalKey<FormFieldState>();
+  final aptKey = GlobalKey<FormFieldState>();
+  final zipKey = GlobalKey<FormFieldState>();
+  final cityKey = GlobalKey<FormFieldState>();
+  final stateKey = GlobalKey<FormFieldState>();
+
   final formKey = GlobalKey<FormState>();
+
+  // void logi
+
   @override
   Widget build(BuildContext context) {
     final watchDet = context.watch<DetailsViewModel>();
@@ -46,27 +54,81 @@ class AddressDetailsView extends StatelessWidget {
               const SizedBox(height: 10,),
               Text('Let us know where we should send your Mastercard Debit Card'),
               const SizedBox(height: 20,),
-              ReuseContainer(child: TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: 3,
-                key: addressKey,
-                controller: addressCtrl,
-                validator: (val){},
-                decoration: InputDecoration(
-                  hint: Text('Street address'),
-                  contentPadding: const EdgeInsets.all(5)
+              ReuseContainer(
+                child:
+                FormWidget(
+                  label: 'Street Address',
+                  fieldKey: streetKey,
+                  validator: (val) => Validator.validateText(val, 'street Address'),
+                  valController: streetCtrl,
+                  onChanged: (val) {
+                    streetKey.currentState!.validate();
+                    readDet.firstFill(val);
+                  },
                 ),
-                onChanged: (val){
-                  addressKey.currentState!.validate();
-                  readDet.addFill(val);
-                },
-              )),
+              ),
+              ReuseContainer(
+                child:
+                FormWidget(
+                  label: 'Apartment/ Suite number',
+                  fieldKey: aptKey,
+                  validator: (value) =>
+                      Validator.validateText(value, 'Apartment'),
+                  valController: apartment,
+                  onChanged: (val) {
+                    aptKey.currentState!.validate();
+                    readDet.lastNFill(val);
+                  },
+                ),
+              ), ReuseContainer(
+                child:
+                FormWidget(
+                  label: 'City',
+                  fieldKey: cityKey,
+                  validator: (value) =>
+                      Validator.validateText(value, 'city'),
+                  valController: cityCtrl,
+                  onChanged: (val) {
+                    cityKey.currentState!.validate();
+                    readDet.lastNFill(val);
+                  },
+                ),
+              ), ReuseContainer(
+                child:
+                FormWidget(
+                  label: 'State',
+                  fieldKey: stateKey,
+                  validator: (value) =>
+                      Validator.validateText(value, 'State'),
+                  valController: stateCtrl,
+                  onChanged: (val) {
+                    stateKey.currentState!.validate();
+                    readDet.lastNFill(val);
+                  },
+                ),
+              ),
+              ReuseContainer(
+                child:
+                FormWidget(
+                  label: 'Zip Code',
+                  fieldKey: zipKey,
+                  validator: (value) =>
+                      Validator.validateText(value, 'zip code'),
+                  valController: zipCodeCtrl,
+                  onChanged: (val) {
+                    zipKey.currentState!.validate();
+                    readDet.lastNFill(val);
+                  },
+                ),
+              ),
               const SizedBox(height: 400,),
               Padding(padding: const EdgeInsets.only(bottom: 15), child:
-              watchDet.addressFill? AppButton(onPressed: (){
+              // watchDet.addressFill?
+              AppButton(onPressed: (){
+
                 Navigator.pushNamed(context, Routes.verifyID);
-              }, label: 'Continue'):
-              DisabledButton(label: 'Continue'),)
+              }, label: 'Continue'))
+                  // : DisabledButton(label: 'Continue'),)
             ],
           ),
         ),
