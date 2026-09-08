@@ -46,18 +46,25 @@ export 'view/homeView/profile_page.dart';
 export 'view/activities/activity.dart';
 export 'view/savings/presentation/saving_page.dart';
 
-export 'view/onboardViews/auth_views/create_password.dart';
-export 'view/onboardViews/auth_views/sign_up_view.dart';
-export 'view/onboardViews/auth_views/verify_acc.dart';
+export 'view/authentication/auth_views/create_password.dart';
+export 'view/authentication/auth_views/sign_up_view.dart';
+export 'view/authentication/auth_views/verify_acc.dart';
 
-export 'view/onboardViews/identifyVerification/camera_page.dart';
-export 'view/onboardViews/identifyVerification/verify_method.dart';
+export 'view/authentication/identifyVerification/camera_page.dart';
+export 'view/authentication/identifyVerification/verify_method.dart';
 
-export 'view/onboardViews/personal_details/address_details.dart';
-export 'view/onboardViews/personal_details/personal_info_view.dart';
+export 'view/authentication/personal_details/address_details.dart';
+export 'view/authentication/personal_details/personal_info_view.dart';
+export 'package:credify/view/authentication/splash_screen.dart';
 
 export 'view/view_export.dart';
 export 'viewModel/view_model_export.dart';
+
+export 'package:credify/view/savings/data/save_model.dart';
+export 'package:credify/view/savings/presentation/available_savings.dart';
+export 'package:credify/view/savings/presentation/create_new_saving.dart';
+
+
 
 export 'package:credify/view/view_widgets/saving_box.dart';
 export 'package:flutter/material.dart';
