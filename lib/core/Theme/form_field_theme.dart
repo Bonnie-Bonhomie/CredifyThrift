@@ -6,13 +6,13 @@ import 'text_theme.dart';
 
 class BFormTheme {
   static InputDecorationTheme lightInputTheme = InputDecorationTheme(
-    prefixIconColor: ColorTheme.darkPrimary,
-    suffixIconColor: ColorTheme.darkPrimary,
-    labelStyle: LightTextTheme.body.copyWith(color: ColorTheme.darkPrimary),
-    hintStyle: LightTextTheme.body.copyWith(color: ColorTheme.darkPrimary),
+    prefixIconColor: AppColors.darkBlue,
+    suffixIconColor: AppColors.darkBlue,
+    labelStyle: LightTextTheme.body.copyWith(color: AppColors.darkBlue,),
+    hintStyle: LightTextTheme.body.copyWith(color: AppColors.darkBlue,),
     filled: true,
-    fillColor: AppColors.lightGrey,
-    iconColor: ColorTheme.containerDark,
+    fillColor: Colors.white,
+    iconColor: AppColors.cardDark,
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(15.0),
       borderSide: BorderSide.none
@@ -32,13 +32,13 @@ class BFormTheme {
   );
 
   static InputDecorationTheme darkInputTheme = InputDecorationTheme(
-    prefixIconColor: ColorTheme.lightPrimary,
-    suffixIconColor: ColorTheme.lightPrimary,
-    labelStyle: LightTextTheme.body.copyWith(color: ColorTheme.textLight),
-    hintStyle: LightTextTheme.body.copyWith(color: ColorTheme.textLight),
+    prefixIconColor: AppColors.lightGrey,
+    suffixIconColor: AppColors.lightGrey,
+    labelStyle: LightTextTheme.body.copyWith(color: AppColors.textMain),
+    hintStyle: LightTextTheme.body.copyWith(color: AppColors.textMain),
 
-    iconColor: ColorTheme.containerLight,
-    fillColor: AppColors.darkGrey,
+    iconColor: AppColors.cardLight,
+    fillColor: AppColors.cardDark,
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(15.0),
       borderSide: BorderSide.none,
