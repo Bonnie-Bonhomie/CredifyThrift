@@ -37,7 +37,9 @@ class _VerifyAccViewState extends State<VerifyAccView> {
 
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Spacer(),
+              Center(child: Image(image: AssetImage('assets/images/signUp.png'), height: 150, width: 150,)),
+
+              const SizedBox(height:  20,),
               Text('Confirm', style: Theme.of(context).textTheme.headlineLarge),
               Text('Please enter the 6-digit code just sent to ${widget.number}'),
               const SizedBox(height: 20),
@@ -48,7 +50,7 @@ class _VerifyAccViewState extends State<VerifyAccView> {
                   controller: pinTextCtrl,
                   len: 4,
                   readOnly: loading,
-                  height: 50,
+                  height: 60,
                   onComplete: (pin) {
                     if(pin.length == 4){
                       context.read<LoaderModel>().changeLoadingState((){
