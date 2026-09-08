@@ -32,107 +32,116 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           backgroundColor: Colors.transparent,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CircleAvatar(
-                child: Icon(Icons.camera_rear, size: 80),
-                radius: 40,
-              ),
-              const Spacer(),
-              Form(
-                key: formKey,
+        body: Column(
+          // mainAxisAlignment:  MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Sign Up',
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      'Simply enter your phone number to login or create an account.',
-                    ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                      margin: const EdgeInsets.only(top: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.0),
-                        color: Theme.of(context).cardTheme.color,
-                      ),
-                      child: Row(
+                    Center(child: Image(image: AssetImage('assets/images/signUp.png'), height: 150, width: 150,)),
+                    const SizedBox(height:  20,),
+                    // const Spacer(),
+                    Form(
+                      key: formKey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              showCountries(context, signMod.availableCount, (
-                                select,
-                              ) {
-                                context.read<SignUpViewM>().selectCode(select);
-                              });
-                            },
+                          Text(
+                            'Sign Up',
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'Simply enter your phone number to login or create an account.',
+                          ),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                            margin: const EdgeInsets.only(top: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              color: Theme.of(context).cardTheme.color,
+                            ),
                             child: Row(
                               children: [
-                                Text(signMod.selected),
-                                const Icon(Icons.arrow_drop_down_sharp),
-                                SizedBox(
-                                  height: 30,
-                                  child: VerticalDivider(
-                                    color: Theme.of(context).dividerTheme.color,
+                                GestureDetector(
+                                  onTap: () {
+                                    showCountries(context, signMod.availableCount, (
+                                      select,
+                                    ) {
+                                      context.read<SignUpViewM>().selectCode(select);
+                                    });
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(signMod.selected),
+                                      const Icon(Icons.arrow_drop_down_sharp),
+                                      SizedBox(
+                                        height: 30,
+                                        child: VerticalDivider(
+                                          color: Theme.of(context).dividerTheme.color,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  child: PhoneNumberFormField(
+                                    numberCtrl: numberCtrl,
+                                    numberKey: numberKey,
+                                    filledColor: Colors.transparent,
+                                    validator: (val) =>
+                                        Validator.validateNumber(val!),
+                                    onChanged: (val) {
+                                      readSign.fillNumber(val);
+                                      numberKey.currentState!.validate();
+                                    },
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          Expanded(
-                            child: PhoneNumberFormField(
-                              numberCtrl: numberCtrl,
-                              numberKey: numberKey,
-                              filledColor: Colors.transparent,
-                              validator: (val) =>
-                                  Validator.validateNumber(val!),
-                              onChanged: (val) {
-                                readSign.fillNumber(val);
-                                numberKey.currentState!.validate();
-                              },
-                            ),
-                          ),
                         ],
                       ),
                     ),
+
+
                   ],
                 ),
               ),
-              const Spacer(),
-              TermOfAgreeText(),
-              const SizedBox(height: 10),
-              signMod.filled
+            ),
+            TermOfAgreeText(),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: signMod.filled
                   ? AppButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          context.read<LoaderModel>().changeLoadingState(() {
-                            numberCtrl.text =
-                                '${signMod.selected}-${numberCtrl.text.substring(1)}';
-                            // CustomSnackbar.successSnack(context: context, message: 'You have sign In successfully');
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    VerifyAccView(number: numberCtrl.text),
-                              ),
-                            );
-                          });
-                        }
-                      },
-                      label: 'Continue',
-                    )
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    context.read<LoaderModel>().changeLoadingState(() {
+                      numberCtrl.text =
+                      '${signMod.selected}-${numberCtrl.text.substring(1)}';
+                      // CustomSnackbar.successSnack(context: context, message: 'You have sign In successfully');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              VerifyAccView(number: numberCtrl.text),
+                        ),
+                      );
+                    });
+                  }
+                },
+                label: 'Continue',
+              )
                   : DisabledButton(label: 'Continue'),
-              const SizedBox(height: 10),
-            ],
-          ),
+            ),
+            // const SizedBox(height: 10),
+          ],
         ),
       ),
     );
