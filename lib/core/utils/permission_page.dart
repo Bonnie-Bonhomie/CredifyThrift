@@ -1,5 +1,4 @@
-import 'package:credify/view/onboardViews/identifyVerification/camera_page.dart';
-import 'package:flutter/material.dart';
+import 'package:credify/export_barrel.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionPage extends StatelessWidget {
