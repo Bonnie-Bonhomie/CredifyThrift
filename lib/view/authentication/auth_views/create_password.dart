@@ -37,7 +37,8 @@ class CreatePasswordView extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 200),
+                  Center(child: Image(image: AssetImage('assets/images/signUp.png'), height: 150, width: 150,)),
+                  const SizedBox(height:  20,),
                   Text(
                     'Create Password',
                     style: Theme.of(context).textTheme.headlineLarge,
