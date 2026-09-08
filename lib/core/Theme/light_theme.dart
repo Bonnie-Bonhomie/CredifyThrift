@@ -8,26 +8,26 @@ import 'text_theme.dart';
 final ThemeData lightTheme = ThemeData(
 
   brightness: Brightness.light,
-  primaryColor: ColorTheme.containerDark,
-  scaffoldBackgroundColor: ColorTheme.backgroundLight,
+  primaryColor: AppColors.progressColor,
+  scaffoldBackgroundColor: AppColors.lightBackground,
   cardTheme: CardThemeData(
-    color: ColorTheme.containerLight
+    color: AppColors.cardLight
   ),
-cardColor: ColorTheme.containerLight,
+cardColor: AppColors.cardLight,
   colorScheme: const ColorScheme.light(
     brightness: Brightness.light,
-    primary: ColorTheme.lightPrimary,
-    secondary: ColorTheme.darkPrimary,
+    primary: AppColors.primary,
+    secondary: AppColors.darkBlue,
     onSurface: AppColors.surface,
     surface: AppColors.onSurface
   ),
 
   iconTheme: IconThemeData(
-    color: ColorTheme.containerDark
+    color: AppColors.cardDark
   ),
   appBarTheme: AppBarTheme(
-    backgroundColor: ColorTheme.lightPrimary,
-    foregroundColor: ColorTheme.lightPrimary,
+    backgroundColor: AppColors.primary,
+    foregroundColor: AppColors.primary,
     elevation: 0
   ),
 
@@ -40,24 +40,24 @@ cardColor: ColorTheme.containerLight,
   ),
 
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: ColorTheme.lightPrimary
+    backgroundColor: AppColors.primary
   ),
 
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: ColorTheme.lightPrimary,
+      backgroundColor: AppColors.primary,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      textStyle: LightTextTheme.body.copyWith(color: ColorTheme.textLight)
+      textStyle: LightTextTheme.body.copyWith(color: AppColors.textMain)
     )
   ),
   inputDecorationTheme: BFormTheme.lightInputTheme,
   dividerTheme: DividerThemeData(
-    color: ColorTheme.containerDark
+    color: AppColors.cardDark
   ),
 
     listTileTheme: ListTileThemeData(
         textColor: LightTextTheme.body.color,
-        iconColor: ColorTheme.darkPrimary,
+        iconColor: AppColors.darkBlue,
         tileColor: Colors.transparent
     ),
 
