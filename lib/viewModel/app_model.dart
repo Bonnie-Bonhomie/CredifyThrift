@@ -144,6 +144,15 @@ class AppModel {
     return '$formatted ~ $formatTime';
   }
 
+  String formatTime(DateTime date) {
+    // DateTime date = DateTime.parse(value);
+
+    // String formatted = DateFormat('MMMM dd, yyyy').format(date);
+    String formatTime = DateFormat('HH:mm a').format(date);
+    return formatTime;
+  }
+
+
   String formatDateAM(String value) {
     DateTime date = DateTime.parse(value);
 
