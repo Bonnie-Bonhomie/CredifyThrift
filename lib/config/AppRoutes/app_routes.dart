@@ -1,11 +1,5 @@
-import 'package:credify/config/AppRoutes/page_slider.dart';
-import 'package:credify/config/AppRoutes/routes.dart';
-import 'package:credify/view/onboardViews/splash_screen.dart';
-import 'package:credify/view/savings/data/save_model.dart';
-import 'package:credify/view/savings/presentation/available_savings.dart';
-import 'package:credify/view/savings/presentation/create_new_saving.dart';
-import 'package:credify/view/view_export.dart';
-import 'package:flutter/material.dart';
+
+import 'package:credify/export_barrel.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> appRoutes = {
