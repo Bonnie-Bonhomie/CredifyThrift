@@ -50,28 +50,32 @@ class CustomPinPut extends StatelessWidget {
       onCompleted: onComplete,
       keyboardType: type ?? TextInputType.number,
       readOnly: readOnly,
+
       errorTextStyle: TextStyle(color: Colors.red, fontSize: 20),
       length: len,
       autofocus: autoFocus,
       defaultPinTheme: PinTheme(
+        textStyle: TextStyle(color: AppColors.textMain),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.primary.withOpacity(0.2),
+          color: AppColors.primary.withAlpha(30),
         ),
       ),
       submittedPinTheme: PinTheme(
-        textStyle: TextStyle(fontSize: 17, color: Colors.white),
+        textStyle: TextStyle(color: AppColors.textMain),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.primary.withOpacity(0.2),
+          color: AppColors.primary.withAlpha(30),
         ),
       ),
       focusedPinTheme: PinTheme(
+        textStyle: TextStyle(color: AppColors.textMain),
         decoration: BoxDecoration(
+
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: AppColors.blueGrey, width: 2),
           // color: Theme.of(context).colorScheme.onSurface,
-          color: AppColors.primary.withOpacity(0.2),
+          color: AppColors.primary.withAlpha(30),
         ),
       ),
       showCursor: true,
