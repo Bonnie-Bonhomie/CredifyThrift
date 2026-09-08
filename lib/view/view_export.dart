@@ -6,13 +6,6 @@ export 'savings/presentation/saving_page.dart';
 export 'activities/activity.dart';
 
 
-export 'onboardViews/auth_views/create_password.dart';
-export 'onboardViews/auth_views/sign_up_view.dart';
-export 'onboardViews/auth_views/verify_acc.dart';
-export 'onboardViews/identifyVerification/camera_page.dart';
-export 'onboardViews/identifyVerification/verify_method.dart';
-export 'onboardViews/personal_details/address_details.dart';
-export 'onboardViews/personal_details/personal_info_view.dart';
 
 
 export 'view_widgets/gradient_page.dart';
