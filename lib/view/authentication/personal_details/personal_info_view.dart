@@ -1,5 +1,7 @@
 
 
+import 'package:credify/core/utils/date_picker.dart';
+
 import '../../../export_barrel.dart';
 
 class PersonalInfoView extends StatefulWidget {
@@ -89,55 +91,33 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
                   ),
                 ),
                 ReuseContainer(
-                  child:
-                  TextFormField(
-                    key: dobKey,
-                    validator: (val) => Validator.validateDate(val!),
-                    controller: dateOfBirth,
-                    decoration: InputDecoration(
-                      labelText: 'Date of birth (MM/DD/YYYY)',
-                      labelStyle: Theme.of(context).textTheme.bodySmall,
-                      suffixIcon: Icon(
-                        Icons.lock_outline,
-                        color: Theme.of(context).iconTheme.color,
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                   inputFormatters: [
-                     FilteringTextInputFormatter.digitsOnly,
-                     DateFormatter()
-                   ],
-                    onChanged: (val){
-                      dobKey.currentState!.validate();
-                      readDet.dateFFill(val);
-                    },
-                  ),
+                  child: DatePicker(dateControl: dateOfBirth,)
                 ),
-                ReuseContainer(
-                  child: FormWidget(
-                    label: 'Social Security number',
-                    fieldKey: secKey,
-                    validator: (val) {
-                      if(val!.isNotEmpty){
-                        return null;
-                      }
-                      return 'Enter your security number';
-                    },
-                    valController: securityCode,
-                    onChanged: (val) {
-                      secKey.currentState!.validate();
-                      readDet.sectFill(val);
-                    },
-                    suffixIcon: Icon(
-                      Icons.lock_outline,
-                      color: Theme.of(context).iconTheme.color,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'We use 128-bit encryption for security, and this is only use for identity verification purpose.',
-                ),
+                // ReuseContainer(
+                //   child: FormWidget(
+                //     label: 'Social Security number',
+                //     fieldKey: secKey,
+                //     validator: (val) {
+                //       if(val!.isNotEmpty){
+                //         return null;
+                //       }
+                //       return 'Enter your security number';
+                //     },
+                //     valController: securityCode,
+                //     onChanged: (val) {
+                //       secKey.currentState!.validate();
+                //       readDet.sectFill(val);
+                //     },
+                //     suffixIcon: Icon(
+                //       Icons.lock_outline,
+                //       color: Theme.of(context).iconTheme.color,
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(height: 10),
+                // const Text(
+                //   'We use 128-bit encryption for security, and this is only use for identity verification purpose.',
+                // ),
                 const SizedBox(height: 150),
                 watchDet.nameFill && watchDet.secFill && watchDet.secFill && watchDet.dateFill
                     ? AppButton(onPressed: () {
