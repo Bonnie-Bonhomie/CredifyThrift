@@ -9,7 +9,6 @@ export 'core/constants/app_color.dart';
 
 export 'core/Theme/app_spacing.dart';
 export 'core/Theme/app_theme.dart';
-export 'core/Theme/color_theme.dart';
 export 'core/Theme/dark_theme.dart';
 export 'core/Theme/form_field_theme.dart';
 export 'core/Theme/light_theme.dart';
@@ -55,7 +54,7 @@ export 'view/authentication/identifyVerification/verify_method.dart';
 
 export 'view/authentication/personal_details/address_details.dart';
 export 'view/authentication/personal_details/personal_info_view.dart';
-export 'package:credify/view/authentication/splash_screen.dart';
+export 'package:credify/view/onboarding/splash_screen.dart';
 
 export 'view/view_export.dart';
 export 'viewModel/view_model_export.dart';
