@@ -42,7 +42,7 @@ class _SignUpViewState extends State<SignUpView> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(child: Image(image: AssetImage('assets/images/signUp.png'), height: 150, width: 150,)),
+                    Center(child: Image(image: AssetImage('assets/images/auth_image.png'), height: 180, width: 180,)),
                     const SizedBox(height:  20,),
                     // const Spacer(),
                     Form(
@@ -115,9 +115,9 @@ class _SignUpViewState extends State<SignUpView> {
               ),
             ),
             TermOfAgreeText(),
-            const SizedBox(height: 10),
+
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: signMod.filled
                   ? AppButton(
                 onPressed: () {
@@ -126,7 +126,7 @@ class _SignUpViewState extends State<SignUpView> {
                       numberCtrl.text =
                       '${signMod.selected}-${numberCtrl.text.substring(1)}';
                       // CustomSnackbar.successSnack(context: context, message: 'You have sign In successfully');
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
