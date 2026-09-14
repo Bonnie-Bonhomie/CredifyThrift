@@ -23,7 +23,7 @@ class LoadingSpinKit extends StatelessWidget {
           return DecoratedBox(decoration: BoxDecoration(
               shape: BoxShape.circle,
 
-              color: index == 0? AppColors.lightBackground: index == 1? AppColors.primary : AppColors.darkBlue
+              color: index == 0? AppColors.lightBackground: index == 1? AppColors.primary : AppColors.darkPrimary
           ));
         },
       ),
@@ -90,7 +90,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
       children: [
         buildDot(0.4, AppColors.lightBackground),
         buildDot(0.2, AppColors.primary),
-        buildDot(0.0, AppColors.darkBlue),
+        buildDot(0.0, AppColors.darkPrimary),
       ],
     );
   }

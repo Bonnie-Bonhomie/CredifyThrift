@@ -2,52 +2,6 @@ import 'package:credify/core/constants/app_color.dart';
 import 'package:credify/core/utils/Helpers/cred_textstyle.dart';
 import 'package:flutter/material.dart';
 
-// class AppButton extends StatelessWidget {
-//   final VoidCallback onPressed;
-//   final String label;
-//   final bool loading;
-//
-//   const AppButton({
-//     super.key,
-//     required this.onPressed,
-//     required this.label,
-//     this.loading = false,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(30),
-//         gradient: LinearGradient(colors: [
-//           AppColors.primary,
-//           // AppColors.primary,
-//           AppColors.gradientBtn,
-//
-//         ], begin: Alignment.topCenter, end: Alignment.bottomRight, )
-//       ),
-//       child: ElevatedButton(
-//         onPressed: onPressed,
-//         style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             const SizedBox(width: 10),
-//             Text( label, style: TextStyle(color: AppColors.lightBackground),),
-//             loading
-//                 ? SizedBox(
-//               width: 20,
-//                     height: 20,
-//                     child: CircularProgressIndicator(color: AppColors.lightGrey),
-//                   )
-//                 : SizedBox(width: 10),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class AppButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String label;
@@ -62,21 +16,71 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: FilledButton(
+    return Container(
+      height: 40,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        gradient: LinearGradient(colors: [
+          AppColors.primary,
+          // AppColors.primary,
+          AppColors.gradientBtn,
+
+        ], begin: Alignment.topCenter, end: Alignment.bottomRight, )
+      ),
+      child: ElevatedButton(
         onPressed: onPressed,
-        child: loading
-            ? SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(color: AppColors.lightGrey),
-              )
-            : Text(label, style: TextStyle(color: AppColors.lightBackground)),
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 10),
+            Text( label, style: TextStyle(color: AppColors.lightBackground),),
+            loading
+                ? SizedBox(
+              width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(color: AppColors.lightGrey),
+                  )
+                : SizedBox(width: 10),
+          ],
+        ),
       ),
     );
   }
 }
+
+
+//
+// class AppButton extends StatelessWidget {
+//   final VoidCallback onPressed;
+//   final String label;
+//   final bool loading;
+//
+//   const AppButton({
+//     super.key,
+//     required this.onPressed,
+//     required this.label,
+//     this.loading = false,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: ,
+//       width: MediaQuery.of(context).size.width,
+//       child: FilledButton(
+//         onPressed: onPressed,
+//         child: loading
+//             ? SizedBox(
+//                 width: 20,
+//                 height: 20,
+//                 child: CircularProgressIndicator(color: AppColors.lightGrey),
+//               )
+//             : Text(label, style: TextStyle(color: AppColors.lightBackground)),
+//       ),
+//     );
+//   }
+// }
 
 class DisabledButton extends StatelessWidget {
   final String label;
@@ -108,12 +112,14 @@ class GradientButton extends StatelessWidget {
     required this.onTap,
     this.iconSize = 15,
     this.needIcon = true,
+    this.height = 30,
     this.icon,
   });
 
   final String title;
   final double iconSize;
   final VoidCallback onTap;
+  final double? height;
   final bool needIcon;
   final IconData? icon;
 
@@ -122,6 +128,7 @@ class GradientButton extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
+        height: height,
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),

@@ -167,7 +167,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
                   label: Text('Take a photo'),
                   icon: Icon(Icons.camera_alt_outlined),
                   style: TextButton.styleFrom(
-                    foregroundColor: AppColors.primary,
+                    foregroundColor: AppColors.darkPrimary,
                     iconSize: 25,
                     textStyle: TextStyle(fontSize: 20),
                   ),

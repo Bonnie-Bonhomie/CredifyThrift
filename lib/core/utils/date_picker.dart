@@ -17,23 +17,26 @@ final onlyToday = DateTime(dDay.year, dDay.month, dDay.day);
 class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.dateControl,
-      readOnly: true,
-      style: const TextStyle(color: Colors.black, fontSize: 16),
-      decoration: InputDecoration(
-        hintText: "Date",
-        suffixIcon: Icon(Icons.calendar_month),
-        // enabledBorder: OutlineInputBorder(
-        //     borderRadius: BorderRadius.circular(15.0),
-        //     borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.1), width: 2.0)
-        // ),
-        // focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius: BorderRadius.circular(15.0)),
-      ),
-      onTap: (){
+    return SizedBox(
+      height: 40,
+      child: TextFormField(
+        controller: widget.dateControl,
+        readOnly: true,
+        style: const TextStyle(color: Colors.black, fontSize: 16),
+        decoration: InputDecoration(
+          labelText: "Date",
+          suffixIcon: Icon(Icons.calendar_month),
+          // enabledBorder: OutlineInputBorder(
+          //     borderRadius: BorderRadius.circular(15.0),
+          //     borderSide: BorderSide(color: Colors.grey.withValues(alpha: 0.1), width: 2.0)
+          // ),
+          // focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.black,), borderRadius: BorderRadius.circular(15.0)),
+        ),
+        onTap: (){
 
-        selectDate();
-      },
+          selectDate();
+        },
+      ),
     );
   }
 
@@ -47,8 +50,8 @@ class _DatePickerState extends State<DatePicker> {
 
         //To make other days before today un selectable
         // To avoid disabling day if the timezone is different
-        firstDate: onlyToday,
-        lastDate: DateTime(2100));
+        firstDate: DateTime(1700),
+        lastDate: onlyToday);
     if(picked != null){
       setState(() {
         widget.dateControl.text = picked.toString().split(" ")[0];

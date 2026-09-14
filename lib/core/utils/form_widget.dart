@@ -49,7 +49,7 @@ class FormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 40,
       child: TextFormField(
         obscureText: obscure ?? false,
         key: fieldKey,

@@ -9,6 +9,7 @@ class Routes{
   static const String personalInfo = '/personalInfo';
   static const String address = '/address';
 
+  static const String verifyDet = '/verifyDetails';
   static const String verifyID = '/verifyID';
   static const String camera = '/camera';
   static const String quality = '/checkQuality';

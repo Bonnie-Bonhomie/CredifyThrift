@@ -30,14 +30,14 @@ class _VerifyAccViewState extends State<VerifyAccView> {
     return LoaderWrapper(
       loading: loading,
       child: Scaffold(
-        appBar: AppBar(leading: Icon(Icons.keyboard_arrow_left_sharp), backgroundColor: Colors.transparent,),
+        appBar: AppBar(leading: IconButton(icon: Icon(Icons.keyboard_arrow_left_sharp), onPressed: () => Navigator.pop(context),), backgroundColor: Colors.transparent,),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
 
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(child: Image(image: AssetImage('assets/images/signUp.png'), height: 150, width: 150,)),
+              Center(child: Image(image: AssetImage('assets/images/auth_image.png'), height: 200, width: 200,)),
 
               const SizedBox(height:  20,),
               Text('Confirm', style: Theme.of(context).textTheme.headlineLarge),
@@ -45,7 +45,7 @@ class _VerifyAccViewState extends State<VerifyAccView> {
               const SizedBox(height: 20),
               SizedBox(
                 height: 55,
-                width: 200,
+                width: 300,
                 child: CustomPinPut(
                   controller: pinTextCtrl,
                   len: 4,
@@ -72,7 +72,7 @@ class _VerifyAccViewState extends State<VerifyAccView> {
                   children: [
                     TextSpan(
                       text: 'Resend',
-                      style: TextStyle(color: AppColors.primary),
+                      style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           readOtp.resetTimer();

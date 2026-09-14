@@ -1,5 +1,7 @@
 
 import 'package:credify/export_barrel.dart';
+import 'package:credify/view/authentication/data/user_model.dart';
+import 'package:credify/view/authentication/personal_details/verify_details.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> appRoutes = {
@@ -21,6 +23,11 @@ class AppRoutes {
         return slidePage(const PersonalInfoView());
       case Routes.address:
         return slidePage(AddressDetailsView());
+
+      case Routes.verifyDet:
+        final userDetails = settings.arguments as UserModel;
+        return slidePage(VerifyDetailsView(userDetails: userDetails));
+
       case Routes.verifyID:
         return slidePage(const VerifyMethod());
       case Routes.camera:
