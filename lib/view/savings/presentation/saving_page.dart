@@ -26,7 +26,7 @@ class _SavingPageState extends State<SavingPage> {
               alignment: Alignment.center,
               children: [
                 GradientContainer(
-                  height: 320,
+                  height: 350,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,7 +84,7 @@ class _SavingPageState extends State<SavingPage> {
                               Navigator.pushNamed(context, Routes.availableSaving);
                             },
                             title: 'create a new goal', iconSize: 20,)),
-                      // const SizedBox(height: 10,)
+                      const SizedBox(height: 30,)
                     ],
                   ),
                 ),
