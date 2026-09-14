@@ -26,7 +26,7 @@ class CreatePasswordView extends StatelessWidget {
       loading: loading,
       child: Scaffold(
         appBar: AppBar(
-          leading: Icon(Icons.keyboard_arrow_left),
+          leading: IconButton(icon: Icon(Icons.keyboard_arrow_left), onPressed: (){Navigator.pop(context);}),
           backgroundColor: Colors.transparent,
         ),
         body: SingleChildScrollView(
@@ -37,7 +37,7 @@ class CreatePasswordView extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Center(child: Image(image: AssetImage('assets/images/signUp.png'), height: 150, width: 150,)),
+                  Center(child: Image(image: AssetImage('assets/images/auth_image.png'), height: 200, width: 200,)),
                   const SizedBox(height:  20,),
                   Text(
                     'Create Password',
@@ -97,7 +97,7 @@ class CreatePasswordView extends StatelessWidget {
                   ? AppButton(onPressed: () {
                     context.read<LoaderModel>().changeLoadingState((){
                       CustomSnackbar.successSnack(context: context, message: 'Password has been set successfully');
-                      Navigator.pushReplacementNamed(context, Routes.personalInfo);
+                      Navigator.pushNamed(context, Routes.personalInfo);
                     });
               }, label: 'Continue')
                   : DisabledButton(label: 'Continue'),
