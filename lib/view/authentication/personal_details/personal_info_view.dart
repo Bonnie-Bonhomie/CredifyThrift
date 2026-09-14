@@ -32,7 +32,7 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
       loading: loading,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: (){}, icon: Icon(Icons.keyboard_arrow_left)),
+          leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.keyboard_arrow_left)),
           backgroundColor: Colors.transparent,
           actions: [
             Container(
@@ -45,92 +45,102 @@ class _PersonalInfoViewState extends State<PersonalInfoView> {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSize.padding),
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(height: 10),
-                Text(
-                  'Personal Info',
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'We ask for your personal information to verify your application.',
-                ),
-                const SizedBox(height: 10),
-                ReuseContainer(
-                 child:
-                  FormWidget(
-                    label: 'First name',
-                    fieldKey: firstKey,
-                    validator: (val) => Validator.validateText(val, 'first name'),
-                    valController: firstNameCtrl,
-                    onChanged: (val) {
-                      firstKey.currentState!.validate();
-                      readDet.firstFill(val);
-                    },
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppSize.padding),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(height: 10),
+                      Text(
+                        'Personal Info',
+                        style: Theme.of(context).textTheme.headlineLarge,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'We ask for your personal information to verify your application.',
+                      ),
+                      const SizedBox(height: 10),
+                      ReuseContainer(
+                       child:
+                        FormWidget(
+                          label: 'First name',
+                          fieldKey: firstKey,
+                          validator: (val) => Validator.validateText(val, 'first name'),
+                          valController: firstNameCtrl,
+                          onChanged: (val) {
+                            firstKey.currentState!.validate();
+                            readDet.firstFill(val);
+                          },
+                        ),
+                      ),
+                      ReuseContainer(
+                        child:
+                        FormWidget(
+                          label: 'Last name',
+                          fieldKey: lastKey,
+                          validator: (value) =>
+                              Validator.validateText(value, 'last name'),
+                          valController: lastNameCtrl,
+                          onChanged: (val) {
+                            lastKey.currentState!.validate();
+                            readDet.lastNFill(val);
+                          },
+                        ),
+                      ),
+                      ReuseContainer(
+                        child: DatePicker(dateControl: dateOfBirth,)
+                      ),
+                      // ReuseContainer(
+                      //   child: FormWidget(
+                      //     label: 'Social Security number',
+                      //     fieldKey: secKey,
+                      //     validator: (val) {
+                      //       if(val!.isNotEmpty){
+                      //         return null;
+                      //       }
+                      //       return 'Enter your security number';
+                      //     },
+                      //     valController: securityCode,
+                      //     onChanged: (val) {
+                      //       secKey.currentState!.validate();
+                      //       readDet.sectFill(val);
+                      //     },
+                      //     suffixIcon: Icon(
+                      //       Icons.lock_outline,
+                      //       color: Theme.of(context).iconTheme.color,
+                      //     ),
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 10),
+                      // const Text(
+                      //   'We use 128-bit encryption for security, and this is only use for identity verification purpose.',
+                      // ),
+
+
+                    ],
                   ),
                 ),
-                ReuseContainer(
-                  child:
-                  FormWidget(
-                    label: 'Last name',
-                    fieldKey: lastKey,
-                    validator: (value) =>
-                        Validator.validateText(value, 'last name'),
-                    valController: lastNameCtrl,
-                    onChanged: (val) {
-                      lastKey.currentState!.validate();
-                      readDet.lastNFill(val);
-                    },
-                  ),
-                ),
-                ReuseContainer(
-                  child: DatePicker(dateControl: dateOfBirth,)
-                ),
-                // ReuseContainer(
-                //   child: FormWidget(
-                //     label: 'Social Security number',
-                //     fieldKey: secKey,
-                //     validator: (val) {
-                //       if(val!.isNotEmpty){
-                //         return null;
-                //       }
-                //       return 'Enter your security number';
-                //     },
-                //     valController: securityCode,
-                //     onChanged: (val) {
-                //       secKey.currentState!.validate();
-                //       readDet.sectFill(val);
-                //     },
-                //     suffixIcon: Icon(
-                //       Icons.lock_outline,
-                //       color: Theme.of(context).iconTheme.color,
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(height: 10),
-                // const Text(
-                //   'We use 128-bit encryption for security, and this is only use for identity verification purpose.',
-                // ),
-                const SizedBox(height: 150),
-                watchDet.nameFill && watchDet.secFill && watchDet.secFill && watchDet.dateFill
-                    ? AppButton(onPressed: () {
-                      if(formKey.currentState!.validate()){
-                            context.read<LoaderModel>().changeLoadingState((){
-                              Navigator.pushNamed(context, Routes.address);
-                            });
-                      }
-                }, label: 'Continue')
-                    :DisabledButton(label: 'Continue'),
-              ],
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: watchDet.nameFill && watchDet.lastFill
+                  ? AppButton(onPressed: () {
+                if(formKey.currentState!.validate()){
+                  context.read<LoaderModel>().changeLoadingState((){
+                    Navigator.pushNamed(context, Routes.address);
+                  });
+                }
+              }, label: 'Continue')
+                  :DisabledButton(label: 'Continue'),
+            ),
+          ],
         ),
       ),
     );
