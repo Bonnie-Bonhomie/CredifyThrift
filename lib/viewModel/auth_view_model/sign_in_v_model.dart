@@ -68,7 +68,7 @@ class SignUpViewM extends ChangeNotifier{
     if(isValid) {
       CustomSnackbar.successSnack(
           context: context, message: 'Account verification is successful');
-      Navigator.pushReplacementNamed(context, Routes.createPwd);
+      Navigator.pushNamed(context, Routes.createPwd);
     }else{
       _incorrectCode = true;
       notifyListeners();
