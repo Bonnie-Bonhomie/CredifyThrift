@@ -32,7 +32,7 @@ class AddressDetailsView extends StatelessWidget {
       loading: loading,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: (){}, icon: Icon(Icons.keyboard_arrow_left)),
+          leading: IconButton(onPressed: ()=> Navigator.pop(context), icon: Icon(Icons.keyboard_arrow_left)),
           backgroundColor: Colors.transparent,
           actions: [
             Container(
@@ -45,92 +45,98 @@ class AddressDetailsView extends StatelessWidget {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSize.padding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Home Address', style: Theme.of(context).textTheme.headlineLarge,),
-              const SizedBox(height: 10,),
-              Text('Let us know where we should send your Mastercard Debit Card'),
-              const SizedBox(height: 20,),
-              ReuseContainer(
-                child:
-                FormWidget(
-                  label: 'Street Address',
-                  fieldKey: streetKey,
-                  validator: (val) => Validator.validateText(val, 'street Address'),
-                  valController: streetCtrl,
-                  onChanged: (val) {
-                    streetKey.currentState!.validate();
-                    readDet.firstFill(val);
-                  },
-                ),
-              ),
-              ReuseContainer(
-                child:
-                FormWidget(
-                  label: 'Apartment/ Suite number',
-                  fieldKey: aptKey,
-                  validator: (value) =>
-                      Validator.validateText(value, 'Apartment'),
-                  valController: apartment,
-                  onChanged: (val) {
-                    aptKey.currentState!.validate();
-                    readDet.lastNFill(val);
-                  },
-                ),
-              ), ReuseContainer(
-                child:
-                FormWidget(
-                  label: 'City',
-                  fieldKey: cityKey,
-                  validator: (value) =>
-                      Validator.validateText(value, 'city'),
-                  valController: cityCtrl,
-                  onChanged: (val) {
-                    cityKey.currentState!.validate();
-                    readDet.lastNFill(val);
-                  },
-                ),
-              ), ReuseContainer(
-                child:
-                FormWidget(
-                  label: 'State',
-                  fieldKey: stateKey,
-                  validator: (value) =>
-                      Validator.validateText(value, 'State'),
-                  valController: stateCtrl,
-                  onChanged: (val) {
-                    stateKey.currentState!.validate();
-                    readDet.lastNFill(val);
-                  },
-                ),
-              ),
-              ReuseContainer(
-                child:
-                FormWidget(
-                  label: 'Zip Code',
-                  fieldKey: zipKey,
-                  validator: (value) =>
-                      Validator.validateText(value, 'zip code'),
-                  valController: zipCodeCtrl,
-                  onChanged: (val) {
-                    zipKey.currentState!.validate();
-                    readDet.lastNFill(val);
-                  },
-                ),
-              ),
-              const SizedBox(height: 400,),
-              Padding(padding: const EdgeInsets.only(bottom: 15), child:
-              // watchDet.addressFill?
-              AppButton(onPressed: (){
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppSize.padding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Home Address', style: Theme.of(context).textTheme.headlineLarge,),
+                    const SizedBox(height: 10,),
+                    Text('Let us know where we should send your Mastercard or Debit Card'),
+                    const SizedBox(height: 20,),
+                    ReuseContainer(
+                      child:
+                      FormWidget(
+                        label: 'Street Address',
+                        fieldKey: streetKey,
+                        validator: (val) => Validator.validateText(val, 'street Address'),
+                        valController: streetCtrl,
+                        onChanged: (val) {
+                          streetKey.currentState!.validate();
+                          readDet.firstFill(val);
+                        },
+                      ),
+                    ),
+                    ReuseContainer(
+                      child:
+                      FormWidget(
+                        label: 'Apartment/ Suite number',
+                        fieldKey: aptKey,
+                        validator: (value) =>
+                            Validator.validateText(value, 'Apartment'),
+                        valController: apartment,
+                        onChanged: (val) {
+                          aptKey.currentState!.validate();
+                          readDet.lastNFill(val);
+                        },
+                      ),
+                    ), ReuseContainer(
+                      child:
+                      FormWidget(
+                        label: 'City',
+                        fieldKey: cityKey,
+                        validator: (value) =>
+                            Validator.validateText(value, 'city'),
+                        valController: cityCtrl,
+                        onChanged: (val) {
+                          cityKey.currentState!.validate();
+                          readDet.lastNFill(val);
+                        },
+                      ),
+                    ), ReuseContainer(
+                      child:
+                      FormWidget(
+                        label: 'State',
+                        fieldKey: stateKey,
+                        validator: (value) =>
+                            Validator.validateText(value, 'State'),
+                        valController: stateCtrl,
+                        onChanged: (val) {
+                          stateKey.currentState!.validate();
+                          readDet.lastNFill(val);
+                        },
+                      ),
+                    ),
+                    ReuseContainer(
+                      child:
+                      FormWidget(
+                        label: 'Zip Code',
+                        fieldKey: zipKey,
+                        validator: (value) =>
+                            Validator.validateText(value, 'zip code'),
+                        valController: zipCodeCtrl,
+                        onChanged: (val) {
+                          zipKey.currentState!.validate();
+                          readDet.lastNFill(val);
+                        },
+                      ),
+                    ),
 
-                Navigator.pushNamed(context, Routes.verifyID);
-              }, label: 'Continue'))
-                  // : DisabledButton(label: 'Continue'),)
-            ],
-          ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(padding: const EdgeInsets.all(15), child:
+            // watchDet.addressFill?
+            AppButton(onPressed: (){
+
+              Navigator.pushNamed(context, Routes.verifyDet);
+            }, label: 'Continue'))
+            // : DisabledButton(label: 'Continue'),)
+          ],
         ),
       ),
     );
