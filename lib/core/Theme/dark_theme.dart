@@ -2,7 +2,6 @@
 
 import 'package:credify/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
-import 'color_theme.dart';
 import 'form_field_theme.dart';
 import 'text_theme.dart';
 
@@ -23,7 +22,7 @@ final ThemeData darkTheme = ThemeData(
     colorScheme: const ColorScheme.light(
         brightness: Brightness.dark,
         primary: AppColors.primary,
-        secondary: AppColors.darkBlue,
+        secondary: AppColors.darkPrimary,
         onSurface: Colors.white
     ),
 
@@ -42,12 +41,12 @@ final ThemeData darkTheme = ThemeData(
     ),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: AppColors.darkBlue
+        backgroundColor: AppColors.darkPrimary
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.darkBlue,
+            backgroundColor: AppColors.darkPrimary,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             textStyle: DarkTextTheme.body.copyWith(color: AppColors.textMain)
         )

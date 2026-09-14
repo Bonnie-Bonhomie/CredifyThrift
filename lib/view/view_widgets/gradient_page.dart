@@ -11,7 +11,7 @@ class GradientPageWidget extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
             AppColors.primary,
-            AppColors.darkBlue
+            AppColors.darkGradient
           ], begin: Alignment.topLeft, end: Alignment.centerRight)
         ),
       ),
