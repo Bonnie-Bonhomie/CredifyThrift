@@ -55,6 +55,8 @@ class CustomPinPut extends StatelessWidget {
       length: len,
       autofocus: autoFocus,
       defaultPinTheme: PinTheme(
+        width: 100,
+        margin: const EdgeInsets.only(right: 10),
         textStyle: TextStyle(color: AppColors.textMain),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
