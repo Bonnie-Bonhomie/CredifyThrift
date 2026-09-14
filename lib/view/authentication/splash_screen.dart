@@ -11,7 +11,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Text('Credify.')),
+      body: SafeArea(child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const Spacer(),
+            Text('Credify.'),
+            const Spacer(),
+            Text('Save with trust')
+          ],
+        ),
+      )),
     );
   }
 }
