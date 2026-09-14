@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import '../constants/app_color.dart';
-import 'color_theme.dart';
 import 'form_field_theme.dart';
 import 'text_theme.dart';
 
@@ -10,6 +9,7 @@ final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: AppColors.progressColor,
   scaffoldBackgroundColor: AppColors.lightBackground,
+  fontFamily: '.SF Pro Display',
   cardTheme: CardThemeData(
     color: AppColors.cardLight
   ),
@@ -17,7 +17,7 @@ cardColor: AppColors.cardLight,
   colorScheme: const ColorScheme.light(
     brightness: Brightness.light,
     primary: AppColors.primary,
-    secondary: AppColors.darkBlue,
+    secondary: AppColors.darkPrimary,
     onSurface: AppColors.surface,
     surface: AppColors.onSurface
   ),
@@ -57,7 +57,7 @@ cardColor: AppColors.cardLight,
 
     listTileTheme: ListTileThemeData(
         textColor: LightTextTheme.body.color,
-        iconColor: AppColors.darkBlue,
+        iconColor: AppColors.darkPrimary,
         tileColor: Colors.transparent
     ),
 

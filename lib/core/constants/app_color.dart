@@ -6,15 +6,15 @@ class AppColors {
   // static const  Color primary = Color(0xFF0730FD);
   // static final Color gradientBtn = Color(0xFF100367);
 
-  static const  Color primary = Color(0xFF0592CE);
-  static final Color gradientBtn = Color(0xFF04478A);
+  static const  Color primary = Color(0xFF5207FA);
+  static final Color gradientBtn = Color(0xFF34039B);
 
-  static const Color darkBlue = Color(0xFF0C0269);
+  static const Color darkPrimary = Color(0xFF0C0269);
   static const Color lightBlue = Color(0xFF5D4DF6);
   
   // static const Color darkGradient = Color(0xFF1C038C);
-  static const Color darkGradient = Color(0xFF034E8C);
-  static const Color lightGradient = Color(0xFF0694FA);
+  static const Color darkGradient = Color(0xFF3805AB);
+  static const Color lightGradient = Color(0xFF5108F6);
   // static const Color lightGradient = Color(0xFF2606FA);
 
   static const Color progressColor = Color(0xFF0A78D3);

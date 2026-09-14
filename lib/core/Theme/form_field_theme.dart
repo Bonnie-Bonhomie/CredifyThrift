@@ -1,4 +1,4 @@
-import 'package:credify/core/Theme/color_theme.dart';
+
 import 'package:credify/core/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +6,10 @@ import 'text_theme.dart';
 
 class BFormTheme {
   static InputDecorationTheme lightInputTheme = InputDecorationTheme(
-    prefixIconColor: AppColors.darkBlue,
-    suffixIconColor: AppColors.darkBlue,
-    labelStyle: LightTextTheme.body.copyWith(color: AppColors.darkBlue,),
-    hintStyle: LightTextTheme.body.copyWith(color: AppColors.darkBlue,),
+    prefixIconColor: AppColors.darkPrimary,
+    suffixIconColor: AppColors.darkPrimary,
+    labelStyle: LightTextTheme.body.copyWith(color: AppColors.darkPrimary,),
+    hintStyle: LightTextTheme.body.copyWith(color: AppColors.darkPrimary,),
     filled: true,
     fillColor: Colors.white,
     iconColor: AppColors.cardDark,
