@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:credify/config/AppRoutes/routes.dart';
 import 'package:credify/core/constants/app_color.dart';
 import 'package:credify/core/widgets/app_button.dart';
+import 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
 import 'package:flutter/material.dart';
 
 class VerifyMethod extends StatefulWidget {
@@ -34,7 +35,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
               border: Border.all(),
               shape: BoxShape.circle,
             ),
-            child: const  Icon(Icons.headset_mic),
+            child: const Icon(Icons.headset_mic),
           ),
         ],
       ),
@@ -81,7 +82,22 @@ class _VerifyMethodState extends State<VerifyMethod> {
                 : AppButton(
                     onPressed: () {
                       setState(() => submitting = true);
-                      showContinueDialog();
+                      AppDialog.showCongratDialog(
+                        context,
+                        subtitle:
+                            'Thanks! We will review your document within 10 minutes',
+                        content: const Text(
+                          'get ready to start using credify for your daily financial app',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            fontSize: 15,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, Routes.mainS);
+                        },
+                      );
                     },
                     label: 'Verify my Identity',
                   ),
@@ -210,56 +226,6 @@ class _VerifyMethodState extends State<VerifyMethod> {
           ),
         ),
       ),
-    );
-  }
-
-  showContinueDialog() {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          child: Container(
-            height: 400,
-            padding: const EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 80,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.blueGrey,
-                  ),
-                ),
-                const Text(
-                  'Thanks! We will review your document within 10 minutes',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                const Text(
-                  'get ready to start using credify for your daily financial app',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 15),
-                ),
-
-                SizedBox(
-                  width: 150,
-                  child: AppButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.pushReplacementNamed(context, Routes.mainS);
-                    },
-                    label: 'Got it',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }
