@@ -29,80 +29,89 @@ class CreatePasswordView extends StatelessWidget {
           leading: IconButton(icon: Icon(Icons.keyboard_arrow_left), onPressed: (){Navigator.pop(context);}),
           backgroundColor: Colors.transparent,
         ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSize.padding),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Center(child: Image(image: AssetImage('assets/images/auth_image.png'), height: 200, width: 200,)),
-                  const SizedBox(height:  20,),
-                  Text(
-                    'Create Password',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  Text(
-                    'Choose a secure password that will be easy for you to remember',
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
-                    margin: const EdgeInsets.only(top: 20, bottom: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: Theme.of(context).cardTheme.color,
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(AppSize.padding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Center(child: Image(image: AssetImage('assets/images/auth_image.png'), height: 200, width: 200,)),
+                        const SizedBox(height:  20,),
+                        Text(
+                          'Create Password',
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ),
+                        Text(
+                          'Choose a secure password that will be easy for you to remember',
+                        ),
+                        const SizedBox(height: 20),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                          margin: const EdgeInsets.only(top: 20, bottom: 20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: Theme.of(context).cardTheme.color,
+                          ),
+                          child: FormWidget(
+                            textSize: 30,
+                            fieldKey: pwdKey,
+                            validator: (val) {
+                              readPwd.validatePwd(val!);
+                            },
+                            valController: pwdCtrl,
+                            obscure: watchPwd.obscure,
+                            label: 'Password',
+                            onChanged: (val) {
+                              readPwd.filledPwd(val);
+                              pwdKey.currentState!.validate();
+                            },
+                            suffixIcon: watchPwd.filled
+                                ? IconButton(
+                                    onPressed: () {
+                                      readPwd.togglePwd();
+                                    },
+                                    icon: watchPwd.obscure
+                                        ? Icon(Icons.visibility_outlined, color: Theme.of(context).iconTheme.color,)
+                                        : Icon(Icons.visibility_off_outlined, color: Theme.of(context).iconTheme.color,),
+                                  )
+                                : SizedBox(),
+                          ),
+                        ),
+                        passwordRules(
+                          context,
+                          'Has at least 8 characters',
+                          watchPwd.minLength,
+                        ),
+                        passwordRules(
+                          context,
+                          'Has an uppercase letter or symbol',
+                          watchPwd.hasSymbol,
+                        ),
+                        passwordRules(context, 'Has a number', watchPwd.hasNumber),
+                      ],
                     ),
-                    child: FormWidget(
-                      textSize: 30,
-                      fieldKey: pwdKey,
-                      validator: (val) {
-                        readPwd.validatePwd(val!);
-                      },
-                      valController: pwdCtrl,
-                      obscure: watchPwd.obscure,
-                      label: 'Password',
-                      onChanged: (val) {
-                        readPwd.filledPwd(val);
-                        pwdKey.currentState!.validate();
-                      },
-                      suffixIcon: watchPwd.filled
-                          ? IconButton(
-                              onPressed: () {
-                                readPwd.togglePwd();
-                              },
-                              icon: watchPwd.obscure
-                                  ? Icon(Icons.visibility_outlined, color: Theme.of(context).iconTheme.color,)
-                                  : Icon(Icons.visibility_off_outlined, color: Theme.of(context).iconTheme.color,),
-                            )
-                          : SizedBox(),
-                    ),
-                  ),
-                  passwordRules(
-                    context,
-                    'Has at least 8 characters',
-                    watchPwd.minLength,
-                  ),
-                  passwordRules(
-                    context,
-                    'Has an uppercase letter or symbol',
-                    watchPwd.hasSymbol,
-                  ),
-                  passwordRules(context, 'Has a number', watchPwd.hasNumber),
-                ],
+
+                  ],
+                ),
               ),
-              SizedBox(height: 130,),
-              watchPwd.isValid
+            ),
+            Padding(
+              padding: const EdgeInsets.all(AppSize.padding),
+              child: watchPwd.isValid
                   ? AppButton(onPressed: () {
-                    context.read<LoaderModel>().changeLoadingState((){
-                      CustomSnackbar.successSnack(context: context, message: 'Password has been set successfully');
-                      Navigator.pushNamed(context, Routes.personalInfo);
-                    });
+                context.read<LoaderModel>().changeLoadingState((){
+                  CustomSnackbar.successSnack(context: context, message: 'Password has been set successfully');
+                  Navigator.pushNamed(context, Routes.personalInfo);
+                });
               }, label: 'Continue')
                   : DisabledButton(label: 'Continue'),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
