@@ -1,3 +1,4 @@
+import 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
 import 'package:credify/export_barrel.dart';
 import 'package:credify/view/savings/data/save_model.dart';
 
@@ -189,45 +190,21 @@ class _CreateNewSavingState extends State<CreateNewSaving> {
                         ),
                         AppButton(
                           onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(Icons.hub, size: 120, color: AppColors.progressColor,),
-                                        const SizedBox(height: 20,),
-                                        Text(
-                                          'Congratulations!',
-                                          style: CredTextStyle.h4,
-                                        ),
-                                        const SizedBox(height: 20,),
-                                        RichText(
-                                          textAlign: TextAlign.center,
-                                          text: TextSpan(
-                                            text: 'You`ve create your ',
-                                            style: Theme.of(context).textTheme.bodyMedium,
-                                            children: [
-                                              TextSpan(
-                                                text: widget.saveMode.title,
-                                                style: CredTextStyle.h6,
-                                              ),
-                                              TextSpan(text: ' Saving goals '),
-
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 20,),
-                                        AppButton(onPressed: (){}, label: 'Got it')
-                                      ],
-                                    ),
+                            AppDialog.showCongratDialog(context, content: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: 'You`ve create your ',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                children: [
+                                  TextSpan(
+                                    text: widget.saveMode.title,
+                                    style: CredTextStyle.h6,
                                   ),
-                                );
-                              },
-                            );
+                                  TextSpan(text: ' Saving goals '),
+
+                                ],
+                              ),
+                            ), onPressed: (){}, label: 'Got it');
                           },
                           label: 'Create your savings',
                         ),
