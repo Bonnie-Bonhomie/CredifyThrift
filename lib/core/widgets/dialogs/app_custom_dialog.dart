@@ -5,7 +5,7 @@ import '../../../export_barrel.dart';
 class AppDialog {
 
 
-  void showCongratDialog(BuildContext context,{String subtitle = '', required Widget content}){
+  static void showCongratDialog(BuildContext context,{String subtitle = '', required Widget content, required VoidCallback onPressed, String label = 'Continue'}){
     showDialog(
       context: context,
       builder: (context) {
@@ -22,7 +22,8 @@ class AppDialog {
                   style: CredTextStyle.h4.copyWith(color: AppColors.darkPrimary),
                 ),
                 const SizedBox(height: 20,),
-                Text(subtitle),
+                Text(subtitle, textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold),),
                 const SizedBox(height: 20,),
                 content,
                 // RichText(
@@ -41,7 +42,7 @@ class AppDialog {
                 //   ),
                 // ),
                 const SizedBox(height: 20,),
-                AppButton(onPressed: (){}, label: 'Got it')
+                AppButton(onPressed: onPressed, label: label)
               ],
             ),
           ),
