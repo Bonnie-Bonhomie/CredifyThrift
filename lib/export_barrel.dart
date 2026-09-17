@@ -45,16 +45,18 @@ export 'view/homeView/profile_page.dart';
 export 'view/activities/activity.dart';
 export 'view/savings/presentation/saving_page.dart';
 
-export 'view/authentication/auth_views/create_password.dart';
-export 'view/authentication/auth_views/sign_up_view.dart';
-export 'view/authentication/auth_views/verify_acc.dart';
+export 'view/authentication/presentation/auth_views/create_password.dart';
+export 'view/authentication/presentation/auth_views/sign_up_view.dart';
+export 'view/authentication/presentation/auth_views/verify_acc.dart';
 
-export 'view/authentication/identifyVerification/camera_page.dart';
-export 'view/authentication/identifyVerification/verify_method.dart';
+export 'view/authentication/presentation/identifyVerification/camera_page.dart';
+export 'view/authentication/presentation/identifyVerification/verify_method.dart';
 
-export 'view/authentication/personal_details/address_details.dart';
-export 'view/authentication/personal_details/personal_info_view.dart';
+export 'view/authentication/presentation/personal_details/personal_info_view.dart';
+export 'view/authentication/presentation/personal_details/address_details.dart';
+export 'view/authentication/presentation/personal_details/verify_details.dart';
 export 'package:credify/view/onboarding/splash_screen.dart';
+export 'package:credify/view/authentication/data/user_model.dart';
 
 export 'view/view_export.dart';
 export 'viewModel/view_model_export.dart';
