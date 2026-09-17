@@ -25,7 +25,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
         title: Text('Verify Identity'),
         centerTitle: true,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {Navigator.pop(context);},
           icon: Icon(Icons.keyboard_arrow_left),
         ),
         backgroundColor: Colors.transparent,
@@ -101,7 +101,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
                     },
                     label: 'Verify my Identity',
                   ),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 20),
           ],
         ),
       ),
@@ -164,6 +164,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
       decoration: BoxDecoration(
         color: Theme.of(context).cardTheme.color,
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [BoxShadow(color: AppColors.primary.withAlpha(100), blurRadius: 2, offset: const Offset(1, 3))]
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
