@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:credify/config/AppRoutes/routes.dart';
 import 'package:credify/core/constants/app_color.dart';
+import 'package:credify/core/utils/image_file_picker.dart';
 import 'package:credify/core/widgets/app_button.dart';
 import 'package:credify/main.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class CameraPage extends StatefulWidget {
 
 class _CameraPageState extends State<CameraPage> {
   CameraController? controller;
+  XFile? selectImage;
 
   @override
   void initState() {
@@ -124,7 +126,20 @@ class _CameraPageState extends State<CameraPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Icon(Icons.flash_off, color: Colors.grey),
+                GalleryPicker(
+                  selectImage: selectImage,
+                  onSelect: () {
+                    // if (selectImage != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CheckQuality(path: selectImage!),
+                        ),
+                      );
+                    // }
+                  },
+                ),
+                // const Icon(Icons.flash_off, color: Colors.grey),
                 GestureDetector(
                   onTap: () async {
                     final path = await controller!.takePicture();
@@ -137,7 +152,11 @@ class _CameraPageState extends State<CameraPage> {
                     );
                     // print('Take picture ${path.path}');
                   },
-                  child: const Icon(Icons.radio_button_checked, size: 80,)
+                  child: const Icon(
+                    Icons.radio_button_checked,
+                    size: 80,
+                    color: AppColors.progressColor,
+                  ),
                 ),
                 const Icon(Icons.done, color: Colors.grey),
               ],
@@ -181,8 +200,13 @@ class CheckQuality extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.blueGrey),
-                    image: DecorationImage(image: FileImage(imageFile), fit: BoxFit.cover, onError: (_, __){Icon(Icons.photo, size: 50,);}),
-
+                    image: DecorationImage(
+                      image: FileImage(imageFile),
+                      fit: BoxFit.cover,
+                      onError: (_, __) {
+                        Icon(Icons.photo, size: 50);
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -193,7 +217,8 @@ class CheckQuality extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [AppColors.primary, AppColors.gradientBtn],
-                    begin: Alignment.topLeft,end: Alignment.bottomRight
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
                   shape: BoxShape.circle,
                 ),
