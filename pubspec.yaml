@@ -16,9 +16,12 @@ dependencies:
 
 
   camera: ^0.10.5+9
+  file_picker: ^8.1.2
   fl_chart: ^0.66.2
   flutter_animate: ^4.5.0
   flutter_spinkit: ^5.2.1
+  get_it: ^9.2.1
+  image_picker: ^1.2.3
   intl: ^0.20.0
   ionicons: ^0.2.2
   lottie: ^3.3.3
