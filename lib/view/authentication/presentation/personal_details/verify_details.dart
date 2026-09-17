@@ -2,9 +2,11 @@ import 'package:credify/export_barrel.dart';
 import 'package:credify/view/authentication/data/user_model.dart';
 
 class VerifyDetailsView extends StatelessWidget {
-  VerifyDetailsView({super.key, required this.userDetails});
+  VerifyDetailsView({super.key,
+    // required this.userDetails
+  });
 
-  final UserModel userDetails;
+  // final UserModel userDetails;
 
   final TextEditingController addressCtrl = TextEditingController();
   final fullNameCtrl = TextEditingController();
@@ -72,29 +74,29 @@ class VerifyDetailsView extends StatelessWidget {
                     profileBox(
                       context,
                       title: 'Full Legal Name',
-                      value: userDetails.fullName,
+                      value: 'Bonnie Bonhomie',
                     ),
                     profileBox(
                       context,
-                      title: 'Full Legal Name',
-                      value: userDetails.fullName,
+                      title: 'Phone Number',
+                      value:'0903-784-8903',
                     ),
                     profileBox(
                       context,
-                      title: 'Full Legal Name',
-                      value: userDetails.fullName,
+                      title: 'Date of Birth',
+                      value: '20/10/2002',
                     ),
                     profileBox(
                       context,
-                      title: 'Full Legal Name',
-                      value: userDetails.fullName,
+                      title: 'Full Address',
+                      value: 'User details',
                     ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.all(15),
               child:
                   // watchDet.addressFill?
                   AppButton(
@@ -117,22 +119,36 @@ class VerifyDetailsView extends StatelessWidget {
     required String value,
   }) {
     return Container(
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
-          Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(value, style: TextStyle(fontWeight: FontWeight(800))),
-              FilledButton(
-                onPressed: () {},
-                style: FilledButton.styleFrom(
-                  backgroundColor: Theme.of(context).cardColor,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 3,),
+                  Text(value, style: TextStyle(fontWeight: FontWeight.w300)),
+                ],
+              ),
+              SizedBox(
+                width: 80,
+                child: FilledButton(
+                  onPressed: () {},
+                  style: FilledButton.styleFrom(
+                    backgroundColor: Theme.of(context).cardColor,
+                    foregroundColor: AppColors.primary,
+                  ),
+                  child: Text('Edit'),
                 ),
-                child: Text('Edit'),
               ),
             ],
           ),
-          Divider(indent: 30, endIndent: 30,)
+          const SizedBox(height: 3,),
+          Divider(indent: 8, endIndent: 8, color: Colors.grey[400],)
         ],
       ),
     );
