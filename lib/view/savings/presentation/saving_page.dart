@@ -1,7 +1,5 @@
 import 'package:credify/view/savings/notifier/saving_notifier.dart';
 import 'package:credify/viewModel/app_model.dart';
-
-import '../../../core/utils/gradient_linear_bar.dart';
 import '../../../export_barrel.dart';
 
 class SavingPage extends StatefulWidget {
@@ -26,7 +24,7 @@ class _SavingPageState extends State<SavingPage> {
               alignment: Alignment.center,
               children: [
                 GradientContainer(
-                  height: 350,
+                  height: 370,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -89,7 +87,7 @@ class _SavingPageState extends State<SavingPage> {
                   ),
                 ),
                 Positioned(
-                  top: 240,
+                  top: 270,
                   child: Container(
                       width: MediaQuery
                           .of(context)
