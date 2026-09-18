@@ -5,6 +5,8 @@ import 'package:credify/core/widgets/app_button.dart';
 import 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../export_barrel.dart';
+
 class VerifyMethod extends StatefulWidget {
   const VerifyMethod({super.key});
 
@@ -22,7 +24,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Verify Identity'),
+        title: Text('Verify Identity', style: Theme.of(context).textTheme.headlineMedium,),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {Navigator.pop(context);},
@@ -39,71 +41,79 @@ class _VerifyMethodState extends State<VerifyMethod> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IdContainer(
-              context,
-              title: "Government ID",
-              subtitle:
-                  "Take a driver`s license, national Identity card or passport photo",
-              imgPath: imgPath,
-              onPressed: () {
-                showIDSheet(context);
-              },
-            ),
-            const SizedBox(height: 20),
-            IdContainer(
-              context,
-              title: "Selfie Photo",
-              subtitle:
-                  "It`s required by law to verify your identity as new user.",
-              imgPath: photoPath,
-              onPressed: () async {
-                final response = await Navigator.pushNamed(
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IdContainer(
                   context,
-                  Routes.camera,
-                );
-                XFile file = response as XFile;
-                print(response);
-                setState(() {
-                  photoPath = file.path;
-                });
-                print(photoPath);
-              },
+                  title: "Government ID",
+                  subtitle:
+                      "Take a driver`s license, national Identity card or passport photo",
+                  imgPath: imgPath,
+                  onPressed: () {
+                    showIDSheet(context);
+                  },
+                ),
+                const SizedBox(height: 20),
+                IdContainer(
+                  context,
+                  title: "Selfie Photo",
+                  subtitle:
+                      "It`s required by law to verify your identity as new user.",
+                  imgPath: photoPath,
+                  onPressed: () async {
+                    final response = await Navigator.pushNamed(
+                      context,
+                      Routes.camera,
+                    );
+                    XFile file = response as XFile;
+                    print(response);
+                    setState(() {
+                      photoPath = file.path;
+                    });
+                    print(photoPath);
+                  },
+                ),
+                const SizedBox(height: 30),
+
+              ],
             ),
-            const SizedBox(height: 30),
-            imgPath.isEmpty && photoPath.isEmpty
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: imgPath.isEmpty && photoPath.isEmpty
                 ? DisabledButton(label: 'Verify my identity')
                 : submitting
                 ? DisabledButton(label: 'Submitting...')
                 : AppButton(
-                    onPressed: () {
-                      setState(() => submitting = true);
-                      AppDialog.showCongratDialog(
-                        context,
-                        subtitle:
-                            'Thanks! We will review your document within 10 minutes',
-                        content: const Text(
-                          'get ready to start using credify for your daily financial app',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 15,
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, Routes.mainS);
-                        },
-                      );
-                    },
-                    label: 'Verify my Identity',
+              onPressed: () {
+                setState(() => submitting = true);
+                AppDialog.showCongratDialog(
+                  context,
+                  subtitle:
+                  'Thanks! We will review your document within 10 minutes',
+                  content: const Text(
+                    'get ready to start using credify for your daily financial app',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 15,
+                    ),
                   ),
-            // const SizedBox(height: 20),
-          ],
-        ),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, Routes.mainS);
+                  },
+                );
+              },
+              label: 'Verify my Identity',
+            ),
+          ),
+
+        ],
       ),
     );
   }
@@ -184,9 +194,9 @@ class _VerifyMethodState extends State<VerifyMethod> {
                   label: Text('Take a photo'),
                   icon: Icon(Icons.camera_alt_outlined),
                   style: TextButton.styleFrom(
-                    foregroundColor: AppColors.darkPrimary,
-                    iconSize: 25,
-                    textStyle: TextStyle(fontSize: 20),
+                    foregroundColor: AppColors.primary,
+                    iconSize: 20,
+                    textStyle: TextStyle(fontSize: 17),
                   ),
                 )
               : Text('pending', style: TextStyle(color: AppColors.pending)),
