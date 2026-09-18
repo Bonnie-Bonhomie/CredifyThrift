@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../export_barrel.dart';
+
 class GalleryPicker extends StatefulWidget {
   GalleryPicker({super.key, this.selectImage, this.onSelect});
 
   XFile? selectImage;
-  VoidCallback? onSelect;
+  Function? onSelect;
 
   @override
   State<GalleryPicker> createState() => _GalleryPickerState();
@@ -27,8 +29,15 @@ class _GalleryPickerState extends State<GalleryPicker> {
     setState(() {
       widget.selectImage = XFile(image.path);
       print(widget.selectImage);
-      widget.onSelect;
+
     });
+    Navigator.pop(context, widget.selectImage);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CheckQuality(path: widget.selectImage!),
+      ),
+    );
   }
 
   @override
