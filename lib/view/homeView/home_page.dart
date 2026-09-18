@@ -25,12 +25,12 @@ class _HomePageViewState extends State<HomePageView> {
               clipBehavior: Clip.none,
               children: [
                 GradientContainer(
-                  height: 300,
+                  height: 280,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(height: 50),
+                      const SizedBox(height: 30),
                       Row(
                         children: [
                           Icon(Icons.layers, color: Colors.white,),
@@ -249,15 +249,19 @@ class _HomePageViewState extends State<HomePageView> {
                         //   ),
                         //   child: Text('See all transactions'),
                         // ),
+                        const SizedBox(height: 10,),
                         SizedBox(
-                          width: 200,
-                          height: 30,
-                          child: GradientButton(title: 'See all transactions', onTap: (){},needIcon: false,),
+                          width: 250,
+                          // height: 30,
+                          child: GradientButton(
+                            height: 40,
+                            title: 'See all transactions', onTap: (){},needIcon: false,),
                         ),
                         const SizedBox(height: 10),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10,)
                 ],
               ),
             ),
