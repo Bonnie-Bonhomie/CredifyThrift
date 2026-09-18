@@ -204,7 +204,11 @@ class _CreateNewSavingState extends State<CreateNewSaving> {
 
                                 ],
                               ),
-                            ), onPressed: (){}, label: 'Got it');
+                            ), onPressed: (){
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            }, label: 'Got it');
                           },
                           label: 'Create your savings',
                         ),
