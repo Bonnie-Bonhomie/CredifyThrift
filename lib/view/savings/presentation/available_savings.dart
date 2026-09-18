@@ -47,7 +47,7 @@ class AvailableSavings extends StatelessWidget {
                   ),
                   Text(
                     'Create Savings',
-                    style: CredTextStyle.h3.copyWith(color: Colors.white),
+                    style: CredTextStyle.h2.copyWith(color: Colors.white),
                   ),
                   const SizedBox(height: 7,),
                   Text(
@@ -57,7 +57,7 @@ class AvailableSavings extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 10),
             Expanded(
               child: Container(
                 padding: const EdgeInsets.all(15),
@@ -69,12 +69,13 @@ class AvailableSavings extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('CUSTOM SAVING'),
+                    Text('Custom Saving'),
                     methodSave(sd, (){}),
                     const SizedBox(height: 15,),
-                    Text('BASIC SAVING'),
+                    Text('Basic Saving'),
                     Expanded(
                       child: ListView.builder(
+                        padding: const EdgeInsets.all(5),
                         itemCount: savings.saveMode.length,
                         itemBuilder: (context, index) {
                           final availableSave = savings.saveMode;
@@ -210,7 +211,7 @@ class AvailableSavings extends StatelessWidget {
               AppButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  createBottomSheet2(context, saving);
+                  Navigator.pushNamed(context, Routes.createSaving, arguments: saving);
                 },
                 label: 'Continue',
               ),
