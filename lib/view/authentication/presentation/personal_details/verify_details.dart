@@ -55,22 +55,30 @@ class VerifyDetailsView extends StatelessWidget {
         ),
         body: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Almost There!',
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Please take a moment to ensure all of the information you provide is correct',
+                  ),
+                  // const SizedBox(height: 20),
+                ],
+              ),
+            ),
+            Divider(thickness: 2, color: Colors.grey[300],),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(AppSize.padding),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Almost There!',
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Please take a moment to ensure all of the information you provide is correct',
-                    ),
-                    const SizedBox(height: 20),
-
                     profileBox(
                       context,
                       title: 'Full Legal Name',
