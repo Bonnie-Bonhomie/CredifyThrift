@@ -100,12 +100,17 @@ class _CameraPageState extends State<CameraPage> {
 
           /// Top Text
           Positioned(
-            top: 60,
+            top: 40,
             left: 0,
             right: 0,
-            child: Column(
+            child: Container(
+              height: 100,
+                alignment: Alignment.center,
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
               children: const [
-                Text("Passport", style: TextStyle(fontSize: 18)),
+                Text("Passport", style: TextStyle(fontSize: 18, fontWeight: FontWeight(800))),
                 SizedBox(height: 6.0),
                 Text("Front of card"),
                 SizedBox(height: 5),
@@ -115,7 +120,7 @@ class _CameraPageState extends State<CameraPage> {
                 ),
                 SizedBox(height: 8.0),
               ],
-            ),
+            )),
           ),
 
           /// Bottom Controls
@@ -123,43 +128,37 @@ class _CameraPageState extends State<CameraPage> {
             bottom: 40,
             left: 0,
             right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GalleryPicker(
-                  selectImage: selectImage,
-                  onSelect: () {
-                    // if (selectImage != null) {
-                      Navigator.push(
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GalleryPicker(
+                    selectImage: selectImage,
+                  ),
+                  // const Icon(Icons.flash_off, color: Colors.grey),
+                  GestureDetector(
+                    onTap: () async {
+                      final path = await controller!.takePicture();
+                      Navigator.pop(context, path);
+                      await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CheckQuality(path: selectImage!),
+                          builder: (context) => CheckQuality(path: path),
                         ),
                       );
-                    // }
-                  },
-                ),
-                // const Icon(Icons.flash_off, color: Colors.grey),
-                GestureDetector(
-                  onTap: () async {
-                    final path = await controller!.takePicture();
-                    Navigator.pop(context, path);
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CheckQuality(path: path),
-                      ),
-                    );
-                    // print('Take picture ${path.path}');
-                  },
-                  child: const Icon(
-                    Icons.radio_button_checked,
-                    size: 80,
-                    color: AppColors.progressColor,
+                      // print('Take picture ${path.path}');
+                    },
+                    child: const Icon(
+                      Icons.radio_button_checked,
+                      size: 80,
+                      color: AppColors.progressColor,
+                    ),
                   ),
-                ),
-                const Icon(Icons.done, color: Colors.grey),
-              ],
+                  const Icon(Icons.done, color: Colors.grey),
+                ],
+              ),
             ),
           ),
         ],
@@ -191,11 +190,10 @@ class CheckQuality extends StatelessWidget {
                   icon: const Icon(Icons.arrow_back_ios),
                 ),
               ),
-              const SizedBox(),
 
               Center(
                 child: Container(
-                  height: 150,
+                  height: 200,
                   width: 300,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -243,7 +241,8 @@ class CheckQuality extends StatelessWidget {
 
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.camera);
+                  Navigator.pop(context);
+                  // Navigator.pushReplacementNamed(context, Routes.camera);
                 },
                 child: const Text('Take a new photo'),
               ),
