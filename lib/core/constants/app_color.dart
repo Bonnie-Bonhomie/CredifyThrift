@@ -12,10 +12,13 @@ class AppColors {
   static const Color darkPrimary = Color(0xFF0C0269);
   static const Color lightBlue = Color(0xFF5D4DF6);
   
-  // static const Color darkGradient = Color(0xFF1C038C);
-  static const Color darkGradient = Color(0xFF3805AB);
-  static const Color lightGradient = Color(0xFF5108F6);
-  // static const Color lightGradient = Color(0xFF2606FA);
+
+  // static const Color darkGradient = Color(0xFF3805AB);
+  // static const Color lightGradient = Color(0xFF5108F6);
+
+  static const Color darkGradient = Color(0xFF051F7C);
+  static const Color lightGradient = Color(0xFF5207F7);
+
 
   static const Color progressColor = Color(0xFF0A78D3);
   static const Color grey = Color(0xFF95A9B2);
