@@ -42,45 +42,48 @@ class _VerifyMethodState extends State<VerifyMethod> {
         ],
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IdContainer(
-                  context,
-                  title: "Government ID",
-                  subtitle:
-                      "Take a driver`s license, national Identity card or passport photo",
-                  imgPath: imgPath,
-                  onPressed: () {
-                    showIDSheet(context);
-                  },
-                ),
-                const SizedBox(height: 20),
-                IdContainer(
-                  context,
-                  title: "Selfie Photo",
-                  subtitle:
-                      "It`s required by law to verify your identity as new user.",
-                  imgPath: photoPath,
-                  onPressed: () async {
-                    final response = await Navigator.pushNamed(
-                      context,
-                      Routes.camera,
-                    );
-                    XFile file = response as XFile;
-                    print(response);
-                    setState(() {
-                      photoPath = file.path;
-                    });
-                    print(photoPath);
-                  },
-                ),
-                const SizedBox(height: 30),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IdContainer(
+                    context,
+                    title: "Government ID",
+                    subtitle:
+                        "Take a driver`s license, national Identity card or passport photo",
+                    imgPath: imgPath,
+                    onPressed: () {
+                      showIDSheet(context);
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  IdContainer(
+                    context,
+                    title: "Selfie Photo",
+                    subtitle:
+                        "It`s required by law to verify your identity as new user.",
+                    imgPath: photoPath,
+                    onPressed: () async {
+                      final response = await Navigator.pushNamed(
+                        context,
+                        Routes.camera,
+                      );
+                      XFile file = response as XFile;
+                      print(response);
+                      setState(() {
+                        photoPath = file.path;
+                      });
+                      print(photoPath);
+                    },
+                  ),
+                  // const SizedBox(height: 30),
 
-              ],
+                ],
+              ),
             ),
           ),
           Padding(
