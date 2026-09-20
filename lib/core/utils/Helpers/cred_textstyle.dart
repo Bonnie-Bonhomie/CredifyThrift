@@ -55,7 +55,11 @@ class CredTextStyle {
   
   static final TextStyle bs3 = TextStyle(
     fontSize: 15,fontWeight: FontWeight.w400
-  ); 
+  );
+
+  static final TextStyle bs5 = TextStyle(
+    fontSize: 15,fontWeight: FontWeight.w300
+  );
   
   static final TextStyle bs4 = TextStyle(
     fontSize: 12,
