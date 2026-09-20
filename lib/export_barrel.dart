@@ -38,7 +38,7 @@ export 'dependencies/auth_dependency.dart';
 export 'dependencies/core_dependencies.dart';
 export 'dependencies/dependencie_injection.dart';
 
-export 'view/investments/investment.dart';
+export 'view/investments/presentation/investment_screen.dart';
 export 'view/homeView/home_page.dart';
 export 'view/homeView/main_screen.dart';
 export 'view/homeView/profile_page.dart';

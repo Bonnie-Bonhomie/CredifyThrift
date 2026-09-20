@@ -1,4 +1,4 @@
-export 'investments/investment.dart';
+export 'investments/presentation/investment_screen.dart';
 export 'homeView/home_page.dart';
 export 'homeView/main_screen.dart';
 export 'homeView/profile_page.dart';
