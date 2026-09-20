@@ -2,7 +2,6 @@ import 'package:credify/export_barrel.dart';
 import 'package:credify/view/savings/notifier/saving_notifier.dart';
 import 'package:credify/viewModel/app_model.dart';
 
-import '../data/save_model.dart';
 
 class AvailableSavings extends StatelessWidget {
   AvailableSavings({super.key});
@@ -52,7 +51,7 @@ class AvailableSavings extends StatelessWidget {
                   const SizedBox(height: 7,),
                   Text(
                     'Select a saving category below to start you savings for it.',
-                    style: CredTextStyle.bs3.copyWith(color: Colors.white),
+                    style: CredTextStyle.bs5.copyWith(color: Colors.white),
                   ),
                 ],
               ),
