@@ -24,18 +24,18 @@ class _InvestPageViewState extends State<InvestPageView> {
               alignment: Alignment.center,
               children: [
                 GradientContainer(
-                  height: 370,
+                  height: 340,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const SizedBox(height: 20),
+                      // const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(Icons.layers, color: Colors.white),
                           Text(
-                            'Budget Goals',
+                            'My Investment',
                             style: TextStyle(
                               color: AppColors.lightBackground,
                               fontWeight: FontWeight.bold,
@@ -50,44 +50,32 @@ class _InvestPageViewState extends State<InvestPageView> {
                         ],
                       ),
 
-                      const SizedBox(height: 30),
-                      const Text(
-                        'Total Amount Saved',
-                        style: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
                       Text(
                         '${appModel.formatCurrency(12756)} left',
                         style: CredTextStyle.h1.copyWith(
                           color: AppColors.onSurface,
                         ),
                       ),
-                      const SizedBox(height: 10),
                       Text(
-                        'Last edited 2 days ago',
-                        style: CredTextStyle.bs3.copyWith(
+                        'out of ${appModel.formatCurrNoKobo(30000)} you plan to invest',
+                        style: CredTextStyle.bs4.copyWith(
                           color: AppColors.textSecondary,
                         ),
                       ),
 
-                      const SizedBox(height: 10),
-                      SizedBox(width: 200,
+                      SizedBox(width: 230,
                           // height: 30,
                           child: GradientButton(
                             onTap: (){
                               Navigator.pushNamed(context, Routes.availableSaving);
                             },
-                            title: 'create a new budget', iconSize: 20,)),
-                      const SizedBox(height: 30,)
+                            title: 'create a new investment', iconSize: 20,)),
+                      const SizedBox(height: 50,)
                     ],
                   ),
                 ),
                 Positioned(
-                  top: 270,
+                  top: 250,
                   child: Container(
                       width: MediaQuery
                           .of(context)
