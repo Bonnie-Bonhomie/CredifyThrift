@@ -1,0 +1,226 @@
+
+import 'package:credify/export_barrel.dart';
+import 'package:credify/view/investments/data/invest_model.dart';
+
+
+class CreateInvestmentScreen extends StatefulWidget {
+  final InvestModeModel investMode;
+
+  const CreateInvestmentScreen({super.key, required this.investMode});
+
+  @override
+  State<CreateInvestmentScreen> createState() => _CreateInvestmentScreenState();
+}
+
+class _CreateInvestmentScreenState extends State<CreateInvestmentScreen> {
+  int selectIndex = 0;
+  final appModel = AppModel();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GradientContainer(
+        bottomMargin: 0,
+        allPadding: 0,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 15,),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.cancel, color: Colors.white),
+                      style: IconButton.styleFrom(
+                        padding: const EdgeInsets.all(5),
+                        iconSize: 30,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  CircleAvatar(
+                    radius: 40,
+                    child: Icon(Icons.account_balance_wallet, size: 70),
+                    backgroundColor: AppColors.progressColor,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'save ${appModel.formatCurrNoKobo(widget.investMode.amount)} by',
+                    style: CredTextStyle.bs3.copyWith(color: Colors.white),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'November 2026',
+                    style: CredTextStyle.h3.copyWith(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('${Frequency.values[selectIndex].value} payment'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.remove_circle_outline,
+                              size: 25,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              appModel.formatCurrNoKobo(
+                                widget.investMode.average,
+                              ),
+                              style: CredTextStyle.h1,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.add_circle_outline_outlined,
+                              size: 25,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: List.generate(Frequency.values.length, (index) {
+                        bool selected = index == selectIndex;
+                        final title = Frequency.values[index].value;
+                        return InkWell(
+                          onTap: () {
+                            setState(() => selectIndex = index);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(25),
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            // height: 60,
+                            // width: 60,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: selected
+                                  ? AppColors.progressColor
+                                  : AppColors.grey,
+                            ),
+                            child: Text(
+                              title,
+                              style: CredTextStyle.bs3.copyWith(
+                                color: selected
+                                    ? Colors.white
+                                    : AppColors.textMain,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text:
+                        'Your ${Frequency.values[selectIndex].value} savings start on ',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                        children: [
+                          TextSpan(text: 'Nov 29', style: CredTextStyle.h5),
+                        ],
+                      ),
+                    ),
+
+                    Column(
+                      children: [
+                        const Divider(
+                          endIndent: 30,
+                          indent: 30,
+                          color: Colors.grey,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Smart Savings',
+                                    style: CredTextStyle.h5,
+                                  ),
+                                  Text(
+                                    'Save when you spend less than your budget',style: TextStyle(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                              Switch(
+                                value: false,
+                                onChanged: (val) {},
+                                hoverColor: AppColors.grey,
+                                inactiveThumbColor: AppColors.grey,
+                              ),
+                            ],
+                          ),
+                        ),
+                        AppButton(
+                          onPressed: () {
+                            AppDialog.showCongratDialog(context, content: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: 'You`ve create your ',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                children: [
+                                  TextSpan(
+                                    text: widget.investMode.title,
+                                    style: CredTextStyle.h6,
+                                  ),
+                                  TextSpan(text: ' Investment goals '),
+
+                                ],
+                              ),
+                            ), onPressed: (){
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            }, label: 'Got it');
+                          },
+                          label: 'Create your investment',
+                        ),
+                        const SizedBox(height: 15),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
