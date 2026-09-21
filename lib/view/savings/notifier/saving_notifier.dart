@@ -1,7 +1,7 @@
-import 'package:credify/core/constants/app_size.dart';
-import 'package:flutter/material.dart';
 
-import '../data/save_model.dart';
+
+import 'package:credify/export_barrel.dart';
+
 
 class SavingNotifier extends ChangeNotifier {
   List<SaveModel> savings = [
