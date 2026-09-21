@@ -6,6 +6,7 @@ export 'config/AppRoutes/routes.dart';
 export 'core/constants/app_size.dart';
 export 'core/constants/app_keys.dart';
 export 'core/constants/app_color.dart';
+export 'core/constants/enum_constant.dart';
 
 export 'core/Theme/app_spacing.dart';
 export 'core/Theme/app_theme.dart';
@@ -58,6 +59,8 @@ export 'view/authentication/presentation/personal_details/verify_details.dart';
 export 'package:credify/view/onboarding/splash_screen.dart';
 export 'package:credify/view/authentication/data/user_model.dart';
 
+export 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
+
 export 'view/view_export.dart';
 export 'viewModel/view_model_export.dart';
 
@@ -71,4 +74,7 @@ export 'package:credify/view/view_widgets/saving_box.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
 export 'package:provider/provider.dart';
+
+
+export '../../../viewModel/app_model.dart';
 
