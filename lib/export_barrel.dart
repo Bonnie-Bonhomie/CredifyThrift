@@ -59,7 +59,8 @@ export 'view/authentication/presentation/personal_details/verify_details.dart';
 export 'package:credify/view/onboarding/splash_screen.dart';
 export 'package:credify/view/authentication/data/user_model.dart';
 
-export 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
+export 'package:credify/core/widgets/dialogs&sheet/app_custom_dialog.dart';
+export 'package:credify/core/widgets/dialogs&sheet/app_custom_sheet.dart';
 
 export 'view/view_export.dart';
 export 'viewModel/view_model_export.dart';
