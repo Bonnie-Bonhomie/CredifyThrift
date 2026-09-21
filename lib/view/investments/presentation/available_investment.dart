@@ -6,12 +6,6 @@ class AvailableInvest extends StatelessWidget {
   AvailableInvest({super.key});
 
   final AppModel appModel = AppModel();
-  final sd = SaveModeModel(
-    title: 'Other Expenses',
-    frequency: Frequency.weekly,
-    amount: 2000,
-    duration: 7,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -44,12 +38,12 @@ class AvailableInvest extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'Create Savings',
+                    'Start Investing',
                     style: CredTextStyle.h2.copyWith(color: Colors.white),
                   ),
                   const SizedBox(height: 7,),
                   Text(
-                    'Select a saving category below to start you savings for it.',
+                    'Select an investment category below to start your savings for it.',
                     style: CredTextStyle.bs5.copyWith(color: Colors.white),
                   ),
                 ],
@@ -67,10 +61,8 @@ class AvailableInvest extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Custom Saving'),
-                    methodSave(sd, (){}),
-                    const SizedBox(height: 15,),
-                    Text('Basic Saving'),
+
+                    Text('Available Investments'),
                     Expanded(
                       child: ListView.builder(
                         padding: const EdgeInsets.all(5),
@@ -81,7 +73,7 @@ class AvailableInvest extends StatelessWidget {
                             return Column(children: [Text('data')]);
                           }
                           final s = availableSave[index];
-                          return methodSave(s, (){createBottomSheet1(context, s);});
+                          return methodSave(s, (){createBottomSheet1(context, saving: s, appModel: appModel);});
                         },
                       ),
                     ),
@@ -117,162 +109,6 @@ class AvailableInvest extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Future<dynamic> createBottomSheet1(
-      BuildContext context,
-      SaveModeModel saving,
-      ) {
-    return showModalBottomSheet(
-      context: context,
-      scrollControlDisabledMaxHeightRatio: 0.8,
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: CustomArrowBtn(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30),
-                child: CircleAvatar(
-                  radius: 40,
-                  child: Icon(Icons.home_work, size: 80),
-                ),
-              ),
-              Text('Savings'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(saving.title, style: CredTextStyle.h5),
-                  Icon(Icons.edit),
-                ],
-              ),
-              // SizedBox(
-              //   width: 200,
-              //   child: TextFormField(
-              //     controller: TextEditingController(text: saving.title),
-              //     style: TextStyle(fontWeight: FontWeight(1000)),
-              //     decoration: InputDecoration(hintText: 'Saving title', suffixIcon: Icon(Icons.edit)),
-              //   ),
-              // ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Text(
-                  'How much do you want to save',
-                  style: CredTextStyle.h2.copyWith(fontSize: 20),
-                ),
-              ),
-              const Spacer(),
-              Text('TARGET AMOUNT', style: CredTextStyle.h6),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.remove_circle_outline,
-                        size: 25,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        appModel.formatCurrNoKobo(saving.amount),
-                        style: CredTextStyle.h1,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.add_circle_outline_outlined,
-                        size: 25,
-                        color: Colors.grey[600],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(),
-              AppButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, Routes.createSaving, arguments: saving);
-                },
-                label: 'Continue',
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Future<dynamic> createBottomSheet2(
-      BuildContext context,
-      SaveModeModel saving,
-      ) {
-    return showModalBottomSheet(
-      scrollControlDisabledMaxHeightRatio: 0.9,
-      backgroundColor: Colors.transparent,
-      showDragHandle: true,
-      context: context,
-      builder: (context) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: CustomArrowBtn(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Text('TARGET AMOUNT', style: CredTextStyle.h6),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Center(
-                  child: TextFormField(
-                    controller: TextEditingController(
-                      text: appModel.formatCurrNoKobo(saving.amount),
-                    ),
-                    autofocus: true,
-                    textAlign: TextAlign.center,
-                    cursorColor: Colors.white,
-                  ),
-                ),
-              ),
-              const Spacer(),
-              AppButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, Routes.createSaving, arguments: saving);
-                },
-                label: 'Set amount ',
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
