@@ -1,7 +1,6 @@
 import 'package:credify/export_barrel.dart';
 import 'package:credify/view/savings/notifier/saving_notifier.dart';
 
-
 class AvailableInvest extends StatelessWidget {
   AvailableInvest({super.key});
 
@@ -18,7 +17,7 @@ class AvailableInvest extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 20,),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -41,7 +40,7 @@ class AvailableInvest extends StatelessWidget {
                     'Start Investing',
                     style: CredTextStyle.h2.copyWith(color: Colors.white),
                   ),
-                  const SizedBox(height: 7,),
+                  const SizedBox(height: 7),
                   Text(
                     'Select an investment category below to start your savings for it.',
                     style: CredTextStyle.bs5.copyWith(color: Colors.white),
@@ -61,7 +60,6 @@ class AvailableInvest extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Text('Available Investments'),
                     Expanded(
                       child: ListView.builder(
@@ -73,7 +71,14 @@ class AvailableInvest extends StatelessWidget {
                             return Column(children: [Text('data')]);
                           }
                           final s = availableSave[index];
-                          return methodSave(s, (){createBottomSheet1(context, saving: s, appModel: appModel);});
+                          return methodSave(s, () {
+                            createBottomSheet1(
+                              context,
+                              saving: s,
+                              appModel: appModel,
+                              route: Routes.createInvest,
+                            );
+                          });
                         },
                       ),
                     ),
@@ -96,12 +101,14 @@ class AvailableInvest extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleAvatar(child: Icon(Icons.account_balance_wallet_sharp)),
-            const SizedBox(width: 10,),
+            const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(s.title, style: CredTextStyle.h4),
-                Text('${appModel.formatCurrency(s.average)} ${s.frequency.value} average'),
+                Text(
+                  '${appModel.formatCurrency(s.average)} ${s.frequency.value} average',
+                ),
               ],
             ),
             const Spacer(),
