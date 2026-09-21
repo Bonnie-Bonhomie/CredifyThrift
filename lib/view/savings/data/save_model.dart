@@ -1,4 +1,6 @@
-import 'package:credify/core/constants/app_size.dart';
+
+import 'package:credify/export_barrel.dart';
+import 'package:credify/core/constants/enum_constant.dart';
 
 class SaveModel {
   String title;
