@@ -67,7 +67,7 @@ class _InvestPageViewState extends State<InvestPageView> {
                           // height: 30,
                           child: GradientButton(
                             onTap: (){
-                              Navigator.pushNamed(context, Routes.availableSaving);
+                              Navigator.pushNamed(context, Routes.availableInvest);
                             },
                             title: 'create a new investment', iconSize: 20,)),
                       const SizedBox(height: 50,)
