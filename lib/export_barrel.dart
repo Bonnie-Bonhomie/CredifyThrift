@@ -69,6 +69,12 @@ export 'package:credify/view/savings/presentation/available_savings.dart';
 export 'package:credify/view/savings/presentation/create_new_saving.dart';
 
 
+export 'package:credify/view/investments/data/invest_model.dart';
+export 'package:credify/view/investments/presentation/available_investment.dart';
+export 'package:credify/view/investments/presentation/create_investment_screen.dart';
+
+
+
 
 export 'package:credify/view/view_widgets/saving_box.dart';
 export 'package:flutter/material.dart';
