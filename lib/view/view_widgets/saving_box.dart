@@ -10,7 +10,7 @@ class SavingBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final savingState = appModel.getPercent(saving.percent * 100);
+    final savingState = appModel.getSavingState(saving.percent * 100);
     return Card(
       child: SizedBox(
         // height: 200,
@@ -103,7 +103,7 @@ class SavingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final freq = saving.frequency;
-    final state = appModel.getPercent(saving.percent * 100);
+    final state = appModel.getSavingState(saving.percent * 100);
     return Card(
       child: SizedBox(
         // height: 170,

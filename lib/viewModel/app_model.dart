@@ -18,7 +18,7 @@ class AppModel {
     return greet;
   }
 
-  SavingState getPercent(double percent) {
+  SavingState getSavingState(double percent) {
     SavingState state = SavingState.early;
     if (percent >= 50 && percent < 75) {
       state = SavingState.middle;
