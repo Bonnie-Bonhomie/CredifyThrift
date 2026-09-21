@@ -1,5 +1,4 @@
 import 'package:credify/view/savings/notifier/saving_notifier.dart';
-import 'package:credify/viewModel/app_model.dart';
 import '../../../export_barrel.dart';
 
 class SavingPage extends StatefulWidget {
@@ -25,65 +24,68 @@ class _SavingPageState extends State<SavingPage> {
               children: [
                 GradientContainer(
                   height: 370,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(Icons.layers, color: Colors.white),
-                          Text(
-                            'Savings Goals',
-                            style: TextStyle(
-                              color: AppColors.lightBackground,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                  child: AnimatedCard(
+                    index: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(Icons.layers, color: Colors.white),
+                            Text(
+                              'Savings Goals',
+                              style: TextStyle(
+                                color: AppColors.lightBackground,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
+
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.more_horiz, color: Colors.white),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 30),
+                        const Text(
+                          'Total Amount Saved',
+                          style: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
                           ),
-
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.more_horiz, color: Colors.white),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          appModel.formatCurrency(12756),
+                          style: CredTextStyle.h2.copyWith(
+                            color: AppColors.onSurface,
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Last edited 2 days ago',
+                          style: CredTextStyle.bs4.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
 
-                      const SizedBox(height: 30),
-                      const Text(
-                        'Total Amount Saved',
-                        style: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        appModel.formatCurrency(12756),
-                        style: CredTextStyle.h2.copyWith(
-                          color: AppColors.onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Last edited 2 days ago',
-                        style: CredTextStyle.bs3.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
-
-                      const SizedBox(height: 10),
-                      SizedBox(width: 200,
-                          // height: 30,
-                          child: GradientButton(
-                            onTap: (){
-                              Navigator.pushNamed(context, Routes.availableSaving);
-                            },
-                            title: 'create a new goal', iconSize: 20,)),
-                      const SizedBox(height: 30,)
-                    ],
+                        const SizedBox(height: 10),
+                        SizedBox(width: 200,
+                            // height: 30,
+                            child: GradientButton(
+                              onTap: (){
+                                Navigator.pushNamed(context, Routes.availableSaving);
+                              },
+                              title: 'create a new goal', iconSize: 20,)),
+                        const SizedBox(height: 30,)
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(
@@ -120,7 +122,12 @@ class _SavingPageState extends State<SavingPage> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: List.generate(save.length, (index) {
                                 final s = save[index];
-                                return SavingCard(appModel: appModel, saving: s,);
+                                return AnimatedCard(
+                                    index: 1+ index,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(bottom: 6),
+                                      child: SavingCard(appModel: appModel, saving: s,),
+                                    ));
                               }),
                             );
                           })
