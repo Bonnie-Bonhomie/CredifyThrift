@@ -6,7 +6,7 @@ import 'package:credify/export_barrel.dart';
 Future<dynamic> createBottomSheet1(
     BuildContext context,
     {required SaveModeModel saving,
-     required AppModel appModel,}
+     required AppModel appModel, required String route}
     ) {
   return showModalBottomSheet(
     context: context,
@@ -93,7 +93,7 @@ Future<dynamic> createBottomSheet1(
             AppButton(
               onPressed: () {
                 Navigator.pop(context);
-                Navigator.pushNamed(context, Routes.createSaving, arguments: saving);
+                Navigator.pushNamed(context, route, arguments: saving);
               },
               label: 'Continue',
             ),
