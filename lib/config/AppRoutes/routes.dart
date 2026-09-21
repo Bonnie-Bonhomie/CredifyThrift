@@ -18,4 +18,7 @@ class Routes{
   static const String createSaving = '/createSaving';
   static const String availableSaving = '/availableSaving';
 
+  static const String createInvest = '/createInvest';
+  static const String availableInvest = '/availableInvest';
+
 }
