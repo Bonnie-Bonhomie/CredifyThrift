@@ -17,70 +17,69 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 52,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        gradient: LinearGradient(colors: [
-          AppColors.primary,
-          // AppColors.primary,
-          AppColors.gradientBtn,
-
-        ], begin: Alignment.topCenter, end: Alignment.bottomRight, )
+        borderRadius: BorderRadius.circular(26),
+        gradient: LinearGradient(
+          colors: [
+            AppColors.primary,
+            AppColors.gradientBtn,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.35),
+            blurRadius: 14,
+            offset: const Offset(0, 5),
+          ),
+        ],
       ),
       child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const SizedBox(width: 10),
-            Text( label, style: TextStyle(color: AppColors.lightBackground),),
-            loading
-                ? SizedBox(
-              width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(color: AppColors.lightGrey),
-                  )
-                : SizedBox(width: 10),
-          ],
+        onPressed: loading ? null : onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(26),
+          ),
+        ),
+        child: Center(
+          child: loading
+              ? const SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2.2,
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      label,
+                      style: CredTextStyle.h4.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: -0.2,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    const Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ],
+                ),
         ),
       ),
     );
   }
 }
-
-
-//
-// class AppButton extends StatelessWidget {
-//   final VoidCallback onPressed;
-//   final String label;
-//   final bool loading;
-//
-//   const AppButton({
-//     super.key,
-//     required this.onPressed,
-//     required this.label,
-//     this.loading = false,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: ,
-//       width: MediaQuery.of(context).size.width,
-//       child: FilledButton(
-//         onPressed: onPressed,
-//         child: loading
-//             ? SizedBox(
-//                 width: 20,
-//                 height: 20,
-//                 child: CircularProgressIndicator(color: AppColors.lightGrey),
-//               )
-//             : Text(label, style: TextStyle(color: AppColors.lightBackground)),
-//       ),
-//     );
-//   }
-// }
 
 class DisabledButton extends StatelessWidget {
   final String label;
@@ -89,16 +88,20 @@ class DisabledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.disableColor,
-        ),
+    return Container(
+      height: 52,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: AppColors.lightGrey.withOpacity(0.7),
+        borderRadius: BorderRadius.circular(26),
+      ),
+      child: Center(
         child: Text(
           label,
-          style: TextStyle(color: Colors.grey.withOpacity(0.8)),
+          style: CredTextStyle.h4.copyWith(
+            color: AppColors.grey.withOpacity(0.8),
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
@@ -112,7 +115,7 @@ class GradientButton extends StatelessWidget {
     required this.onTap,
     this.iconSize = 15,
     this.needIcon = true,
-    this.height = 30,
+    this.height = 34,
     this.icon,
   });
 
@@ -126,26 +129,39 @@ class GradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(30),
       onTap: onTap,
       child: Container(
         height: height,
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [AppColors.lightGradient, AppColors.darkGradient],
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.25),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Center(
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              needIcon
-                  ? Icon(icon ?? Icons.add, color: Colors.white, size: iconSize)
-                  : SizedBox.shrink(),
+              if (needIcon) ...[
+                Icon(icon ?? Icons.add, color: Colors.white, size: iconSize),
+                const SizedBox(width: 4),
+              ],
               Text(
                 title,
-                style: CredTextStyle.bs3.copyWith(color: AppColors.onSurface),
+                style: CredTextStyle.bs4.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ],
           ),
@@ -163,14 +179,19 @@ class CustomArrowBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(20),
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColors.textSecondary.withAlpha(50),
+          color: AppColors.primary.withOpacity(0.08),
         ),
-        child: Icon(Icons.chevron_right_outlined),
+        child: const Icon(
+          Icons.chevron_right_rounded,
+          color: AppColors.primary,
+          size: 20,
+        ),
       ),
     );
   }

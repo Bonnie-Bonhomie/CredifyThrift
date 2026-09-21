@@ -1,65 +1,73 @@
-
 import 'package:flutter/material.dart';
 import '../constants/app_color.dart';
 import 'form_field_theme.dart';
 import 'text_theme.dart';
 
 final ThemeData lightTheme = ThemeData(
-
+  useMaterial3: true,
   brightness: Brightness.light,
-  primaryColor: AppColors.progressColor,
+  primaryColor: AppColors.primary,
   scaffoldBackgroundColor: AppColors.lightBackground,
-  fontFamily: '.SF Pro Display',
-  cardTheme: CardThemeData(
-    color: AppColors.cardLight
+  fontFamily: 'SF-Pro',
+  cardTheme: const CardThemeData(
+    color: AppColors.cardLight,
+    elevation: 0,
+    margin: EdgeInsets.zero,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+    ),
   ),
-cardColor: AppColors.cardLight,
+  cardColor: AppColors.cardLight,
   colorScheme: const ColorScheme.light(
     brightness: Brightness.light,
     primary: AppColors.primary,
     secondary: AppColors.darkPrimary,
     onSurface: AppColors.surface,
-    surface: AppColors.onSurface
+    surface: AppColors.cardLight,
   ),
-
-  iconTheme: IconThemeData(
-    color: AppColors.cardDark
+  iconTheme: const IconThemeData(
+    color: AppColors.cardDark,
   ),
-  appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.primary,
-    foregroundColor: AppColors.primary,
-    elevation: 0
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Colors.transparent,
+    foregroundColor: AppColors.textMain,
+    elevation: 0,
+    centerTitle: true,
   ),
-
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     headlineLarge: LightTextTheme.headings,
     headlineMedium: LightTextTheme.subHead,
     bodyMedium: LightTextTheme.medium,
     bodySmall: LightTextTheme.small,
-    bodyLarge: LightTextTheme.body
+    bodyLarge: LightTextTheme.body,
   ),
-
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.primary
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: AppColors.primary,
+    foregroundColor: Colors.white,
   ),
-
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: AppColors.primary,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      textStyle: LightTextTheme.body.copyWith(color: AppColors.textMain)
-    )
+      foregroundColor: Colors.white,
+      elevation: 0,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(28),
+      ),
+      textStyle: LightTextTheme.body.copyWith(
+        color: Colors.white,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
   ),
   inputDecorationTheme: BFormTheme.lightInputTheme,
-  dividerTheme: DividerThemeData(
-    color: AppColors.cardDark
+  dividerTheme: const DividerThemeData(
+    color: AppColors.lightGrey,
+    thickness: 1,
   ),
-
-    listTileTheme: ListTileThemeData(
-        textColor: LightTextTheme.body.color,
-        iconColor: AppColors.darkPrimary,
-        tileColor: Colors.transparent
-    ),
-
-  // dividerColor: AppColors.progressColor
+  listTileTheme: const ListTileThemeData(
+    textColor: AppColors.textMain,
+    iconColor: AppColors.primary,
+    tileColor: Colors.transparent,
+  ),
 );

@@ -6,8 +6,8 @@ class AppColors {
   // static const  Color primary = Color(0xFF0730FD);
   // static final Color gradientBtn = Color(0xFF100367);
 
-  static const  Color primary = Color(0xFF5207FA);
-  static final Color gradientBtn = Color(0xFF34039B);
+  static const Color primary = Color(0xFF5207FA);
+  static const Color gradientBtn = Color(0xFF34039B);
 
   static const Color darkPrimary = Color(0xFF0C0269);
   static const Color lightBlue = Color(0xFF5D4DF6);

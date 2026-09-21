@@ -1,6 +1,6 @@
-class Routes{
-
+class Routes {
   static const String initRoutes = '/';
+  static const String onboard = '/onboard';
   static const String signUp = '/signUp';
 
   static const String home = '/home';
@@ -17,5 +17,4 @@ class Routes{
 
   static const String createSaving = '/createSaving';
   static const String availableSaving = '/availableSaving';
-
 }

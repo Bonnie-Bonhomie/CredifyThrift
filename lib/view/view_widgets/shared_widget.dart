@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-
 import '../../core/constants/app_color.dart';
 
 class ReuseContainer extends StatelessWidget {
   final Widget child;
   final double radius;
 
-  const ReuseContainer({super.key, required this.child, this.radius = 5.0});
+  const ReuseContainer({super.key, required this.child, this.radius = 16.0});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5.0),
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        color: Theme.of(context).cardTheme.color,
+        color: Theme.of(context).cardColor,
+        border: Border.all(
+          color: AppColors.primary.withOpacity(0.12),
+          width: 1.2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: child,
     );
@@ -45,49 +55,71 @@ class CustomPinPut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final defaultTheme = PinTheme(
+      width: 58,
+      height: height,
+      margin: const EdgeInsets.symmetric(horizontal: 6),
+      textStyle: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'SF-Pro-Rounded',
+        color: isDark ? Colors.white : AppColors.textMain,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: isDark
+            ? AppColors.cardDark
+            : AppColors.primary.withOpacity(0.05),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withOpacity(0.1)
+              : AppColors.primary.withOpacity(0.12),
+          width: 1.5,
+        ),
+      ),
+    );
+
+    final focusedTheme = defaultTheme.copyWith(
+      decoration: defaultTheme.decoration?.copyWith(
+        border: Border.all(color: AppColors.primary, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withOpacity(0.2),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+    );
+
+    final submittedTheme = defaultTheme.copyWith(
+      decoration: defaultTheme.decoration?.copyWith(
+        border: Border.all(color: AppColors.complete, width: 1.5),
+        color: isDark
+            ? AppColors.cardDark
+            : AppColors.complete.withOpacity(0.06),
+      ),
+    );
+
     return Pinput(
       controller: controller,
       onCompleted: onComplete,
       keyboardType: type ?? TextInputType.number,
       readOnly: readOnly,
-
-      errorTextStyle: TextStyle(color: Colors.red, fontSize: 20),
       length: len,
       autofocus: autoFocus,
-      defaultPinTheme: PinTheme(
-        width: 100,
-        margin: const EdgeInsets.only(right: 10),
-        textStyle: TextStyle(color: AppColors.textMain),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.primary.withAlpha(30),
-        ),
-      ),
-      submittedPinTheme: PinTheme(
-        textStyle: TextStyle(color: AppColors.textMain),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: AppColors.primary.withAlpha(30),
-        ),
-      ),
-      focusedPinTheme: PinTheme(
-        textStyle: TextStyle(color: AppColors.textMain),
-        decoration: BoxDecoration(
-
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: AppColors.blueGrey, width: 2),
-          // color: Theme.of(context).colorScheme.onSurface,
-          color: AppColors.primary.withAlpha(30),
-        ),
-      ),
+      defaultPinTheme: defaultTheme,
+      focusedPinTheme: focusedTheme,
+      submittedPinTheme: submittedTheme,
       showCursor: true,
       cursor: Align(
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.center,
         child: Container(
-          width: 20,
-          height: 2,
-          color: AppColors.blueGrey,
-          margin: const EdgeInsets.only(bottom: 8.0),
+          width: 2,
+          height: 24,
+          color: AppColors.primary,
         ),
       ),
     );
@@ -100,6 +132,7 @@ class StatCard extends StatelessWidget {
   final bool accent;
 
   const StatCard({
+    super.key,
     required this.label,
     required this.value,
     this.accent = false,
@@ -110,9 +143,9 @@ class StatCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        // color: accent ? AppColors.moss : AppColors.panel,
-        borderRadius: BorderRadius.circular(14),
-        // border: Border.all(color: accent ? AppColors.moss : AppColors.line),
+        borderRadius: BorderRadius.circular(16),
+        color: Theme.of(context).cardColor,
+        border: Border.all(color: AppColors.lightGrey),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,20 +153,19 @@ class StatCard extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontSize: 10.5,
-              letterSpacing: 0.6,
+            style: const TextStyle(
+              fontSize: 11,
+              letterSpacing: 0.5,
               fontWeight: FontWeight.w600,
-              // color: accent ? const Color(0xFFD7E3D3) : AppColors.muted
             ),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              // color: accent ? Colors.white : AppColors.ink
+              fontFamily: 'SF-Pro-Rounded',
             ),
           ),
         ],
@@ -141,72 +173,6 @@ class StatCard extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-class ProductCard extends StatelessWidget {
-  // final Product product;
-  const ProductCard();
-
-  @override
-  Widget build(BuildContext context) {
-    // final data = context.watch<AppData>();
-    // final inCart = data.cart[product.id] ?? 0;
-    // final disabled = product.isOutOfStock;
-
-    return Opacity(
-      opacity: 0.3,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(14),
-        // onTap: disabled ? null : () => context.read<AppData>().addToCart(product.id),
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            // color: AppColors.panel,
-            borderRadius: BorderRadius.circular(14),
-            // border: Border.all(color: AppColors.line),
-          ),
-          child: Stack(
-            children: [
-              // if (inCart > 0)
-              //   Positioned(
-              //     top: 0,
-              //     right: 0,
-              //     child: Container(
-              //       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              //       decoration: BoxDecoration( borderRadius: BorderRadius.circular(12)),
-              //       child: Text('$inCart', style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
-              //     ),
-              //   ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Text(product.emoji, style: const TextStyle(fontSize: 26)),
-                  // const SizedBox(height: 8),
-                  // Text(product.name,
-                  //     maxLines: 2,
-                  //     overflow: TextOverflow.ellipsis,
-                  //     style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, height: 1.25)),
-                  // const SizedBox(height: 6),
-                  // Text(data.formatMoney(product.price),
-                  //     style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600,)),
-                  // const SizedBox(height: 2),
-                  // Text(disabled ? 'Out of stock' : '${product.stock} in stock',
-                  //     style: const TextStyle(fontSize: 10,)),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
 
 class ListCard extends StatelessWidget {
   final Widget child;
@@ -216,8 +182,8 @@ class ListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.circular(14),
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.lightGrey),
       ),
       clipBehavior: Clip.antiAlias,

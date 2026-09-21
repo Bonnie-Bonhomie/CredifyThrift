@@ -1,72 +1,82 @@
-
 import 'package:flutter/material.dart';
 import '../constants/app_color.dart';
 
-
-class LightTextTheme{
-
+class LightTextTheme {
   static const TextStyle headings = TextStyle(
-    fontSize: 35,
-    fontWeight: FontWeight.bold,
-      fontFamily: 'inter-Regular',
-      color: AppColors.textMain
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SF-Pro-Rounded',
+    letterSpacing: -0.5,
+    color: AppColors.textMain,
   );
+
   static const TextStyle subHead = TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-      fontFamily: 'inter-Regular',
-      color: AppColors.textMain
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'SF-Pro-Rounded',
+    letterSpacing: -0.3,
+    color: AppColors.textMain,
   );
+
   static const TextStyle body = TextStyle(
-      fontSize: 17,
-      fontFamily: 'inter-Regular',
-     color: AppColors.textMain
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'SF-Pro',
+    letterSpacing: -0.2,
+    color: AppColors.textMain,
+  );
+
+  static const TextStyle medium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'SF-Pro',
+    color: AppColors.textMain,
   );
 
   static const TextStyle small = TextStyle(
-      fontSize: 13,
-      fontFamily: 'inter-Regular',
-      color: AppColors.textMain
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'SF-Pro',
+    color: AppColors.grey,
   );
-  static const TextStyle medium = TextStyle(
-      fontSize: 15,
-      fontFamily: 'inter-Regular',
-      color: AppColors.textMain
-  );
-
-
 }
 
-class DarkTextTheme{
-
+class DarkTextTheme {
   static const TextStyle headings = TextStyle(
-      fontSize: 25,
-      fontWeight: FontWeight.bold,
-      fontFamily: '.SF Pro Display',
-      color: AppColors.cardLight
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontFamily: 'SF-Pro-Rounded',
+    letterSpacing: -0.5,
+    color: AppColors.cardLight,
   );
-  static const TextStyle subHead = TextStyle(
-      fontSize: 20,
-      fontFamily: '.SF Pro Display',
-      fontWeight: FontWeight.bold,
 
-      color: AppColors.cardLight
+  static const TextStyle subHead = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'SF-Pro-Rounded',
+    letterSpacing: -0.3,
+    color: AppColors.cardLight,
   );
+
   static const TextStyle body = TextStyle(
-      fontSize: 17,
-      fontFamily: 'inter-Regular',
-      color: AppColors.cardLight
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'SF-Pro',
+    letterSpacing: -0.2,
+    color: AppColors.cardLight,
+  );
+
+  static const TextStyle medium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'SF-Pro',
+    color: AppColors.cardLight,
   );
 
   static const TextStyle small = TextStyle(
-      fontSize: 13,
-      fontFamily: 'inter-Regular',
-      color: AppColors.cardLight
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'SF-Pro',
+    color: AppColors.textSecondary,
   );
-  static const TextStyle medium = TextStyle(
-      fontSize: 15,
-      fontFamily: 'inter-Regular',
-      color: AppColors.cardLight
-  );
-
 }

@@ -56,6 +56,7 @@ export 'view/authentication/presentation/personal_details/personal_info_view.dar
 export 'view/authentication/presentation/personal_details/address_details.dart';
 export 'view/authentication/presentation/personal_details/verify_details.dart';
 export 'package:credify/view/onboarding/splash_screen.dart';
+export 'package:credify/view/onboarding/onboard_screen.dart';
 export 'package:credify/view/authentication/data/user_model.dart';
 
 export 'view/view_export.dart';
