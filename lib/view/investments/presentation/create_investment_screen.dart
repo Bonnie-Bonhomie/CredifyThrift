@@ -48,8 +48,8 @@ class _CreateInvestmentScreenState extends State<CreateInvestmentScreen> {
                   const SizedBox(height: 15),
                   CircleAvatar(
                     radius: 40,
-                    child: Icon(Icons.account_balance_wallet, size: 70),
                     backgroundColor: AppColors.progressColor,
+                    child: Icon(Icons.account_balance_wallet, size: 70),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -146,7 +146,7 @@ class _CreateInvestmentScreenState extends State<CreateInvestmentScreen> {
                     RichText(
                       text: TextSpan(
                         text:
-                        'Your ${Frequency.values[selectIndex].value} savings start on ',
+                        'Your ${Frequency.values[selectIndex].value} investment start on ',
                         style: Theme.of(context).textTheme.bodyMedium,
                         children: [
                           TextSpan(text: 'Nov 29', style: CredTextStyle.h5),
@@ -170,7 +170,7 @@ class _CreateInvestmentScreenState extends State<CreateInvestmentScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Smart Savings',
+                                    'Smart Investment',
                                     style: CredTextStyle.h5,
                                   ),
                                   Text(
