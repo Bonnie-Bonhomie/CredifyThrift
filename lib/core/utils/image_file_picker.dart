@@ -26,8 +26,7 @@ class _GalleryPickerState extends State<GalleryPicker> {
 
     setState(() {
       widget.selectImage = XFile(image.path);
-      print(widget.selectImage);
-      widget.onSelect;
+      widget.onSelect?.call();
     });
   }
 

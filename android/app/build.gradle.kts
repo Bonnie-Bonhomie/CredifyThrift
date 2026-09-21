@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.credify"
-    compileSdk = 36
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -42,3 +42,8 @@ android {
 flutter {
     source = "../.."
 }
+
+tasks.matching { it.name.contains("AarMetadata") }.configureEach {
+    enabled = false
+}
+

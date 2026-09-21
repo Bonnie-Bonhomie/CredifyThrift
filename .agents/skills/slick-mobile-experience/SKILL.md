@@ -95,7 +95,10 @@ badge.animate(onPlay: (c) => c.repeat(reverse: true))
    - Progress bar / step counter (`Step X of Y`) on multi-step forms.
    - Real-time password validation indicators that flip to green ticks smoothly.
    - Focused OTP input boxes with automatic progression.
-4. **Dashboard**:
+4. **Identity Verification**:
+   - Always provide dual options: **Take Photo** (live camera capture) and **Upload Photo / Document** (from gallery or files).
+   - Display a clear document preview thumbnail once attached, along with Replace and Check Quality actions.
+5. **Dashboard**:
    - Floating or docked bottom navigation bar with active icon pills.
    - Privacy toggle to hide/show balances.
    - Responsive scroll views without artificial height hacks.
