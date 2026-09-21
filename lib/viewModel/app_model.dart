@@ -1,6 +1,5 @@
-import 'dart:ui';
 
-import 'package:credify/core/constants/app_color.dart';
+import 'package:credify/core/constants/enum_constant.dart';
 import 'package:intl/intl.dart';
 
 class AppModel {
@@ -19,14 +18,14 @@ class AppModel {
     return greet;
   }
 
-  Color getPercent(double percent) {
-    Color color = AppColors.early;
+  SavingState getPercent(double percent) {
+    SavingState state = SavingState.early;
     if (percent >= 50 && percent < 75) {
-      color = AppColors.middle;
+      state = SavingState.middle;
     } else if(percent >= 75 && percent <= 100) {
-      color = AppColors.complete;
+      state = SavingState.complete;
     }
-    return color;
+    return state;
   }
 
   //Account state
