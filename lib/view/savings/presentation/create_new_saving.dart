@@ -1,8 +1,6 @@
-import 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
-import 'package:credify/export_barrel.dart';
-import 'package:credify/view/savings/data/save_model.dart';
 
-import '../../../viewModel/app_model.dart';
+import 'package:credify/export_barrel.dart';
+
 
 class CreateNewSaving extends StatefulWidget {
   final SaveModeModel saveMode;
