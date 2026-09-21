@@ -50,7 +50,7 @@ class AvailableSavings extends StatelessWidget {
                   ),
                   const SizedBox(height: 7,),
                   Text(
-                    'Select a saving category below to start you savings for it.',
+                    'Select a saving category below to start your savings for it.',
                     style: CredTextStyle.bs5.copyWith(color: Colors.white),
                   ),
                 ],
