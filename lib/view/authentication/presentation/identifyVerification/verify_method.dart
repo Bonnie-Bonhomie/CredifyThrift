@@ -1,9 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:credify/config/AppRoutes/routes.dart';
-import 'package:credify/core/constants/app_color.dart';
-import 'package:credify/core/widgets/app_button.dart';
-import 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../export_barrel.dart';
 
@@ -50,7 +45,10 @@ class _VerifyMethodState extends State<VerifyMethod> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IdContainer(
+
+                  AnimatedCard(
+                    index : 1,
+                    child: IdContainer(
                     context,
                     title: "Government ID",
                     subtitle:
@@ -59,26 +57,29 @@ class _VerifyMethodState extends State<VerifyMethod> {
                     onPressed: () {
                       showIDSheet(context);
                     },
-                  ),
+                  )),
                   const SizedBox(height: 20),
-                  IdContainer(
-                    context,
-                    title: "Selfie Photo",
-                    subtitle:
-                        "It`s required by law to verify your identity as new user.",
-                    imgPath: photoPath,
-                    onPressed: () async {
-                      final response = await Navigator.pushNamed(
-                        context,
-                        Routes.camera,
-                      );
-                      XFile file = response as XFile;
-                      print(response);
-                      setState(() {
-                        photoPath = file.path;
-                      });
-                      print(photoPath);
-                    },
+                  AnimatedCard(
+                    index: 2,
+                    child: IdContainer(
+                      context,
+                      title: "Selfie Photo",
+                      subtitle:
+                          "It`s required by law to verify your identity as new user.",
+                      imgPath: photoPath,
+                      onPressed: () async {
+                        final response = await Navigator.pushNamed(
+                          context,
+                          Routes.camera,
+                        );
+                        XFile file = response as XFile;
+                        print(response);
+                        setState(() {
+                          photoPath = file.path;
+                        });
+                        print(photoPath);
+                      },
+                    ),
                   ),
                   // const SizedBox(height: 30),
 
@@ -86,33 +87,36 @@ class _VerifyMethodState extends State<VerifyMethod> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: imgPath.isEmpty && photoPath.isEmpty
-                ? DisabledButton(label: 'Verify my identity')
-                : submitting
-                ? DisabledButton(label: 'Submitting...')
-                : AppButton(
-              onPressed: () {
-                setState(() => submitting = true);
-                AppDialog.showCongratDialog(
-                  context,
-                  subtitle:
-                  'Thanks! We will review your document within 10 minutes',
-                  content: const Text(
-                    'get ready to start using credify for your daily financial app',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 15,
+          AnimatedCard(
+            index: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: imgPath.isEmpty && photoPath.isEmpty
+                  ? DisabledButton(label: 'Verify my identity')
+                  : submitting
+                  ? DisabledButton(label: 'Submitting...')
+                  : AppButton(
+                onPressed: () {
+                  setState(() => submitting = true);
+                  AppDialog.showCongratDialog(
+                    context,
+                    subtitle:
+                    'Thanks! We will review your document within 10 minutes',
+                    content: const Text(
+                      'get ready to start using credify for your daily financial app',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 15,
+                      ),
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, Routes.mainS);
-                  },
-                );
-              },
-              label: 'Verify my Identity',
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, Routes.mainS);
+                    },
+                  );
+                },
+                label: 'Verify my Identity',
+              ),
             ),
           ),
 

@@ -1,6 +1,7 @@
 import 'package:credify/export_barrel.dart';
 import 'package:credify/view/savings/notifier/saving_notifier.dart';
 import 'package:credify/viewModel/app_model.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -26,243 +27,263 @@ class _HomePageViewState extends State<HomePageView> {
               children: [
                 GradientContainer(
                   height: 280,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(height: 30),
-                      Row(
-                        children: [
-                          Icon(Icons.layers, color: Colors.white,),
-                          const SizedBox(width: 8,),
-                          Text(
-                            'Credify.',
-                            style: TextStyle(
-                              color: AppColors.lightBackground,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 25,
+                  child: AnimatedCard(
+                    index: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const SizedBox(height: 30),
+                        Row(
+                          children: [
+                            Icon(Icons.layers, color: Colors.white,),
+                            const SizedBox(width: 8,),
+                            Text(
+                              'Credify.',
+                              style: TextStyle(
+                                color: AppColors.lightBackground,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                              ),
                             ),
-                          ),
-                          const Spacer(),
-                          SizedBox(
-                            width: 90,
-                            child: GradientButton(title: '234', onTap: (){},),
-                          ),
-                          const SizedBox(width: 20),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.notification_important_sharp,
-                              color: Colors.white,
+                            const Spacer(),
+                            SizedBox(
+                              width: 90,
+                              child: GradientButton(title: '234', onTap: (){},),
                             ),
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      const Text(
-                        'Save-to-Spend',
-                        style: TextStyle(
-                          color: AppColors.onSurface,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w300,
+                            const SizedBox(width: 20),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.notification_important_sharp,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        children: [
-                          Text(
-                            appModel.formatCurrency(123456),
-                            style: TextStyle(
-                              color: AppColors.onSurface,
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        const Spacer(),
+                        const Text(
+                          'Save-to-Spend',
+                          style: TextStyle(
+                            color: AppColors.onSurface,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w300,
                           ),
-                          const SizedBox(width: 30),
-                          customIcon(),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'Updated 2 min ago',
-                        style: TextStyle(
-                          color: AppColors.onSurface,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w300,
                         ),
-                      ),
-                      const Spacer(),
-                    ],
+                        const SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Text(
+                              appModel.formatCurrency(123456),
+                              style: TextStyle(
+                                color: AppColors.onSurface,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(width: 30),
+                            customIcon(),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Updated 2 min ago',
+                          style: TextStyle(
+                            color: AppColors.onSurface,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        const Spacer(),
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(
-                  bottom: -20,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            blurRadius: 1,
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 9,
-                      ),
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: List.generate(quickLinkText.length, (index) {
-                          final title = quickLinkText[index];
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              buildService(title),
-                              index == quickLinkText.length - 1 ?const SizedBox.shrink():  const SizedBox(width: 20,),
-                              index == quickLinkText.length - 1 ? SizedBox.shrink(): SizedBox(
-                                height: 65,
-                                child: VerticalDivider(
-                                  endIndent: 20,
-                                  color: AppColors.lightBlue.withAlpha(100),
+                  bottom: -15,
+                  child: AnimatedCard(
+                    index: 2,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              blurRadius: 1,
+                              offset: Offset(0, 1),
+                            ),
+                          ],
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 9,
+                        ),
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: List.generate(quickLinkText.length, (index) {
+                            final title = quickLinkText[index];
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                buildService(title),
+                                index == quickLinkText.length - 1 ?const SizedBox.shrink():  const SizedBox(width: 20,),
+                                index == quickLinkText.length - 1 ? SizedBox.shrink(): SizedBox(
+                                  height: 65,
+                                  child: VerticalDivider(
+                                    endIndent: 20,
+                                    color: AppColors.lightBlue.withAlpha(100),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        }),
+                              ],
+                            );
+                          }),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  HeadingText(title: 'Upcoming'),
-                  Text(
-                    'Your next investment',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const SizedBox(height: 5.0),
+            const SizedBox(height: 10),
+            AnimatedCard(
+              index: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    HeadingText(title: 'Upcoming'),
+                    Text(
+                      'Your next investment',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    const SizedBox(height: 5.0),
 
-                  SizedBox(
-                    height: 160,
-                    child: ListView.builder(
-                      itemCount: 3,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          width: 150,
-                          height: 100,
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CircleAvatar(backgroundColor: AppColors.complete,child: Icon(Icons.account_balance_wallet_sharp),),
-                                  Text('Title', style: CredTextStyle.h3,),
-                                  Text('description', style: CredTextStyle.bs4,),
-                                  Text(appModel.formatCurrNoKobo(1345), style: CredTextStyle.h5,)
-                                ],
+                    SizedBox(
+                      height: 160,
+                      child: ListView.builder(
+                        itemCount: 3,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: 150,
+                            height: 100,
+                            child: Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CircleAvatar(backgroundColor: AppColors.complete,child: Icon(Icons.account_balance_wallet_sharp),),
+                                    Text('Title', style: CredTextStyle.h3,),
+                                    Text('description', style: CredTextStyle.bs4,),
+                                    Text(appModel.formatCurrNoKobo(1345), style: CredTextStyle.h5,)
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ),
+            ),
+            // const SizedBox(height: 5),
+            AnimatedCard(
+              index: 4,
+              child: Consumer<SavingNotifier>(
+                builder: (key, s, child) {
+                  final save = s.savings;
+                  if(save.isEmpty){
+                    return SizedBox.shrink();
+                  }
+                  int len = save.length >= 3? 3: save.length;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric( horizontal: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        HeadingText(title: 'My Savings'),
+                        Text(
+                          'All available savings',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        const SizedBox(height: 5.0),
+
+                        SizedBox(
+                          height: 190,
+                          child: ListView.builder(
+                            itemCount: len,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              final saving = save[index];
+                              return AnimatedCard(
+                                  index: 5 + index,
+                                  child: SavingBox(appModel: appModel, saving: saving));
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
               ),
             ),
             const SizedBox(height: 15),
-            Consumer<SavingNotifier>(
-              builder: (key, s, child) {
-                final save = s.savings;
-                if(save.isEmpty){
-                  return SizedBox.shrink();
-                }
-                int len = save.length >= 3? 3: save.length;
-                return Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      HeadingText(title: 'My Savings'),
-                      Text(
-                        'All available savings',
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                      const SizedBox(height: 5.0),
-
-                      SizedBox(
-                        height: 190,
-                        child: ListView.builder(
-                          itemCount: len,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            final saving = save[index];
-                            return SavingBox(appModel: appModel, saving: saving);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            ),
             Divider(thickness: 8, color: Colors.grey[300],),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  HeadingText(title: 'This Month'),
-                  Text(
-                    'You have spent £3.90 more than last month',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const SizedBox(height: 30),
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    child: Column(
-                      children: [
-                        TransactionLists(appModel: appModel,),
-                        // ElevatedButton(
-                        //   onPressed: () {},
-                        //   style: ElevatedButton.styleFrom(
-                        //     elevation: 0,
-                        //     backgroundColor: AppColors.progressColor,
-                        //     padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
-                        //     textStyle: Theme.of(context).textTheme.bodyLarge,
-                        //     foregroundColor: AppColors.onSurface
-                        //   ),
-                        //   child: Text('See all transactions'),
-                        // ),
-                        const SizedBox(height: 10,),
-                        SizedBox(
-                          width: 250,
-                          // height: 30,
-                          child: GradientButton(
-                            height: 40,
-                            title: 'See all transactions', onTap: (){},needIcon: false,),
-                        ),
-                        const SizedBox(height: 10),
-                      ],
+            AnimatedCard(
+              index: 20,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    HeadingText(title: 'This Month'),
+                    Text(
+                      'You have spent £3.90 more than last month',
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
-                  ),
-                  const SizedBox(height: 10,)
-                ],
+                    const SizedBox(height: 10),
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                      child: Column(
+                        children: [
+                          TransactionLists(appModel: appModel,),
+                          // ElevatedButton(
+                          //   onPressed: () {},
+                          //   style: ElevatedButton.styleFrom(
+                          //     elevation: 0,
+                          //     backgroundColor: AppColors.progressColor,
+                          //     padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                          //     textStyle: Theme.of(context).textTheme.bodyLarge,
+                          //     foregroundColor: AppColors.onSurface
+                          //   ),
+                          //   child: Text('See all transactions'),
+                          // ),
+                          const SizedBox(height: 10,),
+                          SizedBox(
+                            width: 250,
+                            // height: 30,
+                            child: Animate(
+                              child: GradientButton(
+                                height: 40,
+                                title: 'See all transactions', onTap: (){},needIcon: false,),
+                            ).flip(),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10,)
+                  ],
+                ),
               ),
             ),
           ],
