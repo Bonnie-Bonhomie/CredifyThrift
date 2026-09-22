@@ -1,164 +1,193 @@
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:credify/export_barrel.dart';
-import 'package:credify/view/authentication/data/user_model.dart';
 
 class VerifyDetailsView extends StatelessWidget {
-  VerifyDetailsView({super.key,
-    // required this.userDetails
-  });
-
-  // final UserModel userDetails;
-
-  final TextEditingController addressCtrl = TextEditingController();
-  final fullNameCtrl = TextEditingController();
-  final apartment = TextEditingController();
-  final zipCodeCtrl = TextEditingController();
-  final cityCtrl = TextEditingController();
-  final stateCtrl = TextEditingController();
-
-  final addressKey = GlobalKey<FormFieldState>();
-  final streetKey = GlobalKey<FormFieldState>();
-  final aptKey = GlobalKey<FormFieldState>();
-  final zipKey = GlobalKey<FormFieldState>();
-  final cityKey = GlobalKey<FormFieldState>();
-  final stateKey = GlobalKey<FormFieldState>();
-
-  final formKey = GlobalKey<FormState>();
-
-  // void logi
+  const VerifyDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final watchDet = context.watch<DetailsViewModel>();
-    final readDet = context.read<DetailsViewModel>();
     final loading = context.watch<LoaderModel>().isLoading;
+
     return LoaderWrapper(
       loading: loading,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.keyboard_arrow_left),
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
           ),
           backgroundColor: Colors.transparent,
+          elevation: 0,
           actions: [
             Container(
-              padding: const EdgeInsets.all(5.0),
+              margin: const EdgeInsets.only(right: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).cardTheme.color,
+                borderRadius: BorderRadius.circular(20),
+                color: AppColors.primary.withOpacity(0.08),
               ),
-              child: Text('step 3 of 3'),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Almost There!',
-                    style: Theme.of(context).textTheme.headlineLarge,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Please take a moment to ensure all of the information you provide is correct',
-                  ),
-                  // const SizedBox(height: 20),
-                ],
-              ),
-            ),
-            Divider(thickness: 2, color: Colors.grey[300],),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(AppSize.padding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    profileBox(
-                      context,
-                      title: 'Full Legal Name',
-                      value: 'Bonnie Bonhomie',
-                    ),
-                    profileBox(
-                      context,
-                      title: 'Phone Number',
-                      value:'0903-784-8903',
-                    ),
-                    profileBox(
-                      context,
-                      title: 'Date of Birth',
-                      value: '20/10/2002',
-                    ),
-                    profileBox(
-                      context,
-                      title: 'Full Address',
-                      value: 'User details',
-                    ),
-                  ],
+              child: Text(
+                'Step 3 of 3',
+                style: CredTextStyle.bs4.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child:
-                  // watchDet.addressFill?
-                  AppButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, Routes.verifyID);
-                    },
-                    label: 'Continue',
-                  ),
-            ),
-            // : DisabledButton(label: 'Continue'),)
           ],
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Almost There!',
+                        style: CredTextStyle.h1.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ).animate().fadeIn(duration: 350.ms).slideY(begin: 0.15, end: 0),
+
+                      const SizedBox(height: 8),
+
+                      Text(
+                        'Please verify that all the information provided below is accurate before proceeding.',
+                        style: CredTextStyle.bs3.copyWith(
+                          color: AppColors.grey,
+                          height: 1.4,
+                        ),
+                      ).animate().fadeIn(delay: 50.ms, duration: 350.ms).slideY(begin: 0.15, end: 0),
+
+                      const SizedBox(height: 24),
+
+                      // Review Container Card
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: AppColors.primary.withOpacity(0.1),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 15,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            _reviewTile(
+                              context,
+                              icon: Icons.person_outline_rounded,
+                              title: 'Full Legal Name',
+                              value: 'Bonnie Bonhomie',
+                            ),
+                            const Divider(height: 20),
+                            _reviewTile(
+                              context,
+                              icon: Icons.phone_android_rounded,
+                              title: 'Phone Number',
+                              value: '+234 903 784 8903',
+                            ),
+                            const Divider(height: 20),
+                            _reviewTile(
+                              context,
+                              icon: Icons.cake_outlined,
+                              title: 'Date of Birth',
+                              value: '20 Oct 2002',
+                            ),
+                            const Divider(height: 20),
+                            _reviewTile(
+                              context,
+                              icon: Icons.location_on_outlined,
+                              title: 'Residential Address',
+                              value: '14 Kensington Square, London, UK',
+                            ),
+                          ],
+                        ),
+                      ).animate().fadeIn(delay: 100.ms).scaleXY(begin: 0.96, end: 1.0),
+                    ],
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                child: AppButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.verifyID);
+                  },
+                  label: 'Confirm & Continue',
+                ).animate().fadeIn(duration: 200.ms).scaleXY(begin: 0.98, end: 1.0),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget profileBox(
+  Widget _reviewTile(
     BuildContext context, {
+    required IconData icon,
     required String title,
     required String value,
   }) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: AppColors.primary.withOpacity(0.08),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(icon, color: AppColors.primary, size: 20),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 3,),
-                  Text(value, style: TextStyle(fontWeight: FontWeight.w300)),
-                ],
+              Text(
+                title,
+                style: CredTextStyle.bs4.copyWith(color: AppColors.grey),
               ),
-              SizedBox(
-                width: 80,
-                child: FilledButton(
-                  onPressed: () {},
-                  style: FilledButton.styleFrom(
-                    backgroundColor: Theme.of(context).cardColor,
-                    foregroundColor: AppColors.primary,
-                  ),
-                  child: Text('Edit'),
+              const SizedBox(height: 3),
+              Text(
+                value,
+                style: CredTextStyle.h5.copyWith(
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 3,),
-          Divider(indent: 8, endIndent: 8, color: Colors.grey[400],)
-        ],
-      ),
+        ),
+        InkWell(
+          borderRadius: BorderRadius.circular(8),
+          onTap: () => Navigator.pop(context),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              color: AppColors.lightGrey.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              'Edit',
+              style: CredTextStyle.bs4.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

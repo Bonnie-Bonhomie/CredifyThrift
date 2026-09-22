@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:credify/export_barrel.dart';
 import 'package:credify/view/savings/notifier/saving_notifier.dart';
 import 'package:credify/viewModel/app_model.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -12,278 +13,421 @@ class HomePageView extends StatefulWidget {
 
 class _HomePageViewState extends State<HomePageView> {
   final AppModel appModel = AppModel();
+  bool _hideBalance = false;
 
-  List<String> quickLinkText = ['Top up', 'Transfer', 'Activity', 'savings'];
+  final List<QuickActionItem> _quickActions = [
+    QuickActionItem('Top up', Icons.add_circle_outline_rounded, AppColors.primary),
+    QuickActionItem('Transfer', Icons.send_rounded, AppColors.complete),
+    QuickActionItem('Activity', Icons.receipt_long_rounded, AppColors.middle),
+    QuickActionItem('Savings', Icons.savings_outlined, AppColors.lightBlue),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final loading = context.watch<LoaderModel>().isLoading;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Top Hero Banner with Balance & Quick Actions
             Stack(
               clipBehavior: Clip.none,
               children: [
-                GradientContainer(
-                  height: 280,
-                  child: AnimatedCard(
-                    index: 1,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const SizedBox(height: 30),
-                        Row(
-                          children: [
-                            Icon(Icons.layers, color: Colors.white,),
-                            const SizedBox(width: 8,),
-                            Text(
-                              'Credify.',
-                              style: TextStyle(
-                                color: AppColors.lightBackground,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                              ),
-                            ),
-                            const Spacer(),
-                            SizedBox(
-                              width: 90,
-                              child: GradientButton(title: '234', onTap: (){},),
-                            ),
-                            const SizedBox(width: 20),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.notification_important_sharp,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
+                _buildHeroHeader(context),
+
+                // Floating Quick Actions Bar
+                Positioned(
+                  bottom: -28,
+                  left: 20,
+                  right: 20,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      color: Theme.of(context).cardColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.06),
+                          blurRadius: 20,
+                          offset: const Offset(0, 8),
                         ),
-                        const Spacer(),
-                        const Text(
-                          'Save-to-Spend',
-                          style: TextStyle(
-                            color: AppColors.onSurface,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Text(
-                              appModel.formatCurrency(123456),
-                              style: TextStyle(
-                                color: AppColors.onSurface,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(width: 30),
-                            customIcon(),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Updated 2 min ago',
-                          style: TextStyle(
-                            color: AppColors.onSurface,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                        const Spacer(),
                       ],
                     ),
-                  ),
-                ),
-                Positioned(
-                  bottom: -15,
-                  child: AnimatedCard(
-                    index: 2,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              blurRadius: 1,
-                              offset: Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 9,
-                        ),
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(quickLinkText.length, (index) {
-                            final title = quickLinkText[index];
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                buildService(title),
-                                index == quickLinkText.length - 1 ?const SizedBox.shrink():  const SizedBox(width: 20,),
-                                index == quickLinkText.length - 1 ? SizedBox.shrink(): SizedBox(
-                                  height: 65,
-                                  child: VerticalDivider(
-                                    endIndent: 20,
-                                    color: AppColors.lightBlue.withAlpha(100),
-                                  ),
-                                ),
-                              ],
-                            );
-                          }),
-                        ),
-                      ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(_quickActions.length, (index) {
+                        final action = _quickActions[index];
+                        return _buildQuickActionButton(action);
+                      }),
                     ),
-                  ),
+                  ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2, end: 0),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            AnimatedCard(
-              index: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    HeadingText(title: 'Upcoming'),
-                    Text(
-                      'Your next investment',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 5.0),
 
-                    SizedBox(
-                      height: 160,
-                      child: ListView.builder(
-                        itemCount: 3,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return SizedBox(
-                            width: 150,
-                            height: 100,
-                            child: Card(
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CircleAvatar(backgroundColor: AppColors.complete,child: Icon(Icons.account_balance_wallet_sharp),),
-                                    Text('Title', style: CredTextStyle.h3,),
-                                    Text('description', style: CredTextStyle.bs4,),
-                                    Text(appModel.formatCurrNoKobo(1345), style: CredTextStyle.h5,)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+            const SizedBox(height: 48),
+
+            // Upcoming Investments Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Upcoming', style: CredTextStyle.h3),
+                          const SizedBox(height: 2),
+                          Text(
+                            'Your next automated investments',
+                            style: CredTextStyle.bs4.copyWith(color: AppColors.grey),
+                          ),
+                        ],
                       ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'View all',
+                          style: CredTextStyle.bs4.copyWith(
+                            color: AppColors.primary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    height: 140,
+                    child: ListView.separated(
+                      itemCount: 3,
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (_, __) => const SizedBox(width: 14),
+                      itemBuilder: (context, index) {
+                        return _buildUpcomingCard(index);
+                      },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            // const SizedBox(height: 5),
-            AnimatedCard(
-              index: 4,
-              child: Consumer<SavingNotifier>(
-                builder: (key, s, child) {
-                  final save = s.savings;
-                  if(save.isEmpty){
-                    return SizedBox.shrink();
-                  }
-                  int len = save.length >= 3? 3: save.length;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric( horizontal: 15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        HeadingText(title: 'My Savings'),
-                        Text(
-                          'All available savings',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        const SizedBox(height: 5.0),
 
-                        SizedBox(
-                          height: 190,
-                          child: ListView.builder(
-                            itemCount: len,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              final saving = save[index];
-                              return AnimatedCard(
-                                  index: 5 + index,
-                                  child: SavingBox(appModel: appModel, saving: saving));
+            const SizedBox(height: 24),
+
+            // My Savings Section (From Provider)
+            Consumer<SavingNotifier>(
+              builder: (context, s, child) {
+                final save = s.savings;
+                if (save.isEmpty) {
+                  return const SizedBox.shrink();
+                }
+                int len = save.length >= 3 ? 3 : save.length;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('My Savings', style: CredTextStyle.h3),
+                              const SizedBox(height: 2),
+                              Text(
+                                'Active savings goals',
+                                style: CredTextStyle.bs4.copyWith(color: AppColors.grey),
+                              ),
+                            ],
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.availableSaving);
                             },
+                            child: Text(
+                              'See all',
+                              style: CredTextStyle.bs4.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        height: 190,
+                        child: ListView.separated(
+                          itemCount: len,
+                          scrollDirection: Axis.horizontal,
+                          separatorBuilder: (_, __) => const SizedBox(width: 14),
+                          itemBuilder: (context, index) {
+                            final saving = save[index];
+                            return SavingBox(appModel: appModel, saving: saving);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+
+            const SizedBox(height: 16),
+
+            // Recent Transactions / This Month Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Recent Activity', style: CredTextStyle.h3),
+                          const SizedBox(height: 2),
+                          Text(
+                            'Your latest transactions',
+                            style: CredTextStyle.bs4.copyWith(color: AppColors.grey),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(24),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 15,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        _buildTransactionRow(
+                          icon: Icons.coffee_rounded,
+                          iconColor: AppColors.middle,
+                          title: 'Artisan Coffee Roasters',
+                          category: 'Food & Dining',
+                          amount: '-£4.50',
+                          date: 'Today, 2:40 PM',
+                          isNegative: true,
+                        ),
+                        const Divider(height: 20),
+                        _buildTransactionRow(
+                          icon: Icons.arrow_downward_rounded,
+                          iconColor: AppColors.complete,
+                          title: 'Salary Deposit',
+                          category: 'Income • Tech Corp',
+                          amount: '+£3,450.00',
+                          date: 'Yesterday',
+                          isNegative: false,
+                        ),
+                        const Divider(height: 20),
+                        _buildTransactionRow(
+                          icon: Icons.shopping_bag_outlined,
+                          iconColor: AppColors.primary,
+                          title: 'Apple Store UK',
+                          category: 'Gadgets & Tech',
+                          amount: '-£129.00',
+                          date: '20 Sep',
+                          isNegative: true,
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 42,
+                          child: TextButton(
+                            onPressed: () {},
+                            style: TextButton.styleFrom(
+                              foregroundColor: AppColors.primary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'View All Transactions',
+                                  style: CredTextStyle.bs3.copyWith(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                const Icon(
+                                  Icons.chevron_right_rounded,
+                                  size: 18,
+                                  color: AppColors.primary,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  );
-                }
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 15),
-            Divider(thickness: 8, color: Colors.grey[300],),
-            AnimatedCard(
-              index: 20,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    HeadingText(title: 'This Month'),
-                    Text(
-                      'You have spent £3.90 more than last month',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: 10),
-                    Card(
-                      clipBehavior: Clip.antiAlias,
-                      child: Column(
-                        children: [
-                          TransactionLists(appModel: appModel,),
-                          // ElevatedButton(
-                          //   onPressed: () {},
-                          //   style: ElevatedButton.styleFrom(
-                          //     elevation: 0,
-                          //     backgroundColor: AppColors.progressColor,
-                          //     padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
-                          //     textStyle: Theme.of(context).textTheme.bodyLarge,
-                          //     foregroundColor: AppColors.onSurface
-                          //   ),
-                          //   child: Text('See all transactions'),
-                          // ),
-                          const SizedBox(height: 10,),
-                          SizedBox(
-                            width: 250,
-                            // height: 30,
-                            child: Animate(
-                              child: GradientButton(
-                                height: 40,
-                                title: 'See all transactions', onTap: (){},needIcon: false,),
-                            ).flip(),
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 10,)
-                  ],
+
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeroHeader(BuildContext context) {
+    return Container(
+      height: 310,
+      padding: const EdgeInsets.fromLTRB(20, 50, 20, 40),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            AppColors.primary,
+            AppColors.darkGradient,
+            AppColors.gradientBtn,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Top Brand & Profile Row
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.12),
+                  shape: BoxShape.circle,
                 ),
+                child: const Icon(
+                  Icons.layers_rounded,
+                  color: Colors.white,
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Credify.',
+                style: CredTextStyle.h2.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const Spacer(),
+              // Notification button
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.notifications_none_rounded,
+                  color: Colors.white,
+                  size: 24,
+                ),
+              ),
+            ],
+          ),
+
+          const Spacer(),
+
+          // Balance Header
+          Row(
+            children: [
+              Text(
+                'Total Available Balance',
+                style: CredTextStyle.bs4.copyWith(
+                  color: Colors.white.withOpacity(0.8),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () {
+                  setState(() => _hideBalance = !_hideBalance);
+                },
+                child: Icon(
+                  _hideBalance
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  size: 16,
+                  color: Colors.white.withOpacity(0.8),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 6),
+
+          // Big Currency Amount
+          Text(
+            _hideBalance ? '••••••••' : appModel.formatCurrency(128450),
+            style: CredTextStyle.h1.copyWith(
+              fontSize: 34,
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+            ),
+          ).animate().fadeIn(duration: 400.ms).slideX(begin: -0.05, end: 0),
+
+          const SizedBox(height: 4),
+
+          Text(
+            'Updated just now • Tier 1 Verified',
+            style: CredTextStyle.bs4.copyWith(
+              color: Colors.white.withOpacity(0.65),
+              fontSize: 11,
+            ),
+          ),
+
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickActionButton(QuickActionItem item) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: () {},
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        child: Column(
+          children: [
+            Container(
+              height: 48,
+              width: 48,
+              decoration: BoxDecoration(
+                color: item.color.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(
+                item.icon,
+                size: 22,
+                color: item.color,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              item.title,
+              style: CredTextStyle.bs4.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
               ),
             ),
           ],
@@ -292,104 +436,157 @@ class _HomePageViewState extends State<HomePageView> {
     );
   }
 
-  Widget buildService(String name) {
-    return Column(
+  Widget _buildUpcomingCard(int index) {
+    final titles = ['S&P 500 Index', 'Real Estate Vault', 'Crypto Staking'];
+    final yields = ['+11.4% p.a.', '+9.2% p.a.', '+7.8% p.a.'];
+    final amounts = ['£250/mo', '£150/mo', '£100/mo'];
+    final icons = [
+      Icons.trending_up_rounded,
+      Icons.domain_rounded,
+      Icons.currency_bitcoin_rounded,
+    ];
+
+    return Container(
+      width: 170,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppColors.primary.withOpacity(0.08),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(icons[index], color: AppColors.primary, size: 18),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppColors.complete.withOpacity(0.12),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  yields[index],
+                  style: CredTextStyle.bs4.copyWith(
+                    color: AppColors.complete,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 10,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                titles[index],
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: CredTextStyle.h5.copyWith(fontSize: 14),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                amounts[index],
+                style: CredTextStyle.bs4.copyWith(color: AppColors.grey),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ).animate(delay: (index * 80).ms).fadeIn().slideX(begin: 0.1, end: 0);
+  }
+
+  Widget _buildTransactionRow({
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String category,
+    required String amount,
+    required String date,
+    required bool isNegative,
+  }) {
+    return Row(
       children: [
         Container(
-          height: 45,
-          width: 45,
-          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-          child: const Icon(
-            Icons.now_widgets_rounded,
-            size: 30,
-            color: Colors.white,
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: iconColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: Icon(icon, color: iconColor, size: 22),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: CredTextStyle.h5.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                category,
+                style: CredTextStyle.bs4.copyWith(color: AppColors.grey),
+              ),
+            ],
           ),
         ),
-        const SizedBox(height: 3),
-        Text(
-          name,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              amount,
+              style: CredTextStyle.h5.copyWith(
+                fontWeight: FontWeight.w700,
+                color: isNegative ? AppColors.error : AppColors.complete,
+              ),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              date,
+              style: CredTextStyle.bs4.copyWith(
+                color: AppColors.grey,
+                fontSize: 11,
+              ),
+            ),
+          ],
         ),
       ],
     );
   }
 }
 
-class TransactionLists extends StatelessWidget {
-  final AppModel appModel;
-  const TransactionLists({super.key, required this.appModel});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(
-        3,
-        (index) => Column(
-          children: [
-            ListTile(
-              title: Text(
-                'data',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-              subtitle: Text(
-                'textsheh',
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              leading: CircleAvatar(child: Icon(Icons.real_estate_agent)),
-              trailing: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    '-${appModel.formatCurrency(1234)}',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                  ),
-                  Text('Nov 23', style: TextStyle(fontWeight: FontWeight.w200)),
-                ],
-              ),
-            ),
-
-            Divider(
-              color: AppColors.lightBlue.withAlpha(100),
-              indent: 30,
-              endIndent: 30,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HeadingText extends StatelessWidget {
+class QuickActionItem {
   final String title;
+  final IconData icon;
+  final Color color;
 
-  const HeadingText({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-    );
-  }
-}
-
-Widget customIcon() {
-  return Stack(
-    clipBehavior: Clip.none,
-    alignment: Alignment.center,
-    children: [
-      const Icon(Icons.circle_outlined, color: AppColors.onSurface),
-      Padding(
-        padding: const EdgeInsets.only(bottom: 3),
-        child: const Text(
-          '¡',
-          style: TextStyle(
-            fontStyle: FontStyle.italic,
-            color: AppColors.onSurface,
-          ),
-        ),
-      ),
-    ],
-  );
+  QuickActionItem(this.title, this.icon, this.color);
 }

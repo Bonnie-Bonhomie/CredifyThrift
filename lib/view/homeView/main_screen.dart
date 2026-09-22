@@ -1,6 +1,8 @@
-import 'package:credify/core/constants/app_color.dart';
-import 'package:credify/view/view_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:credify/core/constants/app_color.dart';
+import 'package:credify/core/utils/Helpers/cred_textstyle.dart';
+import 'package:credify/view/view_export.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,46 +24,45 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[currentIndex],
-      floatingActionButton: primaryFab(),
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
-      bottomNavigationBar: BottomAppBar(
-        padding: const EdgeInsets.only(top: 5, bottom: 3),
-        height: 55,
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 0,
-        color: Theme.of(context).cardColor,
-        // color: AppColors.darkGrey,
-        // elevation: 20,
-        child: SizedBox(
-          height: 50,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _navItem(Icons.home_filled, 'Home', 0),
-              _navItem(Icons.wifi_protected_setup_outlined, 'Activity', 1),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const SizedBox(width: 30),
-                  const SizedBox(height: 20),
-                  Text(
-                    'Savings',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: currentIndex == 2
-                          ? AppColors.primary
-                          : Theme.of(context).textTheme.bodySmall!.color,
-                    ),
-                  ),
-                ],
-              ),
-              _navItem(Icons.scale_sharp, 'Investment', 3),
-              _navItem(Icons.person_3, 'Profile', 4),
-            ],
+    return Scaffold(
+      body: IndexedStack(
+        index: currentIndex,
+        children: _screens,
+      ),
+      floatingActionButton: _buildPrimaryFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 20,
+              offset: const Offset(0, -4),
+            ),
+          ],
+        ),
+        child: SafeArea(
+          child: BottomAppBar(
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            height: 64,
+            shape: const CircularNotchedRectangle(),
+            notchMargin: 8,
+            color: Theme.of(context).cardColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _navItem(Icons.home_rounded, 'Home', 0),
+                _navItem(Icons.swap_horiz_rounded, 'Activity', 1),
+                // Center spacer for FAB
+                const SizedBox(width: 48),
+                _navItem(Icons.trending_up_rounded, 'Invest', 3),
+                _navItem(Icons.person_rounded, 'Profile', 4),
+              ],
+            ),
           ),
         ),
       ),
@@ -72,40 +73,45 @@ class _MainScreenState extends State<MainScreen> {
     final bool selected = currentIndex == index;
 
     return InkWell(
+      borderRadius: BorderRadius.circular(16),
       onTap: () {
         setState(() {
           currentIndex = index;
         });
       },
-      child: SizedBox(
-        width: 65,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 19, vertical: 4),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeOutCubic,
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(12),
                 color: selected
-                    ? AppColors.lightBlue.withAlpha(50)
+                    ? AppColors.primary.withOpacity(0.12)
                     : Colors.transparent,
               ),
               child: Icon(
                 icon,
-                size: 20,
+                size: 22,
                 color: selected
                     ? AppColors.primary
-                    : Theme.of(context).colorScheme.onSurface,
+                    : AppColors.grey,
               ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 2),
             Text(
               title,
-              style: TextStyle(
-                fontSize: 10,
+              style: CredTextStyle.bs4.copyWith(
+                fontSize: 11,
+                fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
                 color: selected
                     ? AppColors.primary
-                    : Theme.of(context).colorScheme.onSurface,
+                    : AppColors.grey,
               ),
             ),
           ],
@@ -114,9 +120,9 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  ///Fab
+  Widget _buildPrimaryFab() {
+    final isSelected = currentIndex == 2;
 
-  Widget primaryFab() {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -124,19 +130,38 @@ class _MainScreenState extends State<MainScreen> {
         });
       },
       child: Container(
-        width: 55,
-        height: 55,
+        width: 58,
+        height: 58,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Theme.of(context).cardColor, width: 6),
           gradient: LinearGradient(
-            colors: [AppColors.primary, AppColors.gradientBtn],
+            colors: [
+              AppColors.primary,
+              AppColors.gradientBtn,
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primary.withOpacity(0.4),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+          border: Border.all(
+            color: Theme.of(context).cardColor,
+            width: 4,
+          ),
         ),
-        child: const Icon(Icons.savings_rounded, color: Colors.white, size: 24),
-      ),
+        child: Center(
+          child: const Icon(
+            Icons.savings_rounded,
+            color: Colors.white,
+            size: 26,
+          ),
+        ),
+      ).animate(target: isSelected ? 1 : 0).scaleXY(begin: 1.0, end: 1.06, duration: 200.ms),
     );
   }
 }

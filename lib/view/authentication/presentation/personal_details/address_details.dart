@@ -1,18 +1,15 @@
-
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:credify/export_barrel.dart';
-
 
 class AddressDetailsView extends StatelessWidget {
   AddressDetailsView({super.key});
 
-  final TextEditingController addressCtrl = TextEditingController();
   final streetCtrl = TextEditingController();
   final apartment = TextEditingController();
   final zipCodeCtrl = TextEditingController();
   final cityCtrl = TextEditingController();
   final stateCtrl = TextEditingController();
 
-  final addressKey = GlobalKey<FormFieldState>();
   final streetKey = GlobalKey<FormFieldState>();
   final aptKey = GlobalKey<FormFieldState>();
   final zipKey = GlobalKey<FormFieldState>();
@@ -21,122 +18,162 @@ class AddressDetailsView extends StatelessWidget {
 
   final formKey = GlobalKey<FormState>();
 
-  // void logi
-
   @override
   Widget build(BuildContext context) {
-    final watchDet = context.watch<DetailsViewModel>();
     final readDet = context.read<DetailsViewModel>();
     final loading = context.watch<LoaderModel>().isLoading;
+
     return LoaderWrapper(
       loading: loading,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: ()=> Navigator.pop(context), icon: Icon(Icons.keyboard_arrow_left)),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
+          ),
           backgroundColor: Colors.transparent,
+          elevation: 0,
           actions: [
             Container(
-              padding: const EdgeInsets.all(5.0),
+              margin: const EdgeInsets.only(right: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).cardTheme.color,
+                borderRadius: BorderRadius.circular(20),
+                color: AppColors.primary.withOpacity(0.08),
               ),
-              child: Text('step 2 of 3'),
-            ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(AppSize.padding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Home Address', style: Theme.of(context).textTheme.headlineLarge,),
-                    const SizedBox(height: 10,),
-                    Text('Let us know where we should send your Mastercard or Debit Card'),
-                    const SizedBox(height: 20,),
-                    ReuseContainer(
-                      child:
-                      FormWidget(
-                        label: 'Street Address',
-                        fieldKey: streetKey,
-                        validator: (val) => Validator.validateText(val, 'street Address'),
-                        valController: streetCtrl,
-                        onChanged: (val) {
-                          streetKey.currentState!.validate();
-                          readDet.firstFill(val);
-                        },
-                      ),
-                    ),
-                    ReuseContainer(
-                      child:
-                      FormWidget(
-                        label: 'Apartment/ Suite number',
-                        fieldKey: aptKey,
-                        validator: (value) =>
-                            Validator.validateText(value, 'Apartment'),
-                        valController: apartment,
-                        onChanged: (val) {
-                          aptKey.currentState!.validate();
-                          readDet.lastNFill(val);
-                        },
-                      ),
-                    ), ReuseContainer(
-                      child:
-                      FormWidget(
-                        label: 'City',
-                        fieldKey: cityKey,
-                        validator: (value) =>
-                            Validator.validateText(value, 'city'),
-                        valController: cityCtrl,
-                        onChanged: (val) {
-                          cityKey.currentState!.validate();
-                          readDet.lastNFill(val);
-                        },
-                      ),
-                    ), ReuseContainer(
-                      child:
-                      FormWidget(
-                        label: 'State',
-                        fieldKey: stateKey,
-                        validator: (value) =>
-                            Validator.validateText(value, 'State'),
-                        valController: stateCtrl,
-                        onChanged: (val) {
-                          stateKey.currentState!.validate();
-                          readDet.lastNFill(val);
-                        },
-                      ),
-                    ),
-                    ReuseContainer(
-                      child:
-                      FormWidget(
-                        label: 'Zip Code',
-                        fieldKey: zipKey,
-                        validator: (value) =>
-                            Validator.validateText(value, 'zip code'),
-                        valController: zipCodeCtrl,
-                        onChanged: (val) {
-                          zipKey.currentState!.validate();
-                          readDet.lastNFill(val);
-                        },
-                      ),
-                    ),
-
-                  ],
+              child: Text(
+                'Step 2 of 3',
+                style: CredTextStyle.bs4.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
-            Padding(padding: const EdgeInsets.all(15), child:
-            // watchDet.addressFill?
-            AppButton(onPressed: (){
-
-              Navigator.pushNamed(context, Routes.verifyDet);
-            }, label: 'Continue'))
-            // : DisabledButton(label: 'Continue'),)
           ],
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Home Address',
+                          style: CredTextStyle.h1.copyWith(
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ).animate().fadeIn(duration: 350.ms).slideY(begin: 0.15, end: 0),
+
+                        const SizedBox(height: 8),
+
+                        Text(
+                          'Provide your residential address for card dispatch and regulatory checks.',
+                          style: CredTextStyle.bs3.copyWith(
+                            color: AppColors.grey,
+                            height: 1.4,
+                          ),
+                        ).animate().fadeIn(delay: 50.ms, duration: 350.ms).slideY(begin: 0.15, end: 0),
+
+                        const SizedBox(height: 20),
+
+                        ReuseContainer(
+                          child: FormWidget(
+                            label: 'Street Address',
+                            fieldKey: streetKey,
+                            validator: (val) =>
+                                Validator.validateText(val, 'street address'),
+                            valController: streetCtrl,
+                            onChanged: (val) {
+                              streetKey.currentState?.validate();
+                              readDet.firstFill(val);
+                            },
+                          ),
+                        ).animate().fadeIn(delay: 100.ms).slideY(begin: 0.1, end: 0),
+
+                        ReuseContainer(
+                          child: FormWidget(
+                            label: 'Apartment / Suite (Optional)',
+                            fieldKey: aptKey,
+                            validator: (value) => null,
+                            valController: apartment,
+                            onChanged: (val) {
+                              aptKey.currentState?.validate();
+                              readDet.lastNFill(val);
+                            },
+                          ),
+                        ).animate().fadeIn(delay: 150.ms).slideY(begin: 0.1, end: 0),
+
+                        Row(
+                          children: [
+                            Expanded(
+                              child: ReuseContainer(
+                                child: FormWidget(
+                                  label: 'City',
+                                  fieldKey: cityKey,
+                                  validator: (value) =>
+                                      Validator.validateText(value, 'city'),
+                                  valController: cityCtrl,
+                                  onChanged: (val) {
+                                    cityKey.currentState?.validate();
+                                    readDet.lastNFill(val);
+                                  },
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: ReuseContainer(
+                                child: FormWidget(
+                                  label: 'State',
+                                  fieldKey: stateKey,
+                                  validator: (value) =>
+                                      Validator.validateText(value, 'state'),
+                                  valController: stateCtrl,
+                                  onChanged: (val) {
+                                    stateKey.currentState?.validate();
+                                    readDet.lastNFill(val);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.1, end: 0),
+
+                        ReuseContainer(
+                          child: FormWidget(
+                            label: 'Zip / Postal Code',
+                            fieldKey: zipKey,
+                            validator: (value) =>
+                                Validator.validateText(value, 'zip code'),
+                            valController: zipCodeCtrl,
+                            onChanged: (val) {
+                              zipKey.currentState?.validate();
+                              readDet.lastNFill(val);
+                            },
+                          ),
+                        ).animate().fadeIn(delay: 250.ms).slideY(begin: 0.1, end: 0),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                child: AppButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.verifyDet);
+                  },
+                  label: 'Continue',
+                ).animate().fadeIn(duration: 200.ms).scaleXY(begin: 0.98, end: 1.0),
+              ),
+            ],
+          ),
         ),
       ),
     );
