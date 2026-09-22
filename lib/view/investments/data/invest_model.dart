@@ -42,20 +42,20 @@ class InvestModel {
   }
 }
 
-class InvestModeModel {
-  final String title;
-  final String? description;
-  double amount;
-  Frequency frequency;
-  int duration;
-
-  InvestModeModel({
-    required this.title,
-    required this.frequency,
-    required this.amount,
-    required this.duration,
-    this.description,
-  });
-
-  double get average => amount / duration;
-}
+// class InvestModeModel {
+//   final String title;
+//   final String? description;
+//   double amount;
+//   Frequency frequency;
+//   int duration;
+//
+//   InvestModeModel({
+//     required this.title,
+//     required this.frequency,
+//     required this.amount,
+//     required this.duration,
+//     this.description,
+//   });
+//
+//   double get average => amount / duration;
+// }

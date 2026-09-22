@@ -43,7 +43,7 @@ class AppRoutes {
         return slidePage(CreateNewSaving(saveMode: saveMode,));
 
       case Routes.createInvest:
-        final investMode = settings.arguments as InvestModeModel;
+        final investMode = settings.arguments as SaveModeModel;
         return slidePage(CreateInvestmentScreen(investMode: investMode));
 
       case Routes.availableInvest:

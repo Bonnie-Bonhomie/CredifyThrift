@@ -14,10 +14,10 @@ enum Frequency{
 }
 
 enum SavingState{
-  early(AppColors.early, Icons.local_fire_department, '', 'Early'),
-  middle(AppColors.middle, Icons.local_fire_department, '', 'Middle'),
-  complete(AppColors.complete, Icons.local_fire_department, '', 'Complete'),
-  error(AppColors.error, Icons.local_fire_department, '', 'Error');
+  early(AppColors.early, Icons.local_fire_department, 'Ohhh, you still have to keep up', 'Early'),
+  middle(AppColors.middle, Icons.moped_sharp, 'Great, Keep moving', 'Middle'),
+  complete(AppColors.complete, Icons.whatshot, 'Whooo, you are getting there', 'Complete'),
+  error(AppColors.error, Icons.sensors_off, 'Oops, some error occur', 'Error');
 
   final Color color;
   final IconData icon;

@@ -57,13 +57,13 @@ class _SavingPageState extends State<SavingPage> {
                           style: TextStyle(
                             color: AppColors.textSecondary,
                             fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         const SizedBox(height: 10),
                         Text(
                           appModel.formatCurrency(12756),
-                          style: CredTextStyle.h2.copyWith(
+                          style: CredTextStyle.h1.copyWith(
                             color: AppColors.onSurface,
                           ),
                         ),
@@ -75,7 +75,7 @@ class _SavingPageState extends State<SavingPage> {
                           ),
                         ),
 
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 25),
                         SizedBox(width: 200,
                             // height: 30,
                             child: GradientButton(

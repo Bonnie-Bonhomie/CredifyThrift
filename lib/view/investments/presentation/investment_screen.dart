@@ -25,53 +25,56 @@ class _InvestPageViewState extends State<InvestPageView> {
               children: [
                 GradientContainer(
                   height: 340,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Icon(Icons.layers, color: Colors.white),
-                          Text(
-                            'My Investment',
-                            style: TextStyle(
-                              color: AppColors.lightBackground,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                  child: AnimatedCard(
+                    index: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        // const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(Icons.layers, color: Colors.white),
+                            Text(
+                              'My Investment',
+                              style: TextStyle(
+                                color: AppColors.lightBackground,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
 
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.more_horiz, color: Colors.white),
-                          ),
-                        ],
-                      ),
-
-                      Text(
-                        '${appModel.formatCurrency(12756)} left',
-                        style: CredTextStyle.h1.copyWith(
-                          color: AppColors.onSurface,
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.more_horiz, color: Colors.white),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text(
-                        'out of ${appModel.formatCurrNoKobo(30000)} you plan to invest',
-                        style: CredTextStyle.bs4.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
-                      ),
 
-                      SizedBox(width: 230,
-                          // height: 30,
-                          child: GradientButton(
-                            onTap: (){
-                              Navigator.pushNamed(context, Routes.availableInvest);
-                            },
-                            title: 'create a new investment', iconSize: 20,)),
-                      const SizedBox(height: 50,)
-                    ],
+                        Text(
+                          '${appModel.formatCurrency(12756)} left',
+                          style: CredTextStyle.h1.copyWith(
+                            color: AppColors.onSurface,
+                          ),
+                        ),
+                        Text(
+                          'out of ${appModel.formatCurrNoKobo(30000)} you plan to invest',
+                          style: CredTextStyle.bs4.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+
+                        SizedBox(width: 230,
+                            // height: 30,
+                            child: GradientButton(
+                              onTap: (){
+                                Navigator.pushNamed(context, Routes.availableInvest);
+                              },
+                              title: 'create a new investment', iconSize: 20,)),
+                        const SizedBox(height: 50,)
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(
@@ -108,15 +111,20 @@ class _InvestPageViewState extends State<InvestPageView> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: List.generate(save.length, (index) {
                                 final s = save[index];
-                                return SavingCard(appModel: appModel, saving: s,);
+                                return AnimatedCard(
+                                    index: 3 + index,
+                                    child: SavingCard(appModel: appModel, saving: s,));
                               }),
                             );
                           })
                   ),
                 ),
+                // Positioned(
+                //     // bottom: 100,
+                //     child: Container(color: Colors.yellowAccent, height: 250,))
               ],
             ),
-            const SizedBox(height: 950),
+            const SizedBox(height: 1000),
           ],
         ),
       ),

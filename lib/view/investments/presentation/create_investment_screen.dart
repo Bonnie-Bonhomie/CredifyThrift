@@ -1,10 +1,10 @@
 
 import 'package:credify/export_barrel.dart';
-import 'package:credify/view/investments/data/invest_model.dart';
+
 
 
 class CreateInvestmentScreen extends StatefulWidget {
-  final InvestModeModel investMode;
+  final SaveModeModel investMode;
 
   const CreateInvestmentScreen({super.key, required this.investMode});
 

@@ -132,7 +132,9 @@ class SavingCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 8),
+              const Divider(endIndent: 20, indent: 20,),
+              const SizedBox(height: 8,),
               Row(
                 children: [
                   Column(
@@ -173,6 +175,13 @@ class SavingCard extends StatelessWidget {
                   );
                 },
               ),
+              const SizedBox(height: 3,),
+              Row(
+                children: [
+                  Icon(state.icon, color: state.color,) , const SizedBox(width: 7,),
+                  Text(state.describe, style: CredTextStyle.bs.copyWith(color: state.color),)
+                ],
+              )
             ],
           ),
         ),
