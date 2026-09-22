@@ -2,6 +2,7 @@ class Routes{
 
   static const String initRoutes = '/';
   static const String signUp = '/signUp';
+  static const String onboard = '/onboard';
 
   static const String home = '/home';
   static const String verify = '/verify';

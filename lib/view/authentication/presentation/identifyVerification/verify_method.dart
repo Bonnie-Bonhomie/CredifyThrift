@@ -1,15 +1,9 @@
 import 'dart:io';
-import 'package:camera/camera.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:credify/config/AppRoutes/routes.dart';
-import 'package:credify/core/constants/app_color.dart';
-import 'package:credify/core/utils/Helpers/cred_textstyle.dart';
-import 'package:credify/core/widgets/app_button.dart';
-import 'package:credify/core/widgets/dialogs/app_custom_dialog.dart';
-import 'package:credify/view/authentication/presentation/identifyVerification/camera_page.dart';
-import 'package:flutter/material.dart';
+
+import 'package:credify/export_barrel.dart';
 
 class VerifyMethod extends StatefulWidget {
   const VerifyMethod({super.key});
