@@ -44,7 +44,7 @@ class SavingBox extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               Text(saving.title, style: CredTextStyle.h6),
-              const SizedBox(height: 15),
+              // const SizedBox(height: 10),
               Text('Paid', style: CredTextStyle.bs4),
               const SizedBox(height: 5),
               Text.rich(
@@ -82,7 +82,7 @@ class SavingBox extends StatelessWidget {
                   const SizedBox(width: 4),
                   Text(
                     savingState.describe,
-                    style: TextStyle(color: savingState.color),
+                    style: CredTextStyle.bs4.copyWith(color: savingState.color),
                   ),
                 ],
               ),
@@ -179,7 +179,7 @@ class SavingCard extends StatelessWidget {
               Row(
                 children: [
                   Icon(state.icon, color: state.color,) , const SizedBox(width: 7,),
-                  Text(state.describe, style: CredTextStyle.bs.copyWith(color: state.color),)
+                  Text(state.describe, style: CredTextStyle.bs4.copyWith(color: state.color),)
                 ],
               )
             ],
