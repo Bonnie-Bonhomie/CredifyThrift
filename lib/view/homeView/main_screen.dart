@@ -1,3 +1,4 @@
+import 'package:credify/export_barrel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:credify/core/constants/app_color.dart';
