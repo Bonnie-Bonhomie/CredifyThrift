@@ -210,8 +210,7 @@ class CheckQuality extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Container(
-                height: 60,
-                width: 60,
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [AppColors.primary, AppColors.gradientBtn],
@@ -220,15 +219,16 @@ class CheckQuality extends StatelessWidget {
                   ),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.lens),
+                child: const Icon(Icons.circle_outlined, size: 30,),
               ),
               const Text('Check Quality', textAlign: TextAlign.center),
+              const SizedBox(height: 5,),
               SizedBox(
                 width: 250,
                 child: const Text(
                   'Please make sure your card details or passport is clear to read with no blur or glare',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w200),
+                  style: TextStyle(fontWeight: FontWeight.w200, color: AppColors.textSecondary),
                 ),
               ),
               const SizedBox(height: 20),
