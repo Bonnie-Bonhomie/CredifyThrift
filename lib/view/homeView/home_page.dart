@@ -159,7 +159,7 @@ class _HomePageViewState extends State<HomePageView> {
                       ),
                       const SizedBox(height: 12),
                       SizedBox(
-                        height: 190,
+                        height: 200,
                         child: ListView.separated(
                           itemCount: len,
                           scrollDirection: Axis.horizontal,
