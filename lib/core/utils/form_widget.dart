@@ -58,6 +58,7 @@ class FormWidget extends StatelessWidget {
         controller: valController,
         maxLength: maxLength,
         style: TextStyle(fontSize: textSize),
+        obscuringCharacter: '⚫',
         cursorHeight: cursorHeight,
         // minLines: min,
         // maxLines: max,

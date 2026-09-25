@@ -176,6 +176,7 @@ class InvestPageView extends StatelessWidget {
               const SizedBox(height: 8),
 
               _buildFundCard(
+                context,
                 title: 'Clean Energy & Climate Innovation',
                 category: 'ESG Equity • Moderate Risk',
                 apy: '+16.2% 1Y',
@@ -184,6 +185,7 @@ class InvestPageView extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               _buildFundCard(
+                context,
                 title: 'Global Tech Titans ETF',
                 category: 'Index Tracker • High Growth',
                 apy: '+22.4% 1Y',
@@ -192,6 +194,7 @@ class InvestPageView extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               _buildFundCard(
+                context,
                 title: 'High-Yield Property Trust',
                 category: 'Commercial Real Estate • Balanced',
                 apy: '+8.9% 1Y',
@@ -227,7 +230,7 @@ class InvestPageView extends StatelessWidget {
     );
   }
 
-  Widget _buildFundCard({
+  Widget _buildFundCard(BuildContext context,{
     required String title,
     required String category,
     required String apy,
@@ -237,7 +240,7 @@ class InvestPageView extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.cardLight,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(color: AppColors.primary.withOpacity(0.08)),
       ),

@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Credify',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: BAppTheme.light,
       darkTheme: BAppTheme.dark,
       initialRoute: Routes.initRoutes,

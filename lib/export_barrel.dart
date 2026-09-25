@@ -39,7 +39,7 @@ export 'dependencies/auth_dependency.dart';
 export 'dependencies/core_dependencies.dart';
 export 'dependencies/dependencie_injection.dart';
 
-export 'view/investments/presentation/investment_screen.dart';
+export 'view/investments/presentation/investment.dart';
 export 'view/homeView/home_page.dart';
 export 'view/homeView/main_screen.dart';
 export 'view/homeView/profile_page.dart';
@@ -73,7 +73,7 @@ export 'package:credify/view/savings/presentation/create_new_saving.dart';
 
 export 'package:credify/view/investments/data/invest_model.dart';
 export 'package:credify/view/investments/presentation/available_investment.dart';
-export 'package:credify/view/investments/presentation/create_investment_screen.dart';
+
 
 
 

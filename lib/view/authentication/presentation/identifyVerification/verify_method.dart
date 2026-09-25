@@ -255,7 +255,7 @@ class _VerifyMethodState extends State<VerifyMethod> {
                               onPressed: () {
                                 Navigator.pushReplacementNamed(
                                   context,
-                                  Routes.mainS,
+                                  Routes.dashboard,
                                 );
                               },
                             );

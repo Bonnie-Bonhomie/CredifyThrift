@@ -1,4 +1,5 @@
 import 'package:credify/export_barrel.dart';
+import 'package:credify/view/authentication/presentation/auth_views/login_screen.dart';
 import 'package:credify/view/onboarding/onboard_screen.dart';
 
 class AppRoutes {
@@ -19,6 +20,9 @@ class AppRoutes {
 
       case Routes.signUp:
         return slidePage(const SignUpView());
+
+      case Routes.login:
+        return slidePage( LoginScreen());
 
       case Routes.home:
         return slidePage(const HomePageView());
@@ -41,7 +45,7 @@ class AppRoutes {
       case Routes.camera:
         return slidePage(const CameraPage());
 
-      case Routes.mainS:
+      case Routes.dashboard:
         return slidePage(const MainScreen());
 
       case Routes.availableSaving:
@@ -51,9 +55,6 @@ class AppRoutes {
         final saveMode = settings.arguments as SaveModeModel;
         return slidePage(CreateNewSaving(saveMode: saveMode));
 
-      case Routes.createInvest:
-        final investMode = settings.arguments as SaveModeModel;
-        return slidePage(CreateInvestmentScreen(investMode: investMode));
 
       case Routes.availableInvest:
         return slidePage(AvailableInvest());
