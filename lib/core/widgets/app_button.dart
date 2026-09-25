@@ -98,7 +98,7 @@ class DisabledButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: TextStyle(color: Colors.grey.withOpacity(0.8)),
+          style: TextStyle(color: Colors.grey),
         ),
       ),
     );
