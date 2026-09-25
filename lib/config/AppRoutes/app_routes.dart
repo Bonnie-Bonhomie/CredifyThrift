@@ -1,4 +1,5 @@
 import 'package:credify/export_barrel.dart';
+import 'package:credify/view/authentication/presentation/auth_views/login_screen.dart';
 import 'package:credify/view/onboarding/onboard_screen.dart';
 
 class AppRoutes {
@@ -19,6 +20,9 @@ class AppRoutes {
 
       case Routes.signUp:
         return slidePage(const SignUpView());
+
+      case Routes.login:
+        return slidePage( LoginScreen());
 
       case Routes.home:
         return slidePage(const HomePageView());
