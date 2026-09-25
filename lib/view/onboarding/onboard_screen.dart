@@ -291,7 +291,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
                         style: CredTextStyle.bs3.copyWith(color: AppColors.grey),
                       ),
                       TextButton(
-                        onPressed: _finishOnboarding,
+                        onPressed: (){Navigator.pushReplacementNamed(context, Routes.login);},
                         child: Text(
                           'Sign In',
                           style: CredTextStyle.bs3.copyWith(
