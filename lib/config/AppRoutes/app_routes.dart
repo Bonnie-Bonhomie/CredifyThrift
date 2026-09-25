@@ -45,7 +45,7 @@ class AppRoutes {
       case Routes.camera:
         return slidePage(const CameraPage());
 
-      case Routes.mainS:
+      case Routes.dashboard:
         return slidePage(const MainScreen());
 
       case Routes.availableSaving:

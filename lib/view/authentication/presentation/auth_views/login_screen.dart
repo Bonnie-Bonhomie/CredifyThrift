@@ -1,4 +1,3 @@
-import 'package:credify/core/utils/validator/validator.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:credify/config/AppRoutes/routes.dart';
 import 'package:credify/core/constants/app_color.dart';
@@ -88,15 +87,10 @@ class LoginScreen extends StatelessWidget {
                       RichText(
                             text: TextSpan(
                               text: 'Enter your password to continue with ',
-                              children: [
-                                TextSpan(
-                                  text: '0806-354-2389',
-                                  style: CredTextStyle.bs3.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    height: 1.4,
-                                  ),
-                                ),
-                              ],
+                              children: [TextSpan(text: '0806-354-2389', style: CredTextStyle.bs3.copyWith(
+                                fontWeight: FontWeight.bold,
+                                height: 1.4,
+                              ),)],
                               style: CredTextStyle.bs3.copyWith(
                                 color: AppColors.grey,
                                 height: 1.4,
@@ -130,12 +124,16 @@ class LoginScreen extends StatelessWidget {
                               textSize: 22,
                               fieldKey: pwdKey,
                               validator: (val) {
-                                if (val == null) return 'Enter valid password';
+                                readPwd.validatePwd(val ?? '');
+                                return null;
                               },
                               valController: pwdCtrl,
                               obscure: watchPwd.obscure,
                               label: 'Password',
-                              onChanged: (val) => pwdKey.currentState?.validate(),
+                              onChanged: (val) {
+                                readPwd.filledPwd(val);
+                                pwdKey.currentState?.validate();
+                              },
                               suffixIcon: watchPwd.filled
                                   ? IconButton(
                                       onPressed: () => readPwd.togglePwd(),
@@ -166,7 +164,7 @@ class LoginScreen extends StatelessWidget {
                   horizontal: 24,
                   vertical: 16,
                 ),
-                child: pwdCtrl.text.isNotEmpty
+                child: watchPwd.filled
                     ? AppButton(
                             onPressed: () {
                               context.read<LoaderModel>().changeLoadingState(
@@ -175,7 +173,10 @@ class LoginScreen extends StatelessWidget {
                                     context: context,
                                     message: 'Login Successfully',
                                   );
-                                  Navigator.pushNamed(context, Routes.mainS);
+                                  Navigator.pushNamed(
+                                    context,
+                                    Routes.dashboard,
+                                  );
                                 },
                               );
                             },
