@@ -80,9 +80,7 @@ class _SignUpViewState extends State<SignUpView> {
                                 color: Theme.of(context).colorScheme.onSurface,
                               ),
                             ).animate().fadeIn(delay: 100.ms).slideY(begin: 0.2, end: 0),
-
                             const SizedBox(height: 8),
-
                             Text(
                               'Enter your mobile number to create your account or securely sign in.',
                               style: CredTextStyle.bs3.copyWith(
