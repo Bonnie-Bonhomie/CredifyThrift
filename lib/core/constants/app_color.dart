@@ -38,7 +38,7 @@ class AppColors {
   static const Color darkGrey = Color(0xFF161C2C);
 
   static const Color blueGrey = Color(0xFF00FFFF);
-  static const Color disableColor = Color(0xFFE7EBEE);
+  static const Color disableColor = Color(0xFF8B92AB);
   static const Color onSurface = Color(0xFFF3F3FD);
   static const Color surface = Color(0xFF020226);
 
