@@ -121,7 +121,7 @@ class LoginScreen extends StatelessWidget {
                               ],
                             ),
                             child: FormWidget(
-                              textSize: 22,
+                              textSize: 15,
                               fieldKey: pwdKey,
                               validator: (val) {
                                 readPwd.validatePwd(val ?? '');
@@ -153,6 +153,7 @@ class LoginScreen extends StatelessWidget {
                           .slideY(begin: 0.15, end: 0),
 
                       const SizedBox(height: 24),
+                     InkWell(onTap: (){}, child: Text('Forget password?', textAlign: TextAlign.end,style: CredTextStyle.h5.copyWith(color: AppColors.primary) ))
                     ],
                   ),
                 ),
