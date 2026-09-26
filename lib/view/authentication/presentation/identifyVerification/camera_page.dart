@@ -7,6 +7,7 @@ import 'package:credify/core/utils/image_file_picker.dart';
 import 'package:credify/core/widgets/app_button.dart';
 import 'package:credify/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CameraPage extends StatefulWidget {
@@ -134,28 +135,30 @@ class _CameraPageState extends State<CameraPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GalleryPicker(
-                    selectImage: selectImage,
-                  ),
+                  Icon(Icons.pages_rounded, color: AppColors.grey,),
                   // const Icon(Icons.flash_off, color: Colors.grey),
-                  GestureDetector(
-                    onTap: () async {
-                      final path = await controller!.takePicture();
-                      Navigator.pop(context, path);
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CheckQuality(path: path),
-                        ),
-                      );
-                      // print('Take picture ${path.path}');
-                    },
-                    child: const Icon(
-                      Icons.radio_button_checked,
-                      size: 80,
-                      color: AppColors.progressColor,
+                  Container(
+                    color: AppColors.complete,
+                    padding: const EdgeInsets.all(10),
+                    child: GestureDetector(
+                      onTap: () async {
+                        final path = await controller!.takePicture();
+                        Navigator.pop(context, path);
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CheckQuality(path: path),
+                          ),
+                        );
+                        // print('Take picture ${path.path}');
+                      },
+                      child: const Icon(
+                        Icons.circle_outlined,
+                        size: 60,
+                        color: AppColors.onSurface,
+                      ),
                     ),
-                  ),
+                  ).animate().rotate(duration: 300.microseconds).scaleXY(begin: 0.4, end: 1.0),
                   const Icon(Icons.done, color: Colors.grey),
                 ],
               ),
@@ -213,7 +216,7 @@ class CheckQuality extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [AppColors.primary, AppColors.gradientBtn],
+                    colors: [AppColors.complete, AppColors.pending],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -230,7 +233,7 @@ class CheckQuality extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.w200, color: AppColors.textSecondary),
                 ),
-              ),
+              ).animate().fade(duration: 300.ms).scaleXY(begin: 0.80, end: 1.0),
               const SizedBox(height: 20),
               AppButton(
                 onPressed: () {
