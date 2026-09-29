@@ -36,7 +36,7 @@ class _HomePageViewState extends State<HomePageView> {
 
                 // Floating Quick Actions Bar
                 Positioned(
-                  bottom: -28,
+                  bottom: -40,
                   left: 20,
                   right: 20,
                   child: Container(
@@ -395,7 +395,7 @@ class _HomePageViewState extends State<HomePageView> {
             ),
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 30),
         ],
       ),
     );

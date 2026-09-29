@@ -87,10 +87,15 @@ class LoginScreen extends StatelessWidget {
                       RichText(
                             text: TextSpan(
                               text: 'Enter your password to continue with ',
-                              children: [TextSpan(text: '0806-354-2389', style: CredTextStyle.bs3.copyWith(
-                                fontWeight: FontWeight.bold,
-                                height: 1.4,
-                              ),)],
+                              children: [
+                                TextSpan(
+                                  text: '0806-354-2389',
+                                  style: CredTextStyle.bs3.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ],
                               style: CredTextStyle.bs3.copyWith(
                                 color: AppColors.grey,
                                 height: 1.4,
@@ -153,7 +158,16 @@ class LoginScreen extends StatelessWidget {
                           .slideY(begin: 0.15, end: 0),
 
                       const SizedBox(height: 24),
-                     InkWell(onTap: (){}, child: Text('Forget password?', textAlign: TextAlign.end,style: CredTextStyle.h5.copyWith(color: AppColors.primary) ))
+                      InkWell(
+                        onTap: () {Navigator.pushNamed(context, Routes.resetMail);},
+                        child: Text(
+                          'Forget password?',
+                          textAlign: TextAlign.end,
+                          style: CredTextStyle.h5.copyWith(
+                            color: AppColors.primary,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
