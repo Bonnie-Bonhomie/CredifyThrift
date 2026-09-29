@@ -33,7 +33,7 @@ class EmailToResetPwd extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       AppColors.primary.withOpacity(0.08),
-                      AppColors.primary.withOpacity(0.09),
+                      AppColors.primary.withOpacity(0.06),
                       AppColors.primary.withOpacity(0.01),
                     ],
                     begin: Alignment.topCenter,
