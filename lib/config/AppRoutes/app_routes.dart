@@ -1,4 +1,5 @@
 import 'package:credify/export_barrel.dart';
+import 'package:credify/view/authentication/presentation/auth_views/forget_password.dart';
 import 'package:credify/view/authentication/presentation/auth_views/login_screen.dart';
 import 'package:credify/view/onboarding/onboard_screen.dart';
 
@@ -26,6 +27,13 @@ class AppRoutes {
 
       case Routes.home:
         return slidePage(const HomePageView());
+
+      case Routes.resetMail:
+        return slidePage( EmailToResetPwd());
+
+
+      case Routes.resetPwd:
+        return slidePage( ChangePasswordView());
 
       case Routes.createPwd:
         return slidePage(CreatePasswordView());
